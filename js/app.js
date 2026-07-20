@@ -1029,11 +1029,7 @@ function initImportSection() {
     });
   }
 
-  if (importBackupBtn && backupFileInput) {
-    importBackupBtn.addEventListener("click", () => {
-      backupFileInput.click();
-    });
-
+  if (backupFileInput) {
     backupFileInput.addEventListener("change", (e) => {
       if (e.target.files.length > 0) {
         const file = e.target.files[0];
