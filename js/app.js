@@ -1036,6 +1036,7 @@ function initImportSection() {
         const reader = new FileReader();
         reader.onload = (evt) => {
           importFullBackup(evt.target.result);
+          e.target.value = "";
         };
         reader.readAsText(file);
       }
@@ -1048,7 +1049,12 @@ function exportFullBackup() {
   for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i);
     if (key.startsWith("sistema_contable_")) {
-      data[key] = localStorage.getItem(key);
+      const raw = localStorage.getItem(key);
+      try {
+        data[key] = JSON.parse(raw);
+      } catch (e) {
+        data[key] = raw;
+      }
     }
   }
   const jsonStr = JSON.stringify(data, null, 2);
@@ -1067,14 +1073,20 @@ function importFullBackup(jsonStr) {
     let count = 0;
     Object.keys(data).forEach(key => {
       if (key.startsWith("sistema_contable_")) {
-        localStorage.setItem(key, data[key]);
+        const val = data[key];
+        const strVal = typeof val === "string" ? val : JSON.stringify(val);
+        localStorage.setItem(key, strVal);
         count++;
       }
     });
-    alert(`¡Respaldo restaurado con éxito! Se migraron ${count} registros de datos. La aplicación se recargará ahora.`);
-    location.reload();
+    if (count > 0) {
+      alert(`¡Respaldo restaurado con éxito! Se importaron ${count} categorías de datos contables.`);
+      location.reload();
+    } else {
+      alert("El archivo seleccionado no contiene datos válidos del sistema contable.");
+    }
   } catch (err) {
-    alert(`Error al leer el archivo de respaldo: ${err.message}`);
+    alert(`Error al procesar el archivo de respaldo: ${err.message}`);
   }
 }
 
