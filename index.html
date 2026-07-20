@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema Contable Mexicano - SAT Compliant</title>
+  
+  <!-- SEO & Description -->
+  <meta name="description" content="Sistema contable web adaptado a la normativa mexicana del SAT, con importación de catálogos y pólizas en Excel, generación de estados financieros básicos y balanza de comprobación.">
+  
+  <!-- Google Fonts - Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="dark-theme">
+
+  <!-- APP CONTAINER -->
+  <div class="app-layout">
+    
+    <!-- SIDEBAR -->
+    <aside class="app-sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon">
+          <i class="fa-solid fa-calculator-combined"></i>
+        </div>
+        <div class="brand-text">
+          <h2>Sisco<span>MX</span></h2>
+          <p>Normativa SAT</p>
+        </div>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <ul>
+          <li>
+            <a href="#" class="nav-link active" data-view="dashboard" id="nav-dashboard">
+              <i class="fa-solid fa-chart-pie"></i>
+              <span>Resumen General</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-link" data-view="catalog" id="nav-catalog">
+              <i class="fa-solid fa-sitemap"></i>
+              <span>Catálogo de Cuentas</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-link" data-view="polizas" id="nav-polizas">
+              <i class="fa-solid fa-receipt"></i>
+              <span>Pólizas Contables</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-link" data-view="import" id="nav-import">
+              <i class="fa-solid fa-file-import"></i>
+              <span>Importar / Layouts</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-link" data-view="reports" id="nav-reports">
+              <i class="fa-solid fa-file-invoice-dollar"></i>
+              <span>Estados Financieros</span>
+            </a>
+          </li>
+          <li id="nav-item-users" style="display: none;">
+            <a href="#" class="nav-link" data-view="users" id="nav-users">
+              <i class="fa-solid fa-users-gear"></i>
+              <span>Usuarios y Permisos</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="db-status text-emerald">
+          <i class="fa-solid fa-circle-check"></i>
+          <span>Base de Datos Local Activa</span>
+        </div>
+        <button id="btn-reset-db" class="btn btn-xs btn-outline-danger" title="Reiniciar base de datos a valores por defecto">
+          <i class="fa-solid fa-rotate-left"></i> Reestablecer Datos
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN WINDOW -->
+    <main class="app-main">
+      
+      <!-- TOP BAR -->
+      <header class="app-header">
+        <div class="header-left">
+          <button id="btn-toggle-sidebar" class="sidebar-toggle" aria-label="Toggle Sidebar">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <div class="header-title-container">
+            <h1 id="view-title">Resumen General</h1>
+            <p id="view-subtitle" class="text-muted">Indicadores clave de rendimiento contable</p>
+          </div>
+        </div>
+        
+        <div class="header-right">
+          <!-- Empresa select o config rápida -->
+          <div class="company-selector-container">
+            <div class="company-badge" id="company-badge-click">
+              <i class="fa-solid fa-building-columns"></i>
+              <div>
+                <strong id="active-company-name">Empresa Demo Mexicana, S.A.</strong>
+                <span id="active-company-rfc">RFC: EDM260715AAA</span>
+              </div>
+              <i class="fa-solid fa-chevron-down" style="font-size: 0.75rem; margin-left: 8px; color: var(--text-muted);"></i>
+            </div>
+            <div class="company-dropdown" id="company-dropdown-list">
+              <div id="company-list-items">
+                <!-- Empresas inyectadas dinámicamente -->
+              </div>
+              <div class="dropdown-divider"></div>
+              <button id="btn-add-company" class="dropdown-item">
+                <i class="fa-solid fa-plus-circle text-primary"></i> Nueva Empresa
+              </button>
+            </div>
+          </div>
+
+          <!-- Perfil de usuario activo y logout -->
+          <div class="user-profile-badge" id="user-profile-info" style="display: flex; align-items: center; gap: 10px; margin-left: 14px;">
+            <i class="fa-solid fa-circle-user" style="font-size: 1.6rem; color: var(--primary);"></i>
+            <div style="display: flex; flex-direction: column; line-height: 1.2;">
+              <strong id="header-user-name" style="font-size: 0.85rem;">Administrador</strong>
+              <span id="header-user-role" class="badge badge-indigo" style="font-size: 0.65rem; padding: 2px 6px; width: fit-content;">Admin</span>
+            </div>
+            <button id="btn-logout" class="btn-icon" title="Cerrar Sesión" style="margin-left: 4px;">
+              <i class="fa-solid fa-right-from-bracket text-rose"></i>
+            </button>
+          </div>
+        
+          <button id="btn-theme-toggle" class="theme-toggle-btn" title="Cambiar Tema">
+            <i class="fa-solid fa-sun"></i>
+          </button>
+        </div>
+      </header>
+      
+      <!-- VIEW CONTENT CONTAINER -->
+      <div class="view-content" id="view-container">
+        
+        <!-- 1. DASHBOARD VIEW -->
+        <section id="view-dashboard" class="content-view active-view">
+          
+          <!-- KPI Cards Grid -->
+          <div class="kpi-grid">
+            <div class="kpi-card bg-glass-blue">
+              <div class="kpi-icon"><i class="fa-solid fa-vault"></i></div>
+              <div class="kpi-info">
+                <h3>Total Activos</h3>
+                <h2 id="kpi-activos">$0.00</h2>
+                <p class="kpi-meta text-emerald"><i class="fa-solid fa-shield-halved"></i> Recursos de la empresa</p>
+              </div>
+            </div>
+            <div class="kpi-card bg-glass-rose">
+              <div class="kpi-icon"><i class="fa-solid fa-file-invoice"></i></div>
+              <div class="kpi-info">
+                <h3>Total Pasivos</h3>
+                <h2 id="kpi-pasivos">$0.00</h2>
+                <p class="kpi-meta text-rose"><i class="fa-solid fa-hand-holding-dollar"></i> Obligaciones a pagar</p>
+              </div>
+            </div>
+            <div class="kpi-card bg-glass-purple">
+              <div class="kpi-icon"><i class="fa-solid fa-landmark"></i></div>
+              <div class="kpi-info">
+                <h3>Capital Contable</h3>
+                <h2 id="kpi-capital">$0.00</h2>
+                <p class="kpi-meta text-purple"><i class="fa-solid fa-scale-balanced"></i> Patrimonio neto</p>
+              </div>
+            </div>
+            <div class="kpi-card bg-glass-emerald">
+              <div class="kpi-icon"><i class="fa-solid fa-circle-dollar-to-slot"></i></div>
+              <div class="kpi-info">
+                <h3>Utilidad del Ejercicio</h3>
+                <h2 id="kpi-utilidad">$0.00</h2>
+                <p id="kpi-utilidad-pct" class="kpi-meta text-emerald"><i class="fa-solid fa-chart-line"></i> Ventas - Costos/Gastos</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Charts and Summary Section -->
+          <div class="dashboard-grid">
+            <!-- Balance Chart Card -->
+            <div class="card card-glass visual-card">
+              <div class="card-header">
+                <h3><i class="fa-solid fa-chart-column"></i> Composición Financiera</h3>
+                <span class="badge badge-indigo">Actual</span>
+              </div>
+              <div class="card-body chart-wrapper">
+                <canvas id="chart-financial-composition"></canvas>
+              </div>
+            </div>
+
+            <!-- Profitability Chart Card -->
+            <div class="card card-glass visual-card">
+              <div class="card-header">
+                <h3><i class="fa-solid fa-chart-line"></i> Estructura de Resultados</h3>
+                <span class="badge badge-emerald">Ingresos vs Gastos</span>
+              </div>
+              <div class="card-body chart-wrapper">
+                <canvas id="chart-profitability"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Activity -->
+          <div class="card card-glass margin-top-2">
+            <div class="card-header flex-between">
+              <h3><i class="fa-solid fa-clock-rotate-left"></i> Últimas Pólizas Registradas</h3>
+              <button class="btn btn-xs btn-indigo" onclick="app.switchView('polizas')">Ver Todas</button>
+            </div>
+            <div class="card-body no-padding">
+              <div class="responsive-table">
+                <table class="table" id="dashboard-polizas-table">
+                  <thead>
+                    <tr>
+                      <th>Fecha</th>
+                      <th>Tipo</th>
+                      <th>Folio</th>
+                      <th>Concepto</th>
+                      <th class="text-right">Cargos / Abonos</th>
+                      <th>Estado</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Inyectado dinámicamente -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. CATALOG VIEW -->
+        <section id="view-catalog" class="content-view">
+          <div class="action-bar flex-between margin-bottom-2">
+            <div class="search-box">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input type="text" id="catalog-search" placeholder="Buscar cuenta por código o nombre...">
+            </div>
+            <div class="action-buttons">
+              <button id="btn-add-account" class="btn btn-indigo">
+                <i class="fa-solid fa-plus"></i> Nueva Cuenta
+              </button>
+            </div>
+          </div>
+
+          <div class="card card-glass">
+            <div class="card-header">
+              <h3><i class="fa-solid fa-sitemap"></i> Estructura Jerárquica del Catálogo</h3>
+              <span class="text-muted text-xs">Muestra el nivel y el Código Agrupador del SAT</span>
+            </div>
+            <div class="card-body no-padding">
+              <div class="catalog-tree-container">
+                <div class="catalog-tree-header">
+                  <span class="col-code">Código</span>
+                  <span class="col-name">Nombre de la Cuenta</span>
+                  <span class="col-type">Naturaleza / Tipo</span>
+                  <span class="col-sat">Código SAT</span>
+                  <span class="col-level">Nivel</span>
+                  <span class="col-actions">Acciones</span>
+                </div>
+                <div class="catalog-tree-body" id="catalog-tree-root">
+                  <!-- Árbol de cuentas inyectado por JS -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. POLIZAS VIEW -->
+        <section id="view-polizas" class="content-view">
+          <div class="action-bar flex-between margin-bottom-2">
+            <div class="flex-gap">
+              <div class="select-wrapper">
+                <select id="filter-poliza-type">
+                  <option value="all">Todos los tipos</option>
+                  <option value="Diario">Diario</option>
+                  <option value="Ingresos">Ingresos</option>
+                  <option value="Egresos">Egresos</option>
+                </select>
+              </div>
+              <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="poliza-search" placeholder="Buscar por concepto o folio...">
+              </div>
+            </div>
+            <button id="btn-new-poliza" class="btn btn-indigo">
+              <i class="fa-solid fa-file-circle-plus"></i> Nueva Póliza
+            </button>
+          </div>
+
+          <div class="card card-glass">
+            <div class="card-header">
+              <h3><i class="fa-solid fa-list-check"></i> Registro de Pólizas Contables</h3>
+            </div>
+            <div class="card-body no-padding">
+              <div class="responsive-table">
+                <table class="table" id="polizas-main-table">
+                  <thead>
+                    <tr>
+                      <th>Folio</th>
+                      <th>Fecha</th>
+                      <th>Tipo</th>
+                      <th>Concepto</th>
+                      <th class="text-right">Total Cargo</th>
+                      <th class="text-right">Total Abono</th>
+                      <th class="text-center">Estado</th>
+                      <th class="text-center">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Inyectado por JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. IMPORT / LAYOUTS VIEW -->
+        <section id="view-import" class="content-view">
+          
+          <div class="import-export-grid">
+            <!-- Left: Layouts Download -->
+            <div class="card card-glass">
+              <div class="card-header">
+                <h3><i class="fa-solid fa-download"></i> Descargar Plantillas de Excel (Layouts)</h3>
+              </div>
+              <div class="card-body">
+                <p class="margin-bottom-2 text-muted">Utiliza estas plantillas prediseñadas para cargar masivamente tu catálogo de cuentas o pólizas. Llena los datos y súbelos en el panel de la derecha.</p>
+                
+                <div class="layout-download-card">
+                  <div class="layout-info">
+                    <div class="layout-icon bg-emerald-glow"><i class="fa-regular fa-file-excel text-emerald"></i></div>
+                    <div>
+                      <h4>Plantilla de Catálogo de Cuentas</h4>
+                      <p class="text-xs text-muted">Estructura jerárquica, naturalezas y códigos SAT.</p>
+                    </div>
+                  </div>
+                  <button id="btn-download-layout-catalog" class="btn btn-sm btn-emerald">
+                    <i class="fa-solid fa-download"></i> Descargar Layout
+                  </button>
+                </div>
+
+                <div class="layout-download-card margin-top-1">
+                  <div class="layout-info">
+                    <div class="layout-icon bg-blue-glow"><i class="fa-regular fa-file-excel text-blue"></i></div>
+                    <div>
+                      <h4>Plantilla de Pólizas Contables</h4>
+                      <p class="text-xs text-muted">Permite subir múltiples pólizas de Diario, Ingresos y Egresos en un solo archivo.</p>
+                    </div>
+                  </div>
+                  <button id="btn-download-layout-polizas" class="btn btn-sm btn-blue">
+                    <i class="fa-solid fa-download"></i> Descargar Layout
+                  </button>
+                </div>
+
+                <div class="layout-instructions margin-top-2">
+                  <h5><i class="fa-solid fa-circle-info"></i> Notas Importantes para la carga:</h5>
+                  <ul>
+                    <li>Las cuentas contables referenciadas en las pólizas deben existir primero en el catálogo.</li>
+                    <li>Las pólizas deben venir cuadradas en cargos y abonos (por número de póliza).</li>
+                    <li>El formato de fecha en Excel debe ser YYYY-MM-DD o estándar de Excel.</li>
+                    <li>No alteres los encabezados de la primera fila.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Upload area -->
+            <div class="card card-glass">
+              <div class="card-header">
+                <h3><i class="fa-solid fa-upload"></i> Carga de Archivos de Excel</h3>
+              </div>
+              <div class="card-body">
+                
+                <!-- Dropzone Catálogo -->
+                <div class="upload-section">
+                  <span class="badge badge-emerald">1. Catálogo de Cuentas</span>
+                  <div class="dropzone margin-top-05" id="dropzone-catalog">
+                    <input type="file" id="file-catalog-input" accept=".xlsx, .xls" class="file-hidden">
+                    <div class="dropzone-content">
+                      <i class="fa-solid fa-cloud-arrow-up text-emerald"></i>
+                      <p>Arrastra tu Excel de catálogo aquí o <span>selecciona un archivo</span></p>
+                      <span class="text-xs text-muted">Formatos soportados: .xlsx, .xls</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Dropzone Pólizas -->
+                <div class="upload-section margin-top-2">
+                  <span class="badge badge-indigo">2. Pólizas Contables</span>
+                  <div class="dropzone margin-top-05" id="dropzone-polizas">
+                    <input type="file" id="file-polizas-input" accept=".xlsx, .xls" class="file-hidden">
+                    <div class="dropzone-content">
+                      <i class="fa-solid fa-cloud-arrow-up text-indigo"></i>
+                      <p>Arrastra tu Excel de pólizas aquí o <span>selecciona un archivo</span></p>
+                      <span class="text-xs text-muted">Formatos soportados: .xlsx, .xls</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Log Panel -->
+                <div class="import-log-panel margin-top-2" id="import-log-panel" style="display: none;">
+                  <div class="log-header">
+                    <h4>Resultado del Análisis de Carga</h4>
+                    <button class="btn btn-xs btn-outline-light" id="btn-clear-logs">Limpiar</button>
+                  </div>
+                  <div class="log-body" id="import-log-content">
+                    <!-- Registros de validación de carga inyectados por JS -->
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. REPORTS VIEW -->
+        <section id="view-reports" class="content-view">
+          
+          <!-- Filters Toolbar -->
+          <div class="card card-glass filter-card margin-bottom-2">
+            <div class="card-body flex-between flex-wrap gap-1">
+              
+              <!-- Report Selection -->
+              <div class="flex-gap align-center flex-wrap">
+                <div class="filter-group">
+                  <label for="report-select">Reporte Contable:</label>
+                  <div class="select-wrapper">
+                    <select id="report-select">
+                      <optgroup label="Balanza e Auxiliares">
+                        <option value="balanza" selected>Balanza de Comprobación</option>
+                        <option value="auxiliar">Auxiliar de Cuentas</option>
+                      </optgroup>
+                      <optgroup label="Estados Financieros Básicos">
+                        <option value="balance">1. Balance General</option>
+                        <option value="resultados">2. Estado de Resultados Integral</option>
+                        <option value="variaciones">3. Variaciones en el Capital Contable</option>
+                        <option value="flujo">4. Estado de Flujos de Efectivo</option>
+                      </optgroup>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Date Range Filters -->
+                <div class="filter-group">
+                  <label for="report-start-date">Desde:</label>
+                  <input type="date" id="report-start-date" value="2026-07-01">
+                </div>
+                
+                <div class="filter-group">
+                  <label for="report-end-date">Hasta:</label>
+                  <input type="date" id="report-end-date" value="2026-07-31">
+                </div>
+
+                <!-- Contextual Filter: Balanza Level -->
+                <div class="filter-group" id="filter-group-balanza-level">
+                  <label for="report-balanza-level">Hasta Nivel:</label>
+                  <div class="select-wrapper">
+                    <select id="report-balanza-level">
+                      <option value="1">Nivel 1 (Mayor)</option>
+                      <option value="2">Nivel 2 (Subcuenta)</option>
+                      <option value="3">Nivel 3 (Detalle)</option>
+                      <option value="4" selected>Nivel 4 (Auxiliares)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Filtro para Ocultar Cuentas sin Movimientos -->
+                <div class="filter-group" id="filter-group-hide-empty" style="display: flex; align-items: center; gap: 8px;">
+                  <input type="checkbox" id="report-hide-empty" style="width: auto; cursor: pointer;">
+                  <label for="report-hide-empty" style="margin-bottom: 0; cursor: pointer; user-select: none;">Ocultar cuentas en cero</label>
+                </div>
+
+                <!-- Contextual Filter: Auxiliar Account Selection -->
+                <div class="filter-group" id="filter-group-auxiliar-account" style="display: none;">
+                  <label for="report-auxiliar-account">Cuenta Contable:</label>
+                  <div class="select-wrapper select-lg">
+                    <select id="report-auxiliar-account">
+                      <!-- Cargado por JS -->
+                    </select>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Export Controls -->
+              <div class="export-actions">
+                <button id="btn-export-excel" class="btn btn-emerald">
+                  <i class="fa-regular fa-file-excel"></i> Descargar Excel
+                </button>
+                <button id="btn-export-pdf" class="btn btn-danger">
+                  <i class="fa-regular fa-file-pdf"></i> Descargar PDF
+                </button>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Report Viewer Shell -->
+          <div class="card card-glass visual-card">
+            <div class="card-body">
+              <div id="report-viewer-content">
+                <!-- Se inyecta la tabla formateada según el reporte elegido -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- VISTA 6: GESTIÓN DE USUARIOS Y PERMISOS (SÓLO ADMIN) -->
+        <section class="view-section" id="view-users">
+          <div class="view-header flex-between align-center">
+            <div>
+              <h2>Gestión de Usuarios y Permisos</h2>
+              <p class="subtitle">Administra los accesos y asigna empresas a cada usuario del sistema</p>
+            </div>
+            <button class="btn btn-indigo" id="btn-new-user">
+              <i class="fa-solid fa-user-plus"></i> Registrar Usuario
+            </button>
+          </div>
+
+          <div class="card card-glass margin-top-1 no-padding">
+            <div class="responsive-table">
+              <table class="report-table" id="table-users">
+                <thead>
+                  <tr>
+                    <th>Usuario</th>
+                    <th>Nombre Completo</th>
+                    <th>Rol</th>
+                    <th>Empresas Asignadas</th>
+                    <th>Estado</th>
+                    <th style="text-align: center;">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="users-table-body">
+                  <!-- Inyectado dinámicamente por JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- ================= MODALS ================= -->
+
+  <!-- 1. MODAL: AGREGAR/EDITAR CUENTA -->
+  <div class="modal-overlay" id="modal-account">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modal-account-title">Agregar Nueva Cuenta</h3>
+        <button class="modal-close" id="btn-close-modal-account"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form id="form-account">
+        <div class="modal-body">
+          <div class="form-grid">
+            
+            <div class="form-group span-2">
+              <label for="acc-parent">Cuenta Padre (Opcional):</label>
+              <div class="select-wrapper">
+                <select id="acc-parent">
+                  <option value="">Ninguna (Nivel 1 - Raíz)</option>
+                  <!-- Inyectado por JS -->
+                </select>
+              </div>
+              <small class="text-muted">Si seleccionas un padre, el nivel y la naturaleza se configurarán automáticamente.</small>
+            </div>
+
+            <div class="form-group">
+              <label for="acc-code">Código de Cuenta:</label>
+              <input type="text" id="acc-code" placeholder="Ej. 101-01-003 o 101.01.03" required>
+            </div>
+
+            <div class="form-group">
+              <label for="acc-level">Nivel Jerárquico:</label>
+              <input type="number" id="acc-level" min="1" max="10" value="1" required>
+            </div>
+
+            <div class="form-group span-2">
+              <label for="acc-name">Nombre de la Cuenta:</label>
+              <input type="text" id="acc-name" placeholder="Ej. Clientes Foráneos" required>
+            </div>
+
+            <div class="form-group">
+              <label for="acc-type">Naturaleza Contable:</label>
+              <div class="select-wrapper">
+                <select id="acc-type" required>
+                  <option value="Activo Deudor">Activo Deudor</option>
+                  <option value="Activo Acreedor">Activo Acreedor (Contra-activo)</option>
+                  <option value="Pasivo Acreedor">Pasivo Acreedor</option>
+                  <option value="Pasivo Deudor">Pasivo Deudor (Contra-pasivo)</option>
+                  <option value="Capital Acreedor">Capital Acreedor</option>
+                  <option value="Capital Deudor">Capital Deudor (Contra-capital)</option>
+                  <option value="Ingresos">Ingresos</option>
+                  <option value="Costos">Costos</option>
+                  <option value="Gastos">Gastos</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="acc-sat">Código Agrupador SAT:</label>
+              <div class="select-wrapper">
+                <select id="acc-sat">
+                  <option value="">Sin código agrupador</option>
+                  <!-- Cargado por JS -->
+                </select>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-light" id="btn-cancel-account">Cancelar</button>
+          <button type="submit" class="btn btn-indigo">Guardar Cuenta</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2. MODAL: DETALLE Y EDICIÓN DE PÓLIZA -->
+  <div class="modal-overlay" id="modal-poliza">
+    <div class="modal-card modal-lg">
+      <div class="modal-header">
+        <h3 id="modal-poliza-title">Crear Nueva Póliza</h3>
+        <button class="modal-close" id="btn-close-modal-poliza"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form id="form-poliza">
+        <input type="hidden" id="poliza-id">
+        <div class="modal-body">
+          
+          <!-- Header fields -->
+          <div class="form-grid margin-bottom-2">
+            <div class="form-group">
+              <label for="pol-date">Fecha:</label>
+              <input type="date" id="pol-date" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="pol-type">Tipo de Póliza:</label>
+              <div class="select-wrapper">
+                <select id="pol-type" required>
+                  <option value="Diario">Diario</option>
+                  <option value="Ingresos">Ingresos</option>
+                  <option value="Egresos">Egresos</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="pol-number">Folio / Número:</label>
+              <input type="text" id="pol-number" placeholder="Ej. D-001" required>
+            </div>
+
+            <div class="form-group span-3">
+              <label for="pol-concept">Concepto General:</label>
+              <input type="text" id="pol-concept" placeholder="Concepto global del movimiento contable" required>
+            </div>
+          </div>
+
+          <!-- Entries Table (Asiento detalle) -->
+          <div class="entry-lines-container">
+            <h4>Partidas del Asiento Contable</h4>
+            
+            <div class="responsive-table card card-glass no-padding margin-top-05">
+              <table class="table" id="pol-lines-table">
+                <thead>
+                  <tr>
+                    <th style="width: 30%;">Cuenta Contable</th>
+                    <th style="width: 25%;">Concepto Detalle</th>
+                    <th style="width: 15%; text-align: right;">Debe (Cargo)</th>
+                    <th style="width: 15%; text-align: right;">Haber (Abono)</th>
+                    <th style="width: 10%;">Referencia</th>
+                    <th style="width: 5%; text-align: center;"></th>
+                  </tr>
+                </thead>
+                <tbody id="pol-lines-body">
+                  <!-- Filas dinámicas agregadas por JS -->
+                </tbody>
+              </table>
+            </div>
+
+            <div class="table-actions-bar flex-between margin-top-1">
+              <button type="button" class="btn btn-sm btn-outline-light" id="btn-add-pol-line">
+                <i class="fa-solid fa-plus"></i> Agregar Partida
+              </button>
+              
+              <!-- Real-time balance checker -->
+              <div class="balance-status" id="pol-balance-indicator">
+                <span class="text-xs text-muted">Totales:</span>
+                <strong>Debe: <span id="pol-total-debit">$0.00</span></strong>
+                <strong>Haber: <span id="pol-total-credit">$0.00</span></strong>
+                <span class="badge badge-rose" id="pol-mismatch-badge">
+                  <i class="fa-solid fa-triangle-exclamation"></i> Descuadre: <span id="pol-mismatch-val">$0.00</span>
+                </span>
+                <span class="badge badge-emerald" id="pol-match-badge" style="display: none;">
+                  <i class="fa-solid fa-circle-check"></i> Cuadrado
+                </span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-light" id="btn-cancel-poliza">Cancelar</button>
+          <button type="submit" class="btn btn-indigo" id="btn-save-poliza">Guardar Póliza</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <datalist id="datalist-accounts"></datalist>
+
+  <!-- 3. MODAL: REGISTRAR NUEVA EMPRESA -->
+  <div class="modal-overlay" id="modal-company">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Registrar Nueva Empresa</h3>
+        <button class="modal-close" id="btn-close-modal-company"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form id="form-company">
+        <div class="modal-body">
+          <div class="form-grid">
+            <div class="form-group span-3">
+              <label for="comp-name">Razón Social / Nombre:</label>
+              <input type="text" id="comp-name" placeholder="Ej. Comercializadora Mexicana S.A. de C.V." required>
+            </div>
+            <div class="form-group span-3">
+              <label for="comp-rfc">RFC de la Empresa:</label>
+              <input type="text" id="comp-rfc" placeholder="Ej. COMX900101AAA" required maxlength="13" minlength="12" style="text-transform: uppercase;">
+            </div>
+            <div class="form-group span-3 flex-row align-center margin-top-1" style="display: flex; align-items: center; gap: 8px; flex-direction: row;">
+              <input type="checkbox" id="comp-preload" checked style="width: auto;">
+              <label for="comp-preload" style="margin-bottom: 0;">Precargar catálogo de cuentas básico del SAT</label>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-light" id="btn-cancel-company">Cancelar</button>
+          <button type="submit" class="btn btn-indigo">Crear Empresa</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 4. MODAL: REGISTRAR / EDITAR USUARIO -->
+  <div class="modal-overlay" id="modal-user">
+    <div class="modal-card" style="max-width: 550px;">
+      <div class="modal-header">
+        <h3 id="modal-user-title">Registrar Nuevo Usuario</h3>
+        <button class="modal-close" id="btn-close-modal-user"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form id="form-user">
+        <input type="hidden" id="user-edit-username">
+        <div class="modal-body">
+          <div class="form-grid">
+            <div class="form-group span-3">
+              <label for="user-username">Nombre de Usuario (Login):</label>
+              <input type="text" id="user-username" placeholder="Ej. juan.perez" required>
+            </div>
+            <div class="form-group span-3">
+              <label for="user-fullname">Nombre Completo:</label>
+              <input type="text" id="user-fullname" placeholder="Ej. Juan Pérez López" required>
+            </div>
+            <div class="form-group span-3">
+              <label for="user-password">Contraseña:</label>
+              <input type="password" id="user-password" placeholder="••••••••">
+              <small class="text-xs text-muted" id="user-pwd-help" style="display: none;">Déjalo en blanco para conservar la contraseña actual</small>
+            </div>
+            <div class="form-group span-3">
+              <label for="user-role">Rol del Usuario:</label>
+              <div class="select-wrapper">
+                <select id="user-role">
+                  <option value="user">Usuario Contable Estándar</option>
+                  <option value="admin">Administrador General</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="form-group span-3 margin-top-1">
+              <label style="font-weight: 600;">Empresas a las que se le otorga acceso:</label>
+              <div id="user-companies-checkbox-list" style="max-height: 150px; overflow-y: auto; padding: 10px; border: 1px solid var(--border-color); border-radius: 8px; background-color: var(--bg-app); display: flex; flex-direction: column; gap: 8px;">
+                <!-- Inyectado dinámicamente por JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-light" id="btn-cancel-user">Cancelar</button>
+          <button type="submit" class="btn btn-indigo">Guardar Usuario</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- OVERLAY DE INICIO DE SESIÓN (LOGIN) -->
+  <div class="login-overlay active" id="login-overlay">
+    <div class="login-card">
+      <div class="login-header text-center">
+        <i class="fa-solid fa-shield-halved text-emerald" style="font-size: 3rem; margin-bottom: 12px;"></i>
+        <h2>Sistema Contable SAT</h2>
+        <p class="text-xs text-muted">Acceso Seguro de Usuarios</p>
+      </div>
+      <form id="form-login" style="margin-top: 20px;">
+        <div class="form-group">
+          <label for="login-username">Usuario:</label>
+          <input type="text" id="login-username" placeholder="Ej. admin" required autocomplete="username">
+        </div>
+        <div class="form-group margin-top-1">
+          <label for="login-password">Contraseña:</label>
+          <input type="password" id="login-password" placeholder="••••••••" required autocomplete="current-password">
+        </div>
+        <div id="login-error-msg" class="text-rose text-xs margin-top-1" style="display: none; text-align: center; font-weight: 600;"></div>
+        <button type="submit" class="btn btn-indigo margin-top-1" style="width: 100%; padding: 12px; font-size: 1rem; margin-top: 16px;">Iniciar Sesión</button>
+      </form>
+      <div class="login-footer text-xs text-muted text-center margin-top-1" style="margin-top: 20px; border-top: 1px solid var(--border-color); padding-top: 12px;">
+        <span>Usuario Inicial: <strong>admin</strong> / Clave: <strong>admin123</strong></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= EXTERNAL SCRIPTS VÍA CDN ================= -->
+  <!-- Chart.js for beautiful dashboards -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <!-- SheetJS for processing Excel layouts and exporting to Excel -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  
+  <!-- jsPDF & AutoTable for high-quality client-side PDF generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
+
+  <!-- ================= LOCAL APP SCRIPTS ================= -->
+  <script src="js/sat_codes.js"></script>
+  <script src="js/mock_data.js"></script>
+  <script src="js/accounting.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
