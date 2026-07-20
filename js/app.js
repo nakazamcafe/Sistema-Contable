@@ -7,11 +7,20 @@ let system;
 let currentView = "dashboard";
 let charts = {};
 
-const DEFAULT_COMPANY = {
-  id: "EDM260715AAA",
-  name: "Empresa Demo Mexicana, S.A.",
-  rfc: "EDM260715AAA"
-};
+const DEFAULT_COMPANIES = [
+  {
+    id: "EDM260715AAA",
+    name: "Empresa Demo Mexicana, S.A.",
+    rfc: "EDM260715AAA"
+  },
+  {
+    id: "NCA2603137Q1",
+    name: "Nakazam Cafe SA de CV",
+    rfc: "NCA2603137Q1"
+  }
+];
+
+const DEFAULT_COMPANY = DEFAULT_COMPANIES[0];
 
 // --- MOTOR MULTI-USUARIO Y PERMISOS ---
 const DEFAULT_USERS = [
@@ -56,7 +65,7 @@ function setCurrentUser(username) {
 function getCompanies() {
   let companies = JSON.parse(localStorage.getItem("sistema_contable_companies"));
   if (!companies || companies.length === 0) {
-    companies = [DEFAULT_COMPANY];
+    companies = DEFAULT_COMPANIES;
     localStorage.setItem("sistema_contable_companies", JSON.stringify(companies));
   }
 
@@ -1008,6 +1017,69 @@ function initImportSection() {
   // Configuración de Drag & Drop
   setupDropzone("dropzone-catalog", "file-catalog-input", (data) => importCatalog(data));
   setupDropzone("dropzone-polizas", "file-polizas-input", (data) => importPolizas(data));
+
+  // Configuración de Respaldo Completo (.json)
+  const exportBackupBtn = document.getElementById("btn-export-full-backup");
+  const importBackupBtn = document.getElementById("btn-import-full-backup");
+  const backupFileInput = document.getElementById("file-backup-input");
+
+  if (exportBackupBtn) {
+    exportBackupBtn.addEventListener("click", () => {
+      exportFullBackup();
+    });
+  }
+
+  if (importBackupBtn && backupFileInput) {
+    importBackupBtn.addEventListener("click", () => {
+      backupFileInput.click();
+    });
+
+    backupFileInput.addEventListener("change", (e) => {
+      if (e.target.files.length > 0) {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onload = (evt) => {
+          importFullBackup(evt.target.result);
+        };
+        reader.readAsText(file);
+      }
+    });
+  }
+}
+
+function exportFullBackup() {
+  const data = {};
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (key.startsWith("sistema_contable_")) {
+      data[key] = localStorage.getItem(key);
+    }
+  }
+  const jsonStr = JSON.stringify(data, null, 2);
+  const blob = new Blob([jsonStr], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `Respaldo_Contable_SAT_${new Date().toISOString().split('T')[0]}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function importFullBackup(jsonStr) {
+  try {
+    const data = JSON.parse(jsonStr);
+    let count = 0;
+    Object.keys(data).forEach(key => {
+      if (key.startsWith("sistema_contable_")) {
+        localStorage.setItem(key, data[key]);
+        count++;
+      }
+    });
+    alert(`¡Respaldo restaurado con éxito! Se migraron ${count} registros de datos. La aplicación se recargará ahora.`);
+    location.reload();
+  } catch (err) {
+    alert(`Error al leer el archivo de respaldo: ${err.message}`);
+  }
 }
 
 function setupDropzone(zoneId, inputId, onDataRead) {

@@ -422,6 +422,24 @@
               </div>
             </div>
           </div>
+
+          <!-- Respaldo y Migración Total de Base de Datos -->
+          <div class="card card-glass margin-top-2">
+            <div class="card-header">
+              <h3><i class="fa-solid fa-database text-emerald"></i> Migración y Respaldo Completo de Base de Datos</h3>
+              <p class="text-xs text-muted" style="margin-top: 4px;">Transfiere todas tus empresas, catálogos, pólizas y usuarios entre computadoras o hacia tu sitio web de GitHub Pages</p>
+            </div>
+            <div class="card-body flex-gap flex-wrap margin-top-1" style="display: flex; gap: 12px; align-items: center;">
+              <button id="btn-export-full-backup" class="btn btn-indigo">
+                <i class="fa-solid fa-download"></i> Descargar Respaldo Total (.json)
+              </button>
+              <button id="btn-import-full-backup" class="btn btn-emerald">
+                <i class="fa-solid fa-upload"></i> Cargar / Migrar Respaldo (.json)
+              </button>
+              <input type="file" id="file-backup-input" accept=".json" style="display: none;">
+            </div>
+          </div>
+
         </section>
 
         <!-- 5. REPORTS VIEW -->
