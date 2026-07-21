@@ -93,8 +93,40 @@ function updateActiveCompanyHeader(company) {
   document.getElementById("active-company-rfc").innerText = `RFC: ${company.rfc}`;
 }
 
+async function checkAutoSyncSeedDatabase() {
+  try {
+    const res = await fetch("default_database.json", { cache: "no-cache" });
+    if (res.ok) {
+      const jsonText = await res.text();
+      const lastSynced = localStorage.getItem("sistema_contable_seed_hash");
+      if (lastSynced !== jsonText) {
+        const data = JSON.parse(jsonText);
+        let count = 0;
+        Object.keys(data).forEach(key => {
+          if (key.startsWith("sistema_contable_")) {
+            const val = data[key];
+            const strVal = typeof val === "string" ? val : JSON.stringify(val);
+            localStorage.setItem(key, strVal);
+            count++;
+          }
+        });
+        localStorage.setItem("sistema_contable_seed_hash", jsonText);
+        if (count > 0 && !sessionStorage.getItem("db_synced_reload")) {
+          sessionStorage.setItem("db_synced_reload", "true");
+          location.reload();
+        }
+      }
+    }
+  } catch (e) {
+    // Si no existe default_database.json continua con la bd local sin interrumpir
+  }
+}
+
 // Inicialización de la aplicación al cargar el DOM
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  // Sincronizar automáticamente si existe default_database.json en el servidor/GitHub
+  await checkAutoSyncSeedDatabase();
+
   // Inicializar base de datos
   const activeComp = getActiveCompany();
   system = AccountingSystem.loadFromStorage(activeComp.id);
@@ -1062,7 +1094,7 @@ function exportFullBackup() {
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = `Respaldo_Contable_SAT_${new Date().toISOString().split('T')[0]}.json`;
+  a.download = "default_database.json";
   a.click();
   URL.revokeObjectURL(url);
 }
