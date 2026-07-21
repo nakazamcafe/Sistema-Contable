@@ -1271,7 +1271,28 @@ function handleExcelFile(file, callback) {
   reader.onload = (e) => {
     const data = new Uint8Array(e.target.result);
     const workbook = XLSX.read(data, { type: 'array' });
-    const sheetName = workbook.SheetNames[0];
+    
+    let sheetName = workbook.SheetNames[0];
+    const fileNameLower = file.name.toLowerCase();
+
+    if (fileNameLower.includes("poliza") || fileNameLower.includes("póliza")) {
+      const found = workbook.SheetNames.find(n => 
+        n.toLowerCase().includes("póliza") || 
+        n.toLowerCase().includes("poliza") || 
+        n.toLowerCase().includes("transacciones") ||
+        n.toLowerCase().includes("sheet1")
+      );
+      if (found) sheetName = found;
+    } else if (fileNameLower.includes("catalogo") || fileNameLower.includes("catálogo")) {
+      const found = workbook.SheetNames.find(n => 
+        n.toLowerCase().includes("catál") || 
+        n.toLowerCase().includes("catal") || 
+        n.toLowerCase().includes("cuentas") ||
+        n.toLowerCase().includes("sheet1")
+      );
+      if (found) sheetName = found;
+    }
+
     const sheet = workbook.Sheets[sheetName];
     const json = XLSX.utils.sheet_to_json(sheet);
     callback(json);
