@@ -634,6 +634,16 @@ function initAccountModal() {
     document.getElementById("acc-level").value = 1;
     modal.classList.add("active-modal");
   });
+
+  // Botón Exportar catálogo a Excel
+  document.getElementById("btn-catalog-export-excel").addEventListener("click", () => {
+    exportCatalogExcel();
+  });
+
+  // Botón Exportar catálogo a PDF
+  document.getElementById("btn-catalog-export-pdf").addEventListener("click", () => {
+    exportCatalogPdf();
+  });
 }
 
 window.openAddSubaccount = function(parentCode) {
@@ -687,6 +697,83 @@ window.deleteAccount = function(code) {
     }
   }
 };
+
+function exportCatalogExcel() {
+  const activeCompany = getActiveCompany();
+  const sortedAccounts = system.getSortedAccounts();
+
+  const data = [
+    ["CÓDIGO", "NOMBRE DE LA CUENTA", "NATURALEZA", "CÓDIGO SAT", "NIVEL"]
+  ];
+
+  sortedAccounts.forEach(acc => {
+    const indentation = "   ".repeat(acc.level - 1);
+    data.push([
+      acc.code,
+      indentation + acc.name,
+      acc.type,
+      acc.satCode || "",
+      acc.level
+    ]);
+  });
+
+  const ws = XLSX.utils.aoa_to_sheet(data);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, "Catálogo");
+
+  const max_len = [15, 45, 18, 12, 8];
+  ws["!cols"] = max_len.map(w => ({ wch: w }));
+
+  const filename = `Catalogo_${activeCompany.name.replace(/\s+/g, "_")}.xlsx`;
+  XLSX.writeFile(wb, filename);
+}
+
+function exportCatalogPdf() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF("p", "pt", "a4");
+  const activeCompany = getActiveCompany();
+  const sortedAccounts = system.getSortedAccounts();
+
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(16);
+  doc.text(activeCompany.name, 40, 45);
+  doc.setFontSize(10);
+  doc.setFont("helvetica", "normal");
+  doc.text(`RFC: ${activeCompany.rfc}`, 40, 60);
+  doc.text("CATÁLOGO DE CUENTAS CONTABLES", 40, 75);
+
+  const columns = ["Código", "Nombre de la Cuenta", "Naturaleza", "Código SAT", "Nivel"];
+  const rows = sortedAccounts.map(acc => {
+    const indentation = "      ".repeat(acc.level - 1);
+    return [
+      acc.code,
+      indentation + acc.name,
+      acc.type,
+      acc.satCode || "",
+      acc.level
+    ];
+  });
+
+  doc.autoTable({
+    head: [columns],
+    body: rows,
+    startY: 95,
+    margin: { left: 40, right: 40 },
+    theme: "striped",
+    headStyles: { fillColor: [79, 70, 229], halign: "left" },
+    styles: { font: "helvetica", fontSize: 9, cellPadding: 5 },
+    columnStyles: {
+      0: { cellWidth: 100 },
+      1: { cellWidth: 220 },
+      2: { cellWidth: 100 },
+      3: { cellWidth: 60 },
+      4: { cellWidth: 40, halign: "center" }
+    }
+  });
+
+  const filename = `Catalogo_${activeCompany.name.replace(/\s+/g, "_")}.pdf`;
+  doc.save(filename);
+}
 
 // --- VISTA 3: PÓLIZAS CONTABLES ---
 
