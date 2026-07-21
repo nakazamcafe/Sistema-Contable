@@ -31,6 +31,23 @@ if (typeof firebase !== 'undefined') {
 
 // --- HELPERS DE SINCRONIZACIÓN EN LA NUBE ---
 
+function arraysEqual(key, nextArray, sortKey) {
+  const nextSorted = [...nextArray].sort((a, b) => String(a[sortKey]).localeCompare(String(b[sortKey])));
+  const nextStr = JSON.stringify(nextSorted);
+  
+  let currentRaw = localStorage.getItem(key);
+  if (!currentRaw) return false;
+  
+  try {
+    const currentArray = JSON.parse(currentRaw);
+    if (!Array.isArray(currentArray)) return false;
+    const currentSorted = [...currentArray].sort((a, b) => String(a[sortKey]).localeCompare(String(b[sortKey])));
+    return nextStr === JSON.stringify(currentSorted);
+  } catch (e) {
+    return false;
+  }
+}
+
 // 1. Escuchar cambios de usuarios en tiempo real
 function listenCloudUsers(callback) {
   if (!db) return;
@@ -40,11 +57,10 @@ function listenCloudUsers(callback) {
       cloudUsers.push(doc.data());
     });
     if (cloudUsers.length > 0) {
-      const current = localStorage.getItem("sistema_contable_users");
-      const nextStr = JSON.stringify(cloudUsers);
-      if (current !== nextStr) {
-        localStorage.setItem("sistema_contable_users", nextStr);
-        if (callback) callback(cloudUsers);
+      if (!arraysEqual("sistema_contable_users", cloudUsers, "username")) {
+        const sorted = [...cloudUsers].sort((a, b) => a.username.localeCompare(b.username));
+        localStorage.setItem("sistema_contable_users", JSON.stringify(sorted));
+        if (callback) callback(sorted);
       }
     }
   }, (error) => {
@@ -69,11 +85,10 @@ function listenCloudCompanies(callback) {
       cloudCompanies.push(doc.data());
     });
     if (cloudCompanies.length > 0) {
-      const current = localStorage.getItem("sistema_contable_companies");
-      const nextStr = JSON.stringify(cloudCompanies);
-      if (current !== nextStr) {
-        localStorage.setItem("sistema_contable_companies", nextStr);
-        if (callback) callback(cloudCompanies);
+      if (!arraysEqual("sistema_contable_companies", cloudCompanies, "id")) {
+        const sorted = [...cloudCompanies].sort((a, b) => a.id.localeCompare(b.id));
+        localStorage.setItem("sistema_contable_companies", JSON.stringify(sorted));
+        if (callback) callback(sorted);
       }
     }
   }, (error) => {
@@ -98,11 +113,11 @@ function listenCloudAccounts(companyId, callback) {
       accounts.push(doc.data());
     });
     if (accounts.length > 0) {
-      const current = localStorage.getItem(`sistema_contable_accounts_${companyId}`);
-      const nextStr = JSON.stringify(accounts);
-      if (current !== nextStr) {
-        localStorage.setItem(`sistema_contable_accounts_${companyId}`, nextStr);
-        if (callback) callback(accounts);
+      const storageKey = `sistema_contable_accounts_${companyId}`;
+      if (!arraysEqual(storageKey, accounts, "code")) {
+        const sorted = [...accounts].sort((a, b) => a.code.localeCompare(b.code));
+        localStorage.setItem(storageKey, JSON.stringify(sorted));
+        if (callback) callback(sorted);
       }
     }
   }, (error) => {
@@ -132,11 +147,11 @@ function listenCloudPolizas(companyId, callback) {
       polizas.push(doc.data());
     });
     if (polizas.length > 0) {
-      const current = localStorage.getItem(`sistema_contable_polizas_${companyId}`);
-      const nextStr = JSON.stringify(polizas);
-      if (current !== nextStr) {
-        localStorage.setItem(`sistema_contable_polizas_${companyId}`, nextStr);
-        if (callback) callback(polizas);
+      const storageKey = `sistema_contable_polizas_${companyId}`;
+      if (!arraysEqual(storageKey, polizas, "id")) {
+        const sorted = [...polizas].sort((a, b) => a.id.localeCompare(b.id));
+        localStorage.setItem(storageKey, JSON.stringify(sorted));
+        if (callback) callback(sorted);
       }
     }
   }, (error) => {
