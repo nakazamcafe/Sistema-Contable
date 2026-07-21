@@ -45,6 +45,9 @@ function getUsers() {
 
 function saveUsers(users) {
   localStorage.setItem("sistema_contable_users", JSON.stringify(users));
+  if (typeof saveCloudUser === "function") {
+    users.forEach(u => saveCloudUser(u));
+  }
 }
 
 function getCurrentUser() {
@@ -130,6 +133,25 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Inicializar base de datos
   const activeComp = getActiveCompany();
   system = AccountingSystem.loadFromStorage(activeComp.id);
+
+  // Suscribirse a cambios en tiempo real en la Nube (Google Firebase)
+  if (typeof listenCloudUsers === "function") {
+    listenCloudUsers(() => {
+      if (currentView === "users") renderUsers();
+    });
+    listenCloudCompanies(() => {
+      renderCompanyDropdownItems();
+    });
+    listenCloudAccounts(activeComp.id, (cloudAccounts) => {
+      system.accounts = cloudAccounts;
+      if (currentView === "catalog") renderCatalog();
+    });
+    listenCloudPolizas(activeComp.id, (cloudPolizas) => {
+      system.polizas = cloudPolizas;
+      if (currentView === "polizas") renderPolizas();
+      if (currentView === "dashboard") renderDashboard();
+    });
+  }
   
   // Establecer el color scheme del sistema
   const currentTheme = localStorage.getItem("theme") || "dark";
@@ -848,6 +870,10 @@ function initPolizaModal() {
 
     try {
       system.addPoliza(polizaData);
+      const activeComp = getActiveCompany();
+      if (typeof saveCloudPoliza === "function") {
+        saveCloudPoliza(activeComp.id, polizaData);
+      }
       closeModal();
       renderPolizas();
       renderDashboard();
