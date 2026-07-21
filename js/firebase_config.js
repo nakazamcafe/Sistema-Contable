@@ -40,8 +40,12 @@ function listenCloudUsers(callback) {
       cloudUsers.push(doc.data());
     });
     if (cloudUsers.length > 0) {
-      localStorage.setItem("sistema_contable_users", JSON.stringify(cloudUsers));
-      if (callback) callback(cloudUsers);
+      const current = localStorage.getItem("sistema_contable_users");
+      const nextStr = JSON.stringify(cloudUsers);
+      if (current !== nextStr) {
+        localStorage.setItem("sistema_contable_users", nextStr);
+        if (callback) callback(cloudUsers);
+      }
     }
   }, (error) => {
     console.warn("Límite o aviso en nube (usuarios):", error.message);
@@ -65,8 +69,12 @@ function listenCloudCompanies(callback) {
       cloudCompanies.push(doc.data());
     });
     if (cloudCompanies.length > 0) {
-      localStorage.setItem("sistema_contable_companies", JSON.stringify(cloudCompanies));
-      if (callback) callback(cloudCompanies);
+      const current = localStorage.getItem("sistema_contable_companies");
+      const nextStr = JSON.stringify(cloudCompanies);
+      if (current !== nextStr) {
+        localStorage.setItem("sistema_contable_companies", nextStr);
+        if (callback) callback(cloudCompanies);
+      }
     }
   }, (error) => {
     console.warn("Límite o aviso en nube (empresas):", error.message);
@@ -90,8 +98,12 @@ function listenCloudAccounts(companyId, callback) {
       accounts.push(doc.data());
     });
     if (accounts.length > 0) {
-      localStorage.setItem(`sistema_contable_accounts_${companyId}`, JSON.stringify(accounts));
-      if (callback) callback(accounts);
+      const current = localStorage.getItem(`sistema_contable_accounts_${companyId}`);
+      const nextStr = JSON.stringify(accounts);
+      if (current !== nextStr) {
+        localStorage.setItem(`sistema_contable_accounts_${companyId}`, nextStr);
+        if (callback) callback(accounts);
+      }
     }
   }, (error) => {
     console.warn(`Límite o aviso en nube (cuentas ${companyId}):`, error.message);
@@ -120,8 +132,12 @@ function listenCloudPolizas(companyId, callback) {
       polizas.push(doc.data());
     });
     if (polizas.length > 0) {
-      localStorage.setItem(`sistema_contable_polizas_${companyId}`, JSON.stringify(polizas));
-      if (callback) callback(polizas);
+      const current = localStorage.getItem(`sistema_contable_polizas_${companyId}`);
+      const nextStr = JSON.stringify(polizas);
+      if (current !== nextStr) {
+        localStorage.setItem(`sistema_contable_polizas_${companyId}`, nextStr);
+        if (callback) callback(polizas);
+      }
     }
   }, (error) => {
     console.warn(`Límite o aviso en nube (pólizas ${companyId}):`, error.message);
