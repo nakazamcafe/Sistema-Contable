@@ -946,7 +946,7 @@ function initPolizaModal() {
 
     const currentUser = getCurrentUser();
     const polizaData = {
-      id: document.getElementById("poliza-id").value || undefined,
+      id: document.getElementById("poliza-id").value || `POL-${Date.now()}`,
       number: document.getElementById("pol-number").value.trim(),
       date: document.getElementById("pol-date").value,
       type: document.getElementById("pol-type").value,
