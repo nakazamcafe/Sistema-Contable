@@ -166,3 +166,11 @@ function saveCloudPoliza(companyId, polizaObj) {
     .then(() => console.log(`☁️ Póliza ${polizaObj.number} sincronizada en la nube.`))
     .catch(err => console.error("Error al guardar póliza en nube:", err));
 }
+
+// 9. Eliminar póliza de la nube
+function deleteCloudPoliza(companyId, polizaId) {
+  if (!db || !companyId) return;
+  db.collection(`polizas_${companyId}`).doc(polizaId).delete()
+    .then(() => console.log(`☁️ Póliza ${polizaId} eliminada de la nube.`))
+    .catch(err => console.error("Error al eliminar póliza de la nube:", err));
+}

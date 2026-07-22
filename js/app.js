@@ -1099,6 +1099,10 @@ window.openEditPoliza = function(id) {
 window.deletePoliza = function(id) {
   if (confirm("¿Estás seguro de que deseas eliminar esta póliza? Afectará los saldos y estados financieros.")) {
     system.deletePoliza(id);
+    const activeComp = getActiveCompany();
+    if (typeof deleteCloudPoliza === "function") {
+      deleteCloudPoliza(activeComp.id, id);
+    }
     renderPolizas();
     renderDashboard();
   }
