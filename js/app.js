@@ -991,6 +991,24 @@ function initPolizaModal() {
 
     modal.classList.add("active-modal");
   });
+
+  // Botón Importar Pólizas desde Excel directamente en la vista de pólizas
+  const importDirectBtn = document.getElementById("btn-import-polizas-excel");
+  const importDirectInput = document.getElementById("file-import-polizas-direct");
+  if (importDirectBtn && importDirectInput) {
+    importDirectBtn.addEventListener("click", () => {
+      importDirectInput.click();
+    });
+
+    importDirectInput.addEventListener("change", (e) => {
+      if (e.target.files.length > 0) {
+        handleExcelFile(e.target.files[0], (data) => {
+          importPolizas(data);
+          e.target.value = "";
+        });
+      }
+    });
+  }
 }
 
 function addPolizaRow(lineData = null) {
@@ -1415,9 +1433,22 @@ function importPolizas(jsonRows) {
   let successCount = 0;
   let errorCount = 0;
 
-  Object.values(polizasMap).forEach(pol => {
+  Object.values(polizasMap).forEach((pol, idx) => {
     try {
+      // Generar un ID único determinista e incremental para evitar colisiones en la iteración rápida del bucle
+      const generatedId = `POL-${Date.now()}-${idx}-${Math.random().toString(36).substr(2, 5)}`;
+      pol.id = generatedId;
+      
+      const currentUser = getCurrentUser();
+      pol.createdBy = currentUser ? currentUser.fullName : "Importador Excel";
+
       system.addPoliza(pol);
+
+      const activeComp = getActiveCompany();
+      if (typeof saveCloudPoliza === "function") {
+        saveCloudPoliza(activeComp.id, pol);
+      }
+
       addLog("success", `Póliza ${pol.number} cargada con éxito. Partidas: ${pol.lines.length}`);
       successCount++;
     } catch (err) {

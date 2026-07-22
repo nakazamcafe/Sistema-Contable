@@ -298,9 +298,15 @@
                 <input type="text" id="poliza-search" placeholder="Buscar por concepto o folio...">
               </div>
             </div>
-            <button id="btn-new-poliza" class="btn btn-indigo">
-              <i class="fa-solid fa-file-circle-plus"></i> Nueva Póliza
-            </button>
+            <div style="display: flex; gap: 8px;">
+              <button id="btn-import-polizas-excel" class="btn btn-outline-light">
+                <i class="fa-solid fa-file-import text-indigo"></i> Importar Excel
+              </button>
+              <button id="btn-new-poliza" class="btn btn-indigo">
+                <i class="fa-solid fa-file-circle-plus"></i> Nueva Póliza
+              </button>
+              <input type="file" id="file-import-polizas-direct" accept=".xlsx, .xls" style="display: none;">
+            </div>
           </div>
 
           <div class="card card-glass">
