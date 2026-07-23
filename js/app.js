@@ -40,6 +40,18 @@ function getUsers() {
     users = DEFAULT_USERS;
     localStorage.setItem("sistema_contable_users", JSON.stringify(users));
   }
+  // Asegurar que el usuario administrador de respaldo siempre exista localmente
+  if (!users.some(u => u.username.toLowerCase() === "admin")) {
+    users.push({
+      username: "admin",
+      fullName: "Administrador General",
+      password: "admin",
+      role: "admin",
+      active: true,
+      assignedCompanies: ["*"]
+    });
+    localStorage.setItem("sistema_contable_users", JSON.stringify(users));
+  }
   return users;
 }
 

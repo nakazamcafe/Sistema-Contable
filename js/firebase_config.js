@@ -129,6 +129,18 @@ function listenCloudUsers(callback) {
     snapshot.forEach((doc) => {
       cloudUsers.push(doc.data());
     });
+    
+    // Asegurar que el administrador por defecto siempre exista en la lista sincronizada
+    if (!cloudUsers.some(u => u.username.toLowerCase() === "admin")) {
+      cloudUsers.push({
+        username: "admin",
+        fullName: "Administrador General",
+        role: "admin",
+        active: true,
+        assignedCompanies: ["*"]
+      });
+    }
+
     if (!areUsersEqual(lastSeenUsers, cloudUsers)) {
       lastSeenUsers = cloudUsers;
       const storageKey = "sistema_contable_users";
