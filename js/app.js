@@ -535,7 +535,7 @@ function renderCatalog() {
         <i class="${iconClass}"></i>
         ${acc.name}
       </span>
-      <span class="col-type"><span class="badge ${acc.type.startsWith('Activo') ? 'badge-indigo' : acc.type.startsWith('Pasivo') ? 'badge-rose' : 'badge-purple'}">${acc.type}</span></span>
+      <span class="col-type"><span class="badge ${(acc.type && String(acc.type).startsWith('Activo')) ? 'badge-indigo' : (acc.type && String(acc.type).startsWith('Pasivo')) ? 'badge-rose' : 'badge-purple'}">${acc.type || "-"}</span></span>
       <span class="col-sat font-mono">${acc.satCode || "-"}</span>
       <span class="col-level">${acc.level}</span>
       <div class="col-actions">
@@ -1390,6 +1390,7 @@ function importCatalog(jsonRows) {
 
   populateParentAccountsSelect();
   renderCatalog();
+  alert(`¡Catálogo cargado con éxito!\n\nSe importaron ${successCount} cuentas en tu navegador. Actualmente hay ${system.accounts.length} cuentas registradas para esta empresa.`);
   addLog("success", `Carga finalizada. Cuentas creadas/actualizadas con éxito: ${successCount}. Errores: ${errorCount}.`);
 }
 
