@@ -134,17 +134,37 @@ function listenCloudAccounts(companyId, callback) {
 // 6. Guardar catálogo completo o cuenta en la nube
 function saveCloudAccounts(companyId, accountsArray) {
   if (!db || !companyId) return;
-  const batch = db.batch();
-  accountsArray.forEach(acc => {
-    const ref = db.collection(`accounts_${companyId}`).doc(acc.code.replace(/\//g, '_'));
-    batch.set(ref, acc, { merge: true });
-  });
-  batch.commit()
-    .then(() => console.log(`☁️ Catálogo de ${companyId} sincronizado en la nube.`))
-    .catch(err => {
-      console.error("Error al guardar catálogo en nube:", err);
-      alert(`⚠️ Error al sincronizar catálogo con Firebase:\n${err.message}\n\nVerifica que la base de datos Firestore esté creada y sus Reglas en modo de prueba.`);
+
+  const CHUNK_SIZE = 400;
+  const chunks = [];
+  for (let i = 0; i < accountsArray.length; i += CHUNK_SIZE) {
+    chunks.push(accountsArray.slice(i, i + CHUNK_SIZE));
+  }
+
+  let completed = 0;
+  let hasError = false;
+
+  chunks.forEach((chunk, index) => {
+    const batch = db.batch();
+    chunk.forEach(acc => {
+      const ref = db.collection(`accounts_${companyId}`).doc(acc.code.replace(/\//g, '_'));
+      batch.set(ref, acc, { merge: true });
     });
+
+    batch.commit()
+      .then(() => {
+        completed++;
+        console.log(`☁️ Lote de catálogo ${index + 1}/${chunks.length} sincronizado.`);
+        if (completed === chunks.length && !hasError) {
+          console.log("🔥 Catálogo completo sincronizado con éxito.");
+        }
+      })
+      .catch(err => {
+        hasError = true;
+        console.error(`Error en lote de catálogo ${index + 1}:`, err);
+        alert(`⚠️ Error al sincronizar catálogo con Firebase (Lote ${index + 1}):\n${err.message}\n\nVerifica las reglas de seguridad en Firebase Console.`);
+      });
+  });
 }
 
 // 7. Escuchar pólizas en tiempo real
@@ -190,15 +210,32 @@ function deleteCloudPoliza(companyId, polizaId) {
 // 10. Guardar múltiples pólizas en lote (batch) en la nube
 function saveCloudPolizasBulk(companyId, polizasArray) {
   if (!db || !companyId) return;
-  const batch = db.batch();
-  polizasArray.forEach(pol => {
-    const ref = db.collection(`polizas_${companyId}`).doc(pol.id);
-    batch.set(ref, pol, { merge: true });
-  });
-  batch.commit()
-    .then(() => console.log(`☁️ Lote de ${polizasArray.length} pólizas sincronizado.`))
-    .catch(err => {
-      console.error("Error al guardar lote de pólizas en nube:", err);
-      alert(`⚠️ Error al sincronizar pólizas (Lote) con Firebase:\n${err.message}\n\nVerifica las Reglas de Seguridad en tu Firebase Console.`);
+
+  const CHUNK_SIZE = 400;
+  const chunks = [];
+  for (let i = 0; i < polizasArray.length; i += CHUNK_SIZE) {
+    chunks.push(polizasArray.slice(i, i + CHUNK_SIZE));
+  }
+
+  let completed = 0;
+  let hasError = false;
+
+  chunks.forEach((chunk, index) => {
+    const batch = db.batch();
+    chunk.forEach(pol => {
+      const ref = db.collection(`polizas_${companyId}`).doc(pol.id);
+      batch.set(ref, pol, { merge: true });
     });
+
+    batch.commit()
+      .then(() => {
+        completed++;
+        console.log(`☁️ Lote de pólizas ${index + 1}/${chunks.length} sincronizado.`);
+      })
+      .catch(err => {
+        hasError = true;
+        console.error(`Error en lote de pólizas ${index + 1}:`, err);
+        alert(`⚠️ Error al sincronizar pólizas (Lote ${index + 1}) con Firebase:\n${err.message}\n\nVerifica las Reglas de Seguridad en tu Firebase Console.`);
+      });
+  });
 }
