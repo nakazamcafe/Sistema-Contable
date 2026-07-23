@@ -31,6 +31,11 @@ if (typeof firebase !== 'undefined') {
 
 // --- HELPERS DE SINCRONIZACIÓN EN LA NUBE ---
 
+let lastSeenUsers = null;
+let lastSeenCompanies = null;
+const lastSeenAccounts = {};
+const lastSeenPolizas = {};
+
 function areUsersEqual(arr1, arr2) {
   if (!Array.isArray(arr1) || !Array.isArray(arr2)) return false;
   if (arr1.length !== arr2.length) return false;
@@ -124,15 +129,12 @@ function listenCloudUsers(callback) {
     snapshot.forEach((doc) => {
       cloudUsers.push(doc.data());
     });
-    if (cloudUsers.length > 0) {
+    if (!areUsersEqual(lastSeenUsers, cloudUsers)) {
+      lastSeenUsers = cloudUsers;
       const storageKey = "sistema_contable_users";
-      const localRaw = localStorage.getItem(storageKey);
-      const localUsers = localRaw ? JSON.parse(localRaw) : [];
-      if (!areUsersEqual(localUsers, cloudUsers)) {
-        const sorted = [...cloudUsers].sort((a, b) => a.username.localeCompare(b.username));
-        localStorage.setItem(storageKey, JSON.stringify(sorted));
-        if (callback) callback(sorted);
-      }
+      const sorted = [...cloudUsers].sort((a, b) => a.username.localeCompare(b.username));
+      localStorage.setItem(storageKey, JSON.stringify(sorted));
+      if (callback) callback(sorted);
     }
   }, (error) => {
     console.warn("Límite o aviso en nube (usuarios):", error.message);
@@ -158,15 +160,12 @@ function listenCloudCompanies(callback) {
     snapshot.forEach((doc) => {
       cloudCompanies.push(doc.data());
     });
-    if (cloudCompanies.length > 0) {
+    if (!areCompaniesEqual(lastSeenCompanies, cloudCompanies)) {
+      lastSeenCompanies = cloudCompanies;
       const storageKey = "sistema_contable_companies";
-      const localRaw = localStorage.getItem(storageKey);
-      const localCompanies = localRaw ? JSON.parse(localRaw) : [];
-      if (!areCompaniesEqual(localCompanies, cloudCompanies)) {
-        const sorted = [...cloudCompanies].sort((a, b) => a.id.localeCompare(b.id));
-        localStorage.setItem(storageKey, JSON.stringify(sorted));
-        if (callback) callback(sorted);
-      }
+      const sorted = [...cloudCompanies].sort((a, b) => a.id.localeCompare(b.id));
+      localStorage.setItem(storageKey, JSON.stringify(sorted));
+      if (callback) callback(sorted);
     }
   }, (error) => {
     console.warn("Límite o aviso en nube (empresas):", error.message);
@@ -192,15 +191,13 @@ function listenCloudAccounts(companyId, callback) {
     snapshot.forEach((doc) => {
       accounts.push(doc.data());
     });
-    if (accounts.length > 0) {
+    const last = lastSeenAccounts[companyId];
+    if (!areAccountsEqual(last, accounts)) {
+      lastSeenAccounts[companyId] = accounts;
       const storageKey = `sistema_contable_accounts_${companyId}`;
-      const localRaw = localStorage.getItem(storageKey);
-      const localAccounts = localRaw ? JSON.parse(localRaw) : [];
-      if (!areAccountsEqual(localAccounts, accounts)) {
-        const sorted = [...accounts].sort((a, b) => a.code.localeCompare(b.code));
-        localStorage.setItem(storageKey, JSON.stringify(sorted));
-        if (callback) callback(sorted);
-      }
+      const sorted = [...accounts].sort((a, b) => a.code.localeCompare(b.code));
+      localStorage.setItem(storageKey, JSON.stringify(sorted));
+      if (callback) callback(sorted);
     }
   }, (error) => {
     console.warn(`Límite o aviso en nube (cuentas ${companyId}):`, error.message);
@@ -251,15 +248,13 @@ function listenCloudPolizas(companyId, callback) {
     snapshot.forEach((doc) => {
       polizas.push(doc.data());
     });
-    if (polizas.length > 0) {
+    const last = lastSeenPolizas[companyId];
+    if (!arePolizasEqual(last, polizas)) {
+      lastSeenPolizas[companyId] = polizas;
       const storageKey = `sistema_contable_polizas_${companyId}`;
-      const localRaw = localStorage.getItem(storageKey);
-      const localPolizas = localRaw ? JSON.parse(localRaw) : [];
-      if (!arePolizasEqual(localPolizas, polizas)) {
-        const sorted = [...polizas].sort((a, b) => a.id.localeCompare(b.id));
-        localStorage.setItem(storageKey, JSON.stringify(sorted));
-        if (callback) callback(sorted);
-      }
+      const sorted = [...polizas].sort((a, b) => a.id.localeCompare(b.id));
+      localStorage.setItem(storageKey, JSON.stringify(sorted));
+      if (callback) callback(sorted);
     }
   }, (error) => {
     console.warn(`Límite o aviso en nube (pólizas ${companyId}):`, error.message);
