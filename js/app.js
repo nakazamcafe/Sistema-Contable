@@ -1488,13 +1488,8 @@ function importPolizas(jsonRows) {
   });
 
   system.isImporting = false;
-  system.saveToStorage(); // Guarda localmente de una sola vez
+  system.saveToStorage(); // Guarda localmente y sube todas las pólizas (anteriores + nuevas) en lote a Firebase
 
-  // Sincronizar en lote (batch) todas las pólizas con la nube de Firebase
-  const activeComp = getActiveCompany();
-  if (importedPolizas.length > 0 && typeof saveCloudPolizasBulk === "function") {
-    saveCloudPolizasBulk(activeComp.id, importedPolizas);
-  }
 
   renderPolizas();
   renderDashboard();

@@ -704,6 +704,9 @@ class AccountingSystem {
       if (typeof saveCloudAccounts === "function") {
         saveCloudAccounts(this.companyId, this.accounts);
       }
+      if (typeof saveCloudPolizasBulk === "function") {
+        saveCloudPolizasBulk(this.companyId, this.polizas);
+      }
     }
   }
 
