@@ -1182,8 +1182,8 @@ function initImportSection() {
   });
 
   // Configuración de Drag & Drop
-  setupDropzone("dropzone-catalog", "file-catalog-input", (data) => importCatalog(data));
-  setupDropzone("dropzone-polizas", "file-polizas-input", (data) => importPolizas(data));
+  setupDropzone("dropzone-catalog", "file-catalog-input", "catalog", (data) => importCatalog(data));
+  setupDropzone("dropzone-polizas", "file-polizas-input", "polizas", (data) => importPolizas(data));
 
   // Configuración de Respaldo Completo (.json)
   const exportBackupBtn = document.getElementById("btn-export-full-backup");
@@ -1257,7 +1257,7 @@ function importFullBackup(jsonStr) {
   }
 }
 
-function setupDropzone(zoneId, inputId, onDataRead) {
+function setupDropzone(zoneId, inputId, importType, onDataRead) {
   const zone = document.getElementById(zoneId);
   const input = document.getElementById(inputId);
 
@@ -1277,27 +1277,26 @@ function setupDropzone(zoneId, inputId, onDataRead) {
     zone.classList.remove("dragover");
     
     if (e.dataTransfer.files.length > 0) {
-      handleExcelFile(e.dataTransfer.files[0], onDataRead);
+      handleExcelFile(e.dataTransfer.files[0], importType, onDataRead);
     }
   });
 
   input.addEventListener("change", (e) => {
     if (e.target.files.length > 0) {
-      handleExcelFile(e.target.files[0], onDataRead);
+      handleExcelFile(e.target.files[0], importType, onDataRead);
     }
   });
 }
 
-function handleExcelFile(file, callback) {
+function handleExcelFile(file, importType, callback) {
   const reader = new FileReader();
   reader.onload = (e) => {
     const data = new Uint8Array(e.target.result);
     const workbook = XLSX.read(data, { type: 'array' });
     
     let sheetName = workbook.SheetNames[0];
-    const fileNameLower = file.name.toLowerCase();
 
-    if (fileNameLower.includes("poliza") || fileNameLower.includes("póliza")) {
+    if (importType === "polizas") {
       let found = workbook.SheetNames.find(n => 
         n.toLowerCase() === "pólizas" || 
         n.toLowerCase() === "polizas" ||
@@ -1312,7 +1311,7 @@ function handleExcelFile(file, callback) {
         );
       }
       if (found) sheetName = found;
-    } else if (fileNameLower.includes("catalogo") || fileNameLower.includes("catálogo")) {
+    } else if (importType === "catalog") {
       let found = workbook.SheetNames.find(n => 
         n.toLowerCase() === "catálogo" || 
         n.toLowerCase() === "catalogo" || 
@@ -1361,12 +1360,12 @@ function importCatalog(jsonRows) {
 
   // Normalizar renglones resolviendo variaciones de nombres de columnas
   const normalizedRows = jsonRows.map(row => {
-    const code = row["Código"] || row["Codigo"] || row["codigo"] || row["Code"] || row["code"];
-    const name = row["Nombre"] || row["nombre"] || row["Name"] || row["name"] || row["Cuenta"] || row["cuenta"];
-    const type = row["Tipo"] || row["tipo"] || row["Type"] || row["type"] || row["Naturaleza"] || row["naturaleza"];
-    const level = parseInt(row["Nivel"] || row["nivel"] || row["Level"] || row["level"] || 1);
-    const satCode = String(row["Código Agrupador SAT"] || row["Codigo Agrupador SAT"] || row["Agrupador SAT"] || row["agrupador sat"] || row["SAT"] || row["sat"] || "");
-    const parentCode = row["Cuenta Padre"] || row["Cuenta padre"] || row["cuenta padre"] || row["Padre"] || row["padre"] || "";
+    const code = String(row["Código"] || row["Codigo"] || row["codigo"] || row["Code"] || row["code"] || "").trim();
+    const name = String(row["Nombre"] || row["nombre"] || row["Name"] || row["name"] || row["Cuenta"] || row["cuenta"] || row["Nombre de la Cuenta"] || row["Nombre de la cuenta"] || row["Descripción"] || row["descripcion"] || "").trim();
+    const type = String(row["Tipo"] || row["tipo"] || row["Type"] || row["type"] || row["Naturaleza"] || row["naturaleza"] || "").trim();
+    const level = parseInt(row["Nivel"] || row["nivel"] || row["Level"] || row["level"]) || 1;
+    const satCode = String(row["Código Agrupador SAT"] || row["Codigo Agrupador SAT"] || row["Agrupador SAT"] || row["agrupador sat"] || row["SAT"] || row["sat"] || "").trim();
+    const parentCode = String(row["Cuenta Padre"] || row["Cuenta padre"] || row["cuenta padre"] || row["Padre"] || row["padre"] || "").trim();
     return { code, name, type, level, satCode, parentCode };
   });
 
