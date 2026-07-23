@@ -172,6 +172,27 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Actualizar datos de cabecera de la empresa activa
   updateActiveCompanyHeader(activeComp);
 
+  // Actualizar estado de la base de datos (Nube vs Local)
+  const dbStatusText = document.getElementById("db-status-text");
+  const dbStatusIcon = document.getElementById("db-status-icon");
+  const dbStatusContainer = document.getElementById("db-status-container");
+
+  if (typeof db !== "undefined" && db !== null) {
+    if (dbStatusText) dbStatusText.innerText = "Sincronización Nube Activa";
+    if (dbStatusIcon) dbStatusIcon.className = "fa-solid fa-cloud text-emerald";
+    if (dbStatusContainer) {
+      dbStatusContainer.className = "db-status text-emerald";
+      dbStatusContainer.title = "Conectado a Google Firebase Cloud Firestore 24/7";
+    }
+  } else {
+    if (dbStatusText) dbStatusText.innerText = "Modo Local (Sin Nube)";
+    if (dbStatusIcon) dbStatusIcon.className = "fa-solid fa-database text-amber";
+    if (dbStatusContainer) {
+      dbStatusContainer.className = "db-status text-amber";
+      dbStatusContainer.title = "El SDK de Firebase no se cargó o no está conectado. Usando almacenamiento local.";
+    }
+  }
+
   // Rellenar selectores estáticos
   populateSatCodesSelects();
   populateParentAccountsSelect();

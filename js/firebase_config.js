@@ -150,6 +150,7 @@ function listenCloudUsers(callback) {
     }
   }, (error) => {
     console.warn("Límite o aviso en nube (usuarios):", error.message);
+    alert(`⚠️ Error de conexión a Firebase (Usuarios):\n${error.message}\n\nEs probable que las Reglas de Seguridad de tu Firestore hayan expirado. Por favor, revísalas en Firebase Console.`);
   });
 }
 
@@ -181,6 +182,7 @@ function listenCloudCompanies(callback) {
     }
   }, (error) => {
     console.warn("Límite o aviso en nube (empresas):", error.message);
+    alert(`⚠️ Error de conexión a Firebase (Empresas):\n${error.message}\n\nEs probable que las Reglas de Seguridad de tu Firestore hayan expirado. Por favor, revísalas en Firebase Console.`);
   });
 }
 
@@ -213,6 +215,7 @@ function listenCloudAccounts(companyId, callback) {
     }
   }, (error) => {
     console.warn(`Límite o aviso en nube (cuentas ${companyId}):`, error.message);
+    alert(`⚠️ Error de conexión a Firebase (Catálogo):\n${error.message}\n\nEs probable que las Reglas de Seguridad de tu Firestore hayan expirado. Por favor, revísalas en Firebase Console.`);
   });
 }
 
@@ -270,6 +273,7 @@ function listenCloudPolizas(companyId, callback) {
     }
   }, (error) => {
     console.warn(`Límite o aviso en nube (pólizas ${companyId}):`, error.message);
+    alert(`⚠️ Error de conexión a Firebase (Pólizas):\n${error.message}\n\nEs probable que las Reglas de Seguridad de tu Firestore hayan expirado. Por favor, revísalas en Firebase Console.`);
   });
 }
 
