@@ -1378,18 +1378,21 @@ function importCatalog(jsonRows) {
   sortedRows.forEach(row => {
     const { code, name, type, level, satCode, parentCode } = row;
 
-    if (!code || !name || !type || !level) {
-      addLog("error", `Fila inválida. Faltan campos requeridos en la cuenta ${code || 'sin código'}.`);
+    if (!code || !name) {
+      addLog("error", `Fila inválida. Faltan Código o Nombre de la cuenta.`);
       errorCount++;
       return;
     }
 
+    const exists = system.getAccount(code);
+    const finalType = type || (exists ? exists.type : "Activo Deudor");
+    const finalLevel = level || (exists ? exists.level : 1);
+
     try {
-      // Si la cuenta ya existe, se actualiza, si no se agrega
-      if (system.getAccount(code)) {
-        system.updateAccount(code, { name, type, satCode });
+      if (exists) {
+        system.updateAccount(code, { name, type: finalType, satCode });
       } else {
-        system.addAccount({ code, name, type, level, satCode, parentCode });
+        system.addAccount({ code, name, type: finalType, level: finalLevel, satCode, parentCode });
       }
       successCount++;
     } catch (err) {
