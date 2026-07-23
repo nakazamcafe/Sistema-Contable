@@ -73,7 +73,10 @@ function saveCloudUser(userObj) {
   if (!db) return;
   db.collection("users").doc(userObj.username).set(userObj, { merge: true })
     .then(() => console.log(`☁️ Usuario ${userObj.username} sincronizado en la nube.`))
-    .catch(err => console.error("Error al guardar usuario en nube:", err));
+    .catch(err => {
+      console.error("Error al guardar usuario en nube:", err);
+      alert(`⚠️ Error al sincronizar usuario con Firebase:\n${err.message}\n\nVerifica las Reglas de Seguridad en tu Firebase Console.`);
+    });
 }
 
 // 3. Escuchar empresas en tiempo real
@@ -101,7 +104,10 @@ function saveCloudCompany(companyObj) {
   if (!db) return;
   db.collection("companies").doc(companyObj.id).set(companyObj, { merge: true })
     .then(() => console.log(`☁️ Empresa ${companyObj.name} sincronizada en la nube.`))
-    .catch(err => console.error("Error al guardar empresa en nube:", err));
+    .catch(err => {
+      console.error("Error al guardar empresa en nube:", err);
+      alert(`⚠️ Error al sincronizar empresa con Firebase:\n${err.message}\n\nVerifica las Reglas de Seguridad en tu Firebase Console.`);
+    });
 }
 
 // 5. Escuchar catálogo de cuentas en tiempo real
@@ -135,7 +141,10 @@ function saveCloudAccounts(companyId, accountsArray) {
   });
   batch.commit()
     .then(() => console.log(`☁️ Catálogo de ${companyId} sincronizado en la nube.`))
-    .catch(err => console.error("Error al guardar catálogo en nube:", err));
+    .catch(err => {
+      console.error("Error al guardar catálogo en nube:", err);
+      alert(`⚠️ Error al sincronizar catálogo con Firebase:\n${err.message}\n\nVerifica que la base de datos Firestore esté creada y sus Reglas en modo de prueba.`);
+    });
 }
 
 // 7. Escuchar pólizas en tiempo real
@@ -164,7 +173,10 @@ function saveCloudPoliza(companyId, polizaObj) {
   if (!db || !companyId) return;
   db.collection(`polizas_${companyId}`).doc(polizaObj.id).set(polizaObj, { merge: true })
     .then(() => console.log(`☁️ Póliza ${polizaObj.number} sincronizada en la nube.`))
-    .catch(err => console.error("Error al guardar póliza en nube:", err));
+    .catch(err => {
+      console.error("Error al guardar póliza en nube:", err);
+      alert(`⚠️ Error al sincronizar póliza con Firebase:\n${err.message}\n\nVerifica las Reglas de Seguridad en tu Firebase Console.`);
+    });
 }
 
 // 9. Eliminar póliza de la nube
@@ -185,5 +197,8 @@ function saveCloudPolizasBulk(companyId, polizasArray) {
   });
   batch.commit()
     .then(() => console.log(`☁️ Lote de ${polizasArray.length} pólizas sincronizado.`))
-    .catch(err => console.error("Error al guardar lote de pólizas en nube:", err));
+    .catch(err => {
+      console.error("Error al guardar lote de pólizas en nube:", err);
+      alert(`⚠️ Error al sincronizar pólizas (Lote) con Firebase:\n${err.message}\n\nVerifica las Reglas de Seguridad en tu Firebase Console.`);
+    });
 }
