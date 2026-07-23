@@ -4,6 +4,40 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sistema Contable Mexicano - SAT Compliant</title>
+  <script>
+    window.onerror = function(message, source, lineno, colno, error) {
+      // Ignorar errores que vienen de extensiones del navegador
+      if (!source || (!source.includes("js/app.js") && !source.includes("js/firebase_config.js") && !source.includes("js/accounting.js"))) {
+        return;
+      }
+      const errorDiv = document.getElementById("js-global-error");
+      if (errorDiv) {
+        errorDiv.querySelector(".error-text").innerText = `${message} (Línea ${lineno} en ${source.split('/').pop()})`;
+        errorDiv.style.display = "block";
+      } else {
+        const div = document.createElement("div");
+        div.id = "js-global-error";
+        div.style.position = "fixed";
+        div.style.top = "0";
+        div.style.left = "0";
+        div.style.right = "0";
+        div.style.backgroundColor = "#fee2e2";
+        div.style.color = "#991b1b";
+        div.style.padding = "12px 20px";
+        div.style.borderBottom = "3px solid #ef4444";
+        div.style.zIndex = "9999999";
+        div.style.fontFamily = "monospace";
+        div.style.fontSize = "13px";
+        div.style.display = "flex";
+        div.style.justifyContent = "space-between";
+        div.style.alignItems = "center";
+        div.style.boxShadow = "0 4px 6px -1px rgba(0, 0, 0, 0.1)";
+        div.innerHTML = `<div><strong>⚠️ Error en Pantalla:</strong> <span class="error-text">${message} (Línea ${lineno} en ${source.split('/').pop()})</span></div>
+                         <button onclick="this.parentElement.remove()" style="background:#ef4444;color:#white;border:none;border-radius:4px;padding:3px 8px;cursor:pointer;font-weight:bold;margin-left:15px;">Cerrar</button>`;
+        document.body.appendChild(div);
+      }
+    };
+  </script>
   
   <!-- SEO & Description -->
   <meta name="description" content="Sistema contable web adaptado a la normativa mexicana del SAT, con importación de catálogos y pólizas en Excel, generación de estados financieros básicos y balanza de comprobación.">
