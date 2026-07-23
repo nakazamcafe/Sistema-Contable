@@ -141,7 +141,7 @@ function listenCloudUsers(callback) {
       });
     }
 
-    if (!areUsersEqual(lastSeenUsers, cloudUsers)) {
+    if (cloudUsers.length > 0 && !areUsersEqual(lastSeenUsers, cloudUsers)) {
       lastSeenUsers = cloudUsers;
       const storageKey = "sistema_contable_users";
       const sorted = [...cloudUsers].sort((a, b) => a.username.localeCompare(b.username));
@@ -172,7 +172,7 @@ function listenCloudCompanies(callback) {
     snapshot.forEach((doc) => {
       cloudCompanies.push(doc.data());
     });
-    if (!areCompaniesEqual(lastSeenCompanies, cloudCompanies)) {
+    if (cloudCompanies.length > 0 && !areCompaniesEqual(lastSeenCompanies, cloudCompanies)) {
       lastSeenCompanies = cloudCompanies;
       const storageKey = "sistema_contable_companies";
       const sorted = [...cloudCompanies].sort((a, b) => a.id.localeCompare(b.id));
@@ -204,7 +204,7 @@ function listenCloudAccounts(companyId, callback) {
       accounts.push(doc.data());
     });
     const last = lastSeenAccounts[companyId];
-    if (!areAccountsEqual(last, accounts)) {
+    if (accounts.length > 0 && !areAccountsEqual(last, accounts)) {
       lastSeenAccounts[companyId] = accounts;
       const storageKey = `sistema_contable_accounts_${companyId}`;
       const sorted = [...accounts].sort((a, b) => a.code.localeCompare(b.code));
@@ -261,7 +261,7 @@ function listenCloudPolizas(companyId, callback) {
       polizas.push(doc.data());
     });
     const last = lastSeenPolizas[companyId];
-    if (!arePolizasEqual(last, polizas)) {
+    if (polizas.length > 0 && !arePolizasEqual(last, polizas)) {
       lastSeenPolizas[companyId] = polizas;
       const storageKey = `sistema_contable_polizas_${companyId}`;
       const sorted = [...polizas].sort((a, b) => a.id.localeCompare(b.id));
