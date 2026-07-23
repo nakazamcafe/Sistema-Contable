@@ -31,8 +31,28 @@ if (typeof firebase !== 'undefined') {
 
 // --- HELPERS DE SINCRONIZACIÓN EN LA NUBE ---
 
+function normalizeObject(obj) {
+  if (typeof obj !== 'object' || obj === null) return obj;
+  const normalized = {};
+  const keys = Object.keys(obj).sort();
+  keys.forEach(k => {
+    let val = obj[k];
+    if (Array.isArray(val)) {
+      val = val.map(item => normalizeObject(item));
+    } else if (typeof val === 'object' && val !== null) {
+      val = normalizeObject(val);
+    }
+    // Omitir campos vacíos, nulos o no definidos para hacer la comparación inmune a diferencias de estructura básica
+    if (val !== undefined && val !== null && val !== "") {
+      normalized[k] = val;
+    }
+  });
+  return normalized;
+}
+
 function arraysEqual(key, nextArray, sortKey) {
-  const nextSorted = [...nextArray].sort((a, b) => String(a[sortKey]).localeCompare(String(b[sortKey])));
+  const nextNormalized = nextArray.map(item => normalizeObject(item));
+  const nextSorted = nextNormalized.sort((a, b) => String(a[sortKey] || "").localeCompare(String(b[sortKey] || "")));
   const nextStr = JSON.stringify(nextSorted);
   
   let currentRaw = localStorage.getItem(key);
@@ -41,7 +61,8 @@ function arraysEqual(key, nextArray, sortKey) {
   try {
     const currentArray = JSON.parse(currentRaw);
     if (!Array.isArray(currentArray)) return false;
-    const currentSorted = [...currentArray].sort((a, b) => String(a[sortKey]).localeCompare(String(b[sortKey])));
+    const currentNormalized = currentArray.map(item => normalizeObject(item));
+    const currentSorted = currentNormalized.sort((a, b) => String(a[sortKey] || "").localeCompare(String(b[sortKey] || "")));
     return nextStr === JSON.stringify(currentSorted);
   } catch (e) {
     return false;
