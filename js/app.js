@@ -1298,20 +1298,34 @@ function handleExcelFile(file, callback) {
     const fileNameLower = file.name.toLowerCase();
 
     if (fileNameLower.includes("poliza") || fileNameLower.includes("póliza")) {
-      const found = workbook.SheetNames.find(n => 
-        n.toLowerCase().includes("póliza") || 
-        n.toLowerCase().includes("poliza") || 
-        n.toLowerCase().includes("transacciones") ||
-        n.toLowerCase().includes("sheet1")
+      let found = workbook.SheetNames.find(n => 
+        n.toLowerCase() === "pólizas" || 
+        n.toLowerCase() === "polizas" ||
+        n.toLowerCase() === "transacciones"
       );
+      if (!found) {
+        found = workbook.SheetNames.find(n => 
+          n.toLowerCase().includes("póliza") || 
+          n.toLowerCase().includes("poliza") || 
+          n.toLowerCase().includes("transacciones") ||
+          n.toLowerCase().includes("sheet1")
+        );
+      }
       if (found) sheetName = found;
     } else if (fileNameLower.includes("catalogo") || fileNameLower.includes("catálogo")) {
-      const found = workbook.SheetNames.find(n => 
-        n.toLowerCase().includes("catál") || 
-        n.toLowerCase().includes("catal") || 
-        n.toLowerCase().includes("cuentas") ||
-        n.toLowerCase().includes("sheet1")
+      let found = workbook.SheetNames.find(n => 
+        n.toLowerCase() === "catálogo" || 
+        n.toLowerCase() === "catalogo" || 
+        n.toLowerCase() === "cuentas"
       );
+      if (!found) {
+        found = workbook.SheetNames.find(n => 
+          n.toLowerCase().includes("catál") || 
+          n.toLowerCase().includes("catal") || 
+          n.toLowerCase().includes("cuentas") ||
+          n.toLowerCase().includes("sheet1")
+        );
+      }
       if (found) sheetName = found;
     }
 
