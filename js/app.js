@@ -874,8 +874,8 @@ function generateNextFolio(type, dateStr) {
   // Encontrar el consecutivo numérico más alto
   let maxSeq = 0;
   monthPolizas.forEach(p => {
-    // Busca concordar con el patrón "Prefijo-Número" (ej. D-001)
-    const match = p.number.match(new RegExp(`^${prefix}-(\\d+)$`));
+    // Busca concordar con el patrón "Prefijo-Mes-Número" (ej. D-07-001)
+    const match = p.number.match(new RegExp(`^${prefix}-${month}-(\\d+)$`));
     if (match) {
       const seq = parseInt(match[1]);
       if (seq > maxSeq) maxSeq = seq;
@@ -883,9 +883,9 @@ function generateNextFolio(type, dateStr) {
   });
   
   const nextSeq = maxSeq + 1;
-  // Formatear con ceros a la izquierda a 3 dígitos (ej. D-001)
+  // Formatear con ceros a la izquierda a 3 dígitos (ej. D-07-001)
   const formattedSeq = String(nextSeq).padStart(3, '0');
-  return `${prefix}-${formattedSeq}`;
+  return `${prefix}-${month}-${formattedSeq}`;
 }
 
 function initPolizaModal() {
