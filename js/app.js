@@ -418,9 +418,17 @@ function renderDashboard() {
 }
 
 function renderDashboardCharts(activos, pasivos, capital, ingresos, costos, gastos) {
-  // Destruir gráficos anteriores para evitar overlaps al recargar
-  if (charts.comp) charts.comp.destroy();
-  if (charts.prof) charts.prof.destroy();
+  // Recrear los elementos canvas en el DOM para evitar que Chart.js arroje errores de canvas ya en uso
+  const compCanvas = document.getElementById('chart-financial-composition');
+  if (compCanvas) {
+    const parent = compCanvas.parentElement;
+    parent.innerHTML = '<canvas id="chart-financial-composition"></canvas>';
+  }
+  const profCanvas = document.getElementById('chart-profitability');
+  if (profCanvas) {
+    const parent = profCanvas.parentElement;
+    parent.innerHTML = '<canvas id="chart-profitability"></canvas>';
+  }
 
   const ctxComp = document.getElementById('chart-financial-composition').getContext('2d');
   const ctxProf = document.getElementById('chart-profitability').getContext('2d');

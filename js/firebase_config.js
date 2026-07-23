@@ -31,42 +31,83 @@ if (typeof firebase !== 'undefined') {
 
 // --- HELPERS DE SINCRONIZACIÓN EN LA NUBE ---
 
-function normalizeObject(obj) {
-  if (typeof obj !== 'object' || obj === null) return obj;
-  const normalized = {};
-  const keys = Object.keys(obj).sort();
-  keys.forEach(k => {
-    let val = obj[k];
-    if (Array.isArray(val)) {
-      val = val.map(item => normalizeObject(item));
-    } else if (typeof val === 'object' && val !== null) {
-      val = normalizeObject(val);
+function areUsersEqual(arr1, arr2) {
+  if (!Array.isArray(arr1) || !Array.isArray(arr2)) return false;
+  if (arr1.length !== arr2.length) return false;
+  const s1 = [...arr1].sort((a, b) => (a.username || "").localeCompare(b.username || ""));
+  const s2 = [...arr2].sort((a, b) => (a.username || "").localeCompare(b.username || ""));
+  for (let i = 0; i < s1.length; i++) {
+    if (s1[i].username !== s2[i].username || s1[i].fullName !== s2[i].fullName || s1[i].role !== s2[i].role) {
+      return false;
     }
-    // Omitir campos vacíos, nulos o no definidos para hacer la comparación inmune a diferencias de estructura básica
-    if (val !== undefined && val !== null && val !== "") {
-      normalized[k] = val;
-    }
-  });
-  return normalized;
+  }
+  return true;
 }
 
-function arraysEqual(key, nextArray, sortKey) {
-  const nextNormalized = nextArray.map(item => normalizeObject(item));
-  const nextSorted = nextNormalized.sort((a, b) => String(a[sortKey] || "").localeCompare(String(b[sortKey] || "")));
-  const nextStr = JSON.stringify(nextSorted);
-  
-  let currentRaw = localStorage.getItem(key);
-  if (!currentRaw) return false;
-  
-  try {
-    const currentArray = JSON.parse(currentRaw);
-    if (!Array.isArray(currentArray)) return false;
-    const currentNormalized = currentArray.map(item => normalizeObject(item));
-    const currentSorted = currentNormalized.sort((a, b) => String(a[sortKey] || "").localeCompare(String(b[sortKey] || "")));
-    return nextStr === JSON.stringify(currentSorted);
-  } catch (e) {
-    return false;
+function areCompaniesEqual(arr1, arr2) {
+  if (!Array.isArray(arr1) || !Array.isArray(arr2)) return false;
+  if (arr1.length !== arr2.length) return false;
+  const s1 = [...arr1].sort((a, b) => (a.id || "").localeCompare(b.id || ""));
+  const s2 = [...arr2].sort((a, b) => (a.id || "").localeCompare(b.id || ""));
+  for (let i = 0; i < s1.length; i++) {
+    if (s1[i].id !== s2[i].id || s1[i].name !== s2[i].name || s1[i].rfc !== s2[i].rfc) {
+      return false;
+    }
   }
+  return true;
+}
+
+function areAccountsEqual(arr1, arr2) {
+  if (!Array.isArray(arr1) || !Array.isArray(arr2)) return false;
+  if (arr1.length !== arr2.length) return false;
+  const s1 = [...arr1].sort((a, b) => (a.code || "").localeCompare(b.code || ""));
+  const s2 = [...arr2].sort((a, b) => (a.code || "").localeCompare(b.code || ""));
+  for (let i = 0; i < s1.length; i++) {
+    const a = s1[i];
+    const b = s2[i];
+    if (a.code !== b.code ||
+        a.name !== b.name ||
+        a.type !== b.type ||
+        a.level !== b.level ||
+        (a.satCode || "") !== (b.satCode || "") ||
+        (a.parentCode || "") !== (b.parentCode || "")) {
+      return false;
+    }
+  }
+  return true;
+}
+
+function arePolizasEqual(arr1, arr2) {
+  if (!Array.isArray(arr1) || !Array.isArray(arr2)) return false;
+  if (arr1.length !== arr2.length) return false;
+  const s1 = [...arr1].sort((a, b) => (a.id || "").localeCompare(b.id || ""));
+  const s2 = [...arr2].sort((a, b) => (a.id || "").localeCompare(b.id || ""));
+  
+  for (let i = 0; i < s1.length; i++) {
+    const p1 = s1[i];
+    const p2 = s2[i];
+    if (p1.id !== p2.id ||
+        p1.number !== p2.number ||
+        p1.date !== p2.date ||
+        p1.type !== p2.type ||
+        p1.concept !== p2.concept ||
+        p1.createdBy !== p2.createdBy) {
+      return false;
+    }
+    const l1 = p1.lines || [];
+    const l2 = p2.lines || [];
+    if (l1.length !== l2.length) return false;
+    for (let j = 0; j < l1.length; j++) {
+      if (l1[j].accountCode !== l2[j].accountCode ||
+          l1[j].concept !== l2[j].concept ||
+          Number(l1[j].debit) !== Number(l2[j].debit) ||
+          Number(l1[j].credit) !== Number(l2[j].credit) ||
+          (l1[j].reference || "") !== (l2[j].reference || "")) {
+        return false;
+      }
+    }
+  }
+  return true;
 }
 
 // 1. Escuchar cambios de usuarios en tiempo real
@@ -78,9 +119,12 @@ function listenCloudUsers(callback) {
       cloudUsers.push(doc.data());
     });
     if (cloudUsers.length > 0) {
-      if (!arraysEqual("sistema_contable_users", cloudUsers, "username")) {
+      const storageKey = "sistema_contable_users";
+      const localRaw = localStorage.getItem(storageKey);
+      const localUsers = localRaw ? JSON.parse(localRaw) : [];
+      if (!areUsersEqual(localUsers, cloudUsers)) {
         const sorted = [...cloudUsers].sort((a, b) => a.username.localeCompare(b.username));
-        localStorage.setItem("sistema_contable_users", JSON.stringify(sorted));
+        localStorage.setItem(storageKey, JSON.stringify(sorted));
         if (callback) callback(sorted);
       }
     }
@@ -109,9 +153,12 @@ function listenCloudCompanies(callback) {
       cloudCompanies.push(doc.data());
     });
     if (cloudCompanies.length > 0) {
-      if (!arraysEqual("sistema_contable_companies", cloudCompanies, "id")) {
+      const storageKey = "sistema_contable_companies";
+      const localRaw = localStorage.getItem(storageKey);
+      const localCompanies = localRaw ? JSON.parse(localRaw) : [];
+      if (!areCompaniesEqual(localCompanies, cloudCompanies)) {
         const sorted = [...cloudCompanies].sort((a, b) => a.id.localeCompare(b.id));
-        localStorage.setItem("sistema_contable_companies", JSON.stringify(sorted));
+        localStorage.setItem(storageKey, JSON.stringify(sorted));
         if (callback) callback(sorted);
       }
     }
@@ -141,7 +188,9 @@ function listenCloudAccounts(companyId, callback) {
     });
     if (accounts.length > 0) {
       const storageKey = `sistema_contable_accounts_${companyId}`;
-      if (!arraysEqual(storageKey, accounts, "code")) {
+      const localRaw = localStorage.getItem(storageKey);
+      const localAccounts = localRaw ? JSON.parse(localRaw) : [];
+      if (!areAccountsEqual(localAccounts, accounts)) {
         const sorted = [...accounts].sort((a, b) => a.code.localeCompare(b.code));
         localStorage.setItem(storageKey, JSON.stringify(sorted));
         if (callback) callback(sorted);
@@ -198,7 +247,9 @@ function listenCloudPolizas(companyId, callback) {
     });
     if (polizas.length > 0) {
       const storageKey = `sistema_contable_polizas_${companyId}`;
-      if (!arraysEqual(storageKey, polizas, "id")) {
+      const localRaw = localStorage.getItem(storageKey);
+      const localPolizas = localRaw ? JSON.parse(localRaw) : [];
+      if (!arePolizasEqual(localPolizas, polizas)) {
         const sorted = [...polizas].sort((a, b) => a.id.localeCompare(b.id));
         localStorage.setItem(storageKey, JSON.stringify(sorted));
         if (callback) callback(sorted);
