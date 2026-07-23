@@ -641,12 +641,10 @@
 
             <div class="form-group">
               <label for="acc-sat">Código Agrupador SAT:</label>
-              <div class="select-wrapper">
-                <select id="acc-sat">
-                  <option value="">Sin código agrupador</option>
-                  <!-- Cargado por JS -->
-                </select>
-              </div>
+              <input type="text" id="acc-sat" list="datalist-sat" placeholder="Ej. 102.01 o personalizado...">
+              <datalist id="datalist-sat">
+                <!-- Cargado por JS -->
+              </datalist>
             </div>
 
           </div>

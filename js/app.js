@@ -292,15 +292,16 @@ function updateThemeIcon(theme) {
 // --- SELECTS Y DROPDOWNS DINÁMICOS ---
 
 function populateSatCodesSelects() {
-  const select = document.getElementById("acc-sat");
-  select.innerHTML = '<option value="">Sin código agrupador SAT</option>';
+  const datalist = document.getElementById("datalist-sat");
+  if (!datalist) return;
+  datalist.innerHTML = "";
   
   // Agrupar y ordenar códigos SAT
   SAT_CODES.forEach(item => {
     const opt = document.createElement("option");
     opt.value = item.code;
     opt.innerText = `${item.code} - ${item.name} (${item.type})`;
-    select.appendChild(opt);
+    datalist.appendChild(opt);
   });
 }
 
