@@ -174,3 +174,16 @@ function deleteCloudPoliza(companyId, polizaId) {
     .then(() => console.log(`☁️ Póliza ${polizaId} eliminada de la nube.`))
     .catch(err => console.error("Error al eliminar póliza de la nube:", err));
 }
+
+// 10. Guardar múltiples pólizas en lote (batch) en la nube
+function saveCloudPolizasBulk(companyId, polizasArray) {
+  if (!db || !companyId) return;
+  const batch = db.batch();
+  polizasArray.forEach(pol => {
+    const ref = db.collection(`polizas_${companyId}`).doc(pol.id);
+    batch.set(ref, pol, { merge: true });
+  });
+  batch.commit()
+    .then(() => console.log(`☁️ Lote de ${polizasArray.length} pólizas sincronizado.`))
+    .catch(err => console.error("Error al guardar lote de pólizas en nube:", err));
+}

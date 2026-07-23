@@ -1345,16 +1345,25 @@ function importCatalog(jsonRows) {
   let successCount = 0;
   let errorCount = 0;
 
-  // Limpiar catálogo actual para una importación limpia (opcional, pero sugerido para consistencia total en layouts)
-  const sortedRows = [...jsonRows].sort((a, b) => parseInt(a.Nivel) - parseInt(b.Nivel));
+  // Normalizar renglones resolviendo variaciones de nombres de columnas
+  const normalizedRows = jsonRows.map(row => {
+    const code = row["Código"] || row["Codigo"] || row["codigo"] || row["Code"] || row["code"];
+    const name = row["Nombre"] || row["nombre"] || row["Name"] || row["name"] || row["Cuenta"] || row["cuenta"];
+    const type = row["Tipo"] || row["tipo"] || row["Type"] || row["type"] || row["Naturaleza"] || row["naturaleza"];
+    const level = parseInt(row["Nivel"] || row["nivel"] || row["Level"] || row["level"] || 1);
+    const satCode = String(row["Código Agrupador SAT"] || row["Codigo Agrupador SAT"] || row["Agrupador SAT"] || row["agrupador sat"] || row["SAT"] || row["sat"] || "");
+    const parentCode = row["Cuenta Padre"] || row["Cuenta padre"] || row["cuenta padre"] || row["Padre"] || row["padre"] || "";
+    return { code, name, type, level, satCode, parentCode };
+  });
+
+  // Ordenar por nivel contable para garantizar que los padres se creen antes que las subcuentas
+  const sortedRows = normalizedRows.sort((a, b) => a.level - b.level);
+
+  // Evitar escrituras concurrentes e ineficientes a la nube en cada iteración
+  system.isImporting = true;
 
   sortedRows.forEach(row => {
-    const code = row["Código"];
-    const name = row["Nombre"];
-    const type = row["Tipo"];
-    const level = parseInt(row["Nivel"]);
-    const satCode = String(row["Código Agrupador SAT"] || "");
-    const parentCode = row["Cuenta Padre"] || "";
+    const { code, name, type, level, satCode, parentCode } = row;
 
     if (!code || !name || !type || !level) {
       addLog("error", `Fila inválida. Faltan campos requeridos en la cuenta ${code || 'sin código'}.`);
@@ -1376,6 +1385,9 @@ function importCatalog(jsonRows) {
     }
   });
 
+  system.isImporting = false;
+  system.saveToStorage(); // Guarda localmente y sube en lote a Firebase de una sola vez
+
   populateParentAccountsSelect();
   renderCatalog();
   addLog("success", `Carga finalizada. Cuentas creadas/actualizadas con éxito: ${successCount}. Errores: ${errorCount}.`);
@@ -1388,15 +1400,15 @@ function importPolizas(jsonRows) {
   const polizasMap = {};
 
   jsonRows.forEach(row => {
-    const number = row["Número"];
-    const dateStr = row["Fecha"];
-    const type = row["Tipo"];
-    const conceptGen = row["Concepto General"];
-    const accountCode = row["Cuenta Contable"];
-    const conceptLine = row["Concepto Línea"] || conceptGen;
-    const debit = parseFloat(row["Debe"] || 0);
-    const credit = parseFloat(row["Haber"] || 0);
-    const reference = row["Referencia"] || "";
+    const number = row["Número"] || row["Numero"] || row["numero"] || row["Folio"] || row["folio"] || row["Póliza"] || row["poliza"];
+    const dateStr = row["Fecha"] || row["fecha"] || row["Date"] || row["date"];
+    const type = row["Tipo"] || row["tipo"] || row["Type"] || row["type"];
+    const conceptGen = row["Concepto General"] || row["Concepto general"] || row["concepto general"] || row["Concepto"] || row["concepto"];
+    const accountCode = row["Cuenta Contable"] || row["Cuenta contable"] || row["cuenta contable"] || row["Cuenta"] || row["cuenta"] || row["Código"] || row["codigo"];
+    const conceptLine = row["Concepto Línea"] || row["Concepto línea"] || row["concepto línea"] || row["Concepto Linea"] || row["concepto linea"] || conceptGen;
+    const debit = parseFloat(row["Debe"] || row["debe"] || row["Cargo"] || row["cargo"] || 0);
+    const credit = parseFloat(row["Haber"] || row["haber"] || row["Abono"] || row["abono"] || 0);
+    const reference = row["Referencia"] || row["referencia"] || row["Ref"] || row["ref"] || "";
 
     if (!number || !dateStr || !type || !accountCode) {
       addLog("error", `Fila ignorada. Faltan datos esenciales de póliza. Folio: ${number || 'Indefinido'}`);
@@ -1432,6 +1444,10 @@ function importPolizas(jsonRows) {
 
   let successCount = 0;
   let errorCount = 0;
+  const importedPolizas = [];
+
+  // Evitar escrituras concurrentes e ineficientes a la nube en cada iteración
+  system.isImporting = true;
 
   Object.values(polizasMap).forEach((pol, idx) => {
     try {
@@ -1443,11 +1459,7 @@ function importPolizas(jsonRows) {
       pol.createdBy = currentUser ? currentUser.fullName : "Importador Excel";
 
       system.addPoliza(pol);
-
-      const activeComp = getActiveCompany();
-      if (typeof saveCloudPoliza === "function") {
-        saveCloudPoliza(activeComp.id, pol);
-      }
+      importedPolizas.push(pol);
 
       addLog("success", `Póliza ${pol.number} cargada con éxito. Partidas: ${pol.lines.length}`);
       successCount++;
@@ -1456,6 +1468,15 @@ function importPolizas(jsonRows) {
       errorCount++;
     }
   });
+
+  system.isImporting = false;
+  system.saveToStorage(); // Guarda localmente de una sola vez
+
+  // Sincronizar en lote (batch) todas las pólizas con la nube de Firebase
+  const activeComp = getActiveCompany();
+  if (importedPolizas.length > 0 && typeof saveCloudPolizasBulk === "function") {
+    saveCloudPolizasBulk(activeComp.id, importedPolizas);
+  }
 
   renderPolizas();
   renderDashboard();

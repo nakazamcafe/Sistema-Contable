@@ -700,8 +700,10 @@ class AccountingSystem {
   saveToStorage() {
     localStorage.setItem(`sistema_contable_accounts_${this.companyId}`, JSON.stringify(this.accounts));
     localStorage.setItem(`sistema_contable_polizas_${this.companyId}`, JSON.stringify(this.polizas));
-    if (typeof saveCloudAccounts === "function") {
-      saveCloudAccounts(this.companyId, this.accounts);
+    if (!this.isImporting) {
+      if (typeof saveCloudAccounts === "function") {
+        saveCloudAccounts(this.companyId, this.accounts);
+      }
     }
   }
 
