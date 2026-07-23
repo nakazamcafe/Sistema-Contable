@@ -364,7 +364,6 @@ function renderDashboard() {
   const endStr = `${today.getFullYear()}-07-31`;
 
   // Obtener balances
-  const balances = system.calculateBalances(startStr, endStr);
   const bg = system.getBalanceGeneral(startStr, endStr);
   const er = system.getEstadoResultados(startStr, endStr);
 
@@ -386,8 +385,30 @@ function renderDashboard() {
     ? `<i class="fa-solid fa-chart-line text-emerald"></i> Margen Neto: ${utilPct.toFixed(1)}%` 
     : `<i class="fa-solid fa-chart-line text-rose"></i> Pérdida Neta`;
 
-  // Renderizar gráficos
-  renderDashboardCharts(bg.totals.activos, bg.totals.pasivos, bg.totals.capital, er.totals.ingresos, er.totals.costos, er.totals.gastos);
+  // Cargar tablas de Resumen de Balance General
+  document.getElementById("sum-activos").innerText = fmt(bg.totals.activos);
+  document.getElementById("sum-pasivos").innerText = fmt(bg.totals.pasivos);
+  document.getElementById("sum-capital").innerText = fmt(bg.totals.capital);
+  
+  const diff = bg.totals.activos - bg.totals.pasivos - bg.totals.capital;
+  const sumDiff = document.getElementById("sum-diferencia");
+  if (Math.abs(diff) < 0.01) {
+    sumDiff.className = "text-right font-mono text-emerald";
+    sumDiff.innerHTML = `<i class="fa-solid fa-circle-check"></i> ${fmt(0)}`;
+  } else {
+    sumDiff.className = "text-right font-mono text-rose";
+    sumDiff.innerText = fmt(diff);
+  }
+
+  // Cargar tablas de Resumen de Estado de Resultados
+  document.getElementById("sum-ingresos").innerText = fmt(er.totals.ingresos);
+  document.getElementById("sum-costos").innerText = fmt(er.totals.costos);
+  document.getElementById("sum-utilidad-bruta").innerText = fmt(er.totals.utilidadBruta);
+  document.getElementById("sum-gastos").innerText = fmt(er.totals.gastos);
+  
+  const sumUtilNeta = document.getElementById("sum-utilidad-neta");
+  sumUtilNeta.innerText = fmt(util);
+  sumUtilNeta.className = util >= 0 ? "text-right font-mono text-emerald" : "text-right font-mono text-rose";
 
   // Cargar últimas 5 pólizas
   const tbody = document.querySelector("#dashboard-polizas-table tbody");
@@ -414,91 +435,6 @@ function renderDashboard() {
       <td class="text-center"><span class="text-emerald"><i class="fa-solid fa-circle-check"></i> Cuadrada</span></td>
     `;
     tbody.appendChild(tr);
-  });
-}
-
-function renderDashboardCharts(activos, pasivos, capital, ingresos, costos, gastos) {
-  // Recrear los elementos canvas en el DOM para evitar que Chart.js arroje errores de canvas ya en uso
-  const compCanvas = document.getElementById('chart-financial-composition');
-  if (compCanvas) {
-    const parent = compCanvas.parentElement;
-    parent.innerHTML = '<canvas id="chart-financial-composition"></canvas>';
-  }
-  const profCanvas = document.getElementById('chart-profitability');
-  if (profCanvas) {
-    const parent = profCanvas.parentElement;
-    parent.innerHTML = '<canvas id="chart-profitability"></canvas>';
-  }
-
-  const ctxComp = document.getElementById('chart-financial-composition').getContext('2d');
-  const ctxProf = document.getElementById('chart-profitability').getContext('2d');
-
-  const isDark = document.body.classList.contains("dark-theme");
-  const textColor = isDark ? '#9ca3af' : '#4b5563';
-  const gridColor = isDark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)';
-
-  // Gráfico de Composición Financiera (Doughnut)
-  charts.comp = new Chart(ctxComp, {
-    type: 'doughnut',
-    data: {
-      labels: ['Activos', 'Pasivos', 'Capital Contable'],
-      datasets: [{
-        data: [activos, pasivos, capital],
-        backgroundColor: [
-          '#6366f1', // Indigo
-          '#f43f5e', // Rose
-          '#a855f7'  // Purple
-        ],
-        borderWidth: isDark ? 2 : 1,
-        borderColor: isDark ? '#101420' : '#ffffff'
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          position: 'bottom',
-          labels: { color: textColor, font: { family: 'Inter' } }
-        }
-      }
-    }
-  });
-
-  // Gráfico de Estructura de Resultados (Barra)
-  charts.prof = new Chart(ctxProf, {
-    type: 'bar',
-    data: {
-      labels: ['Ingresos', 'Costos', 'Gastos'],
-      datasets: [{
-        label: 'Monto ($)',
-        data: [ingresos, costos, gastos],
-        backgroundColor: [
-          '#10b981', // Emerald
-          '#f59e0b', // Amber
-          '#f43f5e'  // Rose
-        ],
-        borderRadius: 8,
-        barThickness: 32
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false }
-      },
-      scales: {
-        y: {
-          grid: { color: gridColor },
-          ticks: { color: textColor }
-        },
-        x: {
-          grid: { display: false },
-          ticks: { color: textColor }
-        }
-      }
-    }
   });
 }
 

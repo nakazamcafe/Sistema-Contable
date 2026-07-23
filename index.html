@@ -221,25 +221,67 @@
 
           <!-- Charts and Summary Section -->
           <div class="dashboard-grid">
-            <!-- Balance Chart Card -->
+            <!-- Balance Summary Card -->
             <div class="card card-glass visual-card">
               <div class="card-header">
-                <h3><i class="fa-solid fa-chart-column"></i> Composición Financiera</h3>
-                <span class="badge badge-indigo">Actual</span>
+                <h3><i class="fa-solid fa-scale-balanced"></i> Resumen de Balance General</h3>
+                <span class="badge badge-indigo">Estructura</span>
               </div>
-              <div class="card-body chart-wrapper">
-                <canvas id="chart-financial-composition"></canvas>
+              <div class="card-body">
+                <table class="report-table" style="width:100%; font-size: 0.95rem; line-height: 2; border-collapse: collapse;">
+                  <tbody>
+                    <tr>
+                      <td style="padding: 6px 0;"><i class="fa-solid fa-circle text-primary" style="margin-right:8px; font-size:10px;"></i> <strong>Total Activos</strong></td>
+                      <td class="text-right font-mono" id="sum-activos">$0.00</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 6px 0;"><i class="fa-solid fa-circle text-rose" style="margin-right:8px; font-size:10px;"></i> <strong>Total Pasivos</strong></td>
+                      <td class="text-right font-mono" id="sum-pasivos">$0.00</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 6px 0;"><i class="fa-solid fa-circle text-purple" style="margin-right:8px; font-size:10px;"></i> <strong>Capital Contable</strong></td>
+                      <td class="text-right font-mono" id="sum-capital">$0.00</td>
+                    </tr>
+                    <tr style="border-top: 1px solid var(--border-color); font-weight: bold;">
+                      <td style="padding: 8px 0; color: var(--text-muted);">Diferencia (Activos - Pasivos - Capital)</td>
+                      <td class="text-right font-mono" id="sum-diferencia" style="padding: 8px 0;">$0.00</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
 
-            <!-- Profitability Chart Card -->
+            <!-- Profitability Summary Card -->
             <div class="card card-glass visual-card">
               <div class="card-header">
-                <h3><i class="fa-solid fa-chart-line"></i> Estructura de Resultados</h3>
-                <span class="badge badge-emerald">Ingresos vs Gastos</span>
+                <h3><i class="fa-solid fa-receipt"></i> Resumen de Estado de Resultados</h3>
+                <span class="badge badge-emerald">Rentabilidad</span>
               </div>
-              <div class="card-body chart-wrapper">
-                <canvas id="chart-profitability"></canvas>
+              <div class="card-body">
+                <table class="report-table" style="width:100%; font-size: 0.95rem; line-height: 2; border-collapse: collapse;">
+                  <tbody>
+                    <tr>
+                      <td style="padding: 6px 0;"><i class="fa-solid fa-circle text-emerald" style="margin-right:8px; font-size:10px;"></i> <strong>Total Ingresos</strong></td>
+                      <td class="text-right font-mono" id="sum-ingresos">$0.00</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 6px 0;"><i class="fa-solid fa-circle text-amber" style="margin-right:8px; font-size:10px;"></i> <strong>Total Costos</strong></td>
+                      <td class="text-right font-mono" id="sum-costos">$0.00</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                      <td style="padding: 6px 0; color: var(--text-muted);"><strong>Utilidad Bruta</strong></td>
+                      <td class="text-right font-mono" id="sum-utilidad-bruta" style="padding: 6px 0;">$0.00</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 6px 0;"><i class="fa-solid fa-circle text-rose" style="margin-right:8px; font-size:10px;"></i> <strong>Total Gastos</strong></td>
+                      <td class="text-right font-mono" id="sum-gastos">$0.00</td>
+                    </tr>
+                    <tr style="border-top: 1px solid var(--border-color); font-weight: bold;">
+                      <td style="padding: 8px 0; color: var(--emerald);">Utilidad (o Pérdida) Neta</td>
+                      <td class="text-right font-mono" id="sum-utilidad-neta" style="padding: 8px 0;">$0.00</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
