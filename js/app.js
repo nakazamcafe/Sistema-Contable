@@ -827,13 +827,14 @@ function renderPolizas() {
 
 // --- GESTIÓN DE MODAL DE PÓLIZAS ---
 
-// Generador de folio consecutivo automático por tipo y mes
+// Generador de folio consecutivo automático por tipo, año y mes
 function generateNextFolio(type, dateStr) {
   if (!dateStr) return "";
   
   // Extraer año y mes (YYYY-MM)
   const dateParts = dateStr.split("-");
   const year = dateParts[0];
+  const year2 = year.substring(2); // Ej: "26" para "2026"
   const month = dateParts[1];
   
   // Prefijo según tipo de póliza
@@ -851,8 +852,15 @@ function generateNextFolio(type, dateStr) {
   // Encontrar el consecutivo numérico más alto
   let maxSeq = 0;
   monthPolizas.forEach(p => {
-    // Busca concordar con el patrón "Prefijo-Mes-Número" (ej. D-07-001)
-    const match = p.number.match(new RegExp(`^${prefix}-${month}-(\\d+)$`));
+    // Busca concordar con el nuevo patrón (ej. D26-07-001) o el antiguo (ej. D-07-001)
+    const newPattern = new RegExp(`^${prefix}${year2}-${month}-(\\d+)$`);
+    const oldPattern = new RegExp(`^${prefix}-${month}-(\\d+)$`);
+    
+    let match = p.number.match(newPattern);
+    if (!match) {
+      match = p.number.match(oldPattern);
+    }
+    
     if (match) {
       const seq = parseInt(match[1]);
       if (seq > maxSeq) maxSeq = seq;
@@ -860,9 +868,9 @@ function generateNextFolio(type, dateStr) {
   });
   
   const nextSeq = maxSeq + 1;
-  // Formatear con ceros a la izquierda a 3 dígitos (ej. D-07-001)
+  // Formatear con ceros a la izquierda a 3 dígitos (ej. D26-07-001)
   const formattedSeq = String(nextSeq).padStart(3, '0');
-  return `${prefix}-${month}-${formattedSeq}`;
+  return `${prefix}${year2}-${month}-${formattedSeq}`;
 }
 
 function initPolizaModal() {
