@@ -590,60 +590,12 @@
       "parentCode": ""
     },
     {
-      "code": "200-00-000",
-      "name": "Pasivo",
-      "type": "Pasivo Acreedor",
-      "level": 1,
-      "satCode": "200",
-      "parentCode": ""
-    },
-    {
-      "code": "300-00-000",
-      "name": "Capital contable",
-      "type": "Capital Acreedor",
-      "level": 1,
-      "satCode": "300",
-      "parentCode": ""
-    },
-    {
-      "code": "400-00-000",
-      "name": "Ingresos",
-      "type": "Ingresos",
-      "level": 1,
-      "satCode": "400",
-      "parentCode": ""
-    },
-    {
-      "code": "500-00-000",
-      "name": "Costos",
-      "type": "Costos",
-      "level": 1,
-      "satCode": "500",
-      "parentCode": ""
-    },
-    {
-      "code": "600-00-000",
-      "name": "Gastos",
-      "type": "Gastos",
-      "level": 1,
-      "satCode": "600",
-      "parentCode": ""
-    },
-    {
-      "code": "700-00-000",
-      "name": "Resultado integral de financiamiento",
-      "type": "Resultado Integral",
-      "level": 1,
-      "satCode": "700",
-      "parentCode": ""
-    },
-    {
-      "code": "800-00-000",
-      "name": "Cuentas de orden",
-      "type": "Cuentas de Orden",
-      "level": 1,
-      "satCode": "800",
-      "parentCode": ""
+      "code": "100-01-000",
+      "name": "Activo a corto plazo",
+      "type": "Activo Deudor",
+      "level": 3,
+      "satCode": "100.01",
+      "parentCode": "100-00-000"
     },
     {
       "code": "101-00-000",
@@ -654,1124 +606,20 @@
       "parentCode": "100-00-000"
     },
     {
-      "code": "102-00-000",
-      "name": "Bancos",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "102",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "103-00-000",
-      "name": "Inversiones",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "103",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "104-00-000",
-      "name": "Otros instrumentos financieros",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "104",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "105-00-000",
-      "name": "Clientes",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "105",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "106-00-000",
-      "name": "Cuentas y documentos por cobrar a corto plazo",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "106",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "107-00-000",
-      "name": "Deudores diversos",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "107",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "108-00-000",
-      "name": "Estimación de cuentas incobrables",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "108",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "109-00-000",
-      "name": "Pagos anticipados",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "109",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "110-00-000",
-      "name": "Subsidio al empleo por aplicar",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "110",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "111-00-000",
-      "name": "Crédito al diesel por acreditar",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "111",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "112-00-000",
-      "name": "Otros estímulos",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "112",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "113-00-000",
-      "name": "Impuestos a favor",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "113",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "114-00-000",
-      "name": "Pagos provisionales",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "114",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "115-00-000",
-      "name": "Inventario",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "115",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "116-00-000",
-      "name": "Estimación de inventarios obsoletos y de lento movimiento",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "116",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "117-00-000",
-      "name": "Obras en proceso de inmuebles",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "117",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "118-00-000",
-      "name": "Impuestos acreditables pagados",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "118",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "119-00-000",
-      "name": "Impuestos acreditables por pagar",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "119",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "120-00-000",
-      "name": "Anticipo a proveedores",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "120",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "121-00-000",
-      "name": "Otros activos a corto plazo",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "121",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "151-00-000",
-      "name": "Terrenos",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "151",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "152-00-000",
-      "name": "Edificios",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "152",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "153-00-000",
-      "name": "Maquinaria y equipo",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "153",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "154-00-000",
-      "name": "Automóviles, autobuses, camiones de carga, tractocamiones, montacargas y remolques",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "154",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "155-00-000",
-      "name": "Mobiliario y equipo de oficina",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "155",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "156-00-000",
-      "name": "Equipo de cómputo",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "156",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "157-00-000",
-      "name": "Equipo de comunicación",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "157",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "158-00-000",
-      "name": "Activos biológicos, vegetales y semovientes",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "158",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "159-00-000",
-      "name": "Obras en proceso de activos fijos",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "159",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "160-00-000",
-      "name": "Otros activos fijos",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "160",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "161-00-000",
-      "name": "Ferrocarriles",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "161",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "162-00-000",
-      "name": "Embarcaciones",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "162",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "163-00-000",
-      "name": "Aviones",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "163",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "164-00-000",
-      "name": "Troqueles, moldes, matrices y herramental",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "164",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "165-00-000",
-      "name": "Equipo de comunicaciones telefónicas",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "165",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "166-00-000",
-      "name": "Equipo de comunicación satelital",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "166",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "167-00-000",
-      "name": "Equipo de adaptaciones para personas con capacidades diferentes",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "167",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "168-00-000",
-      "name": "Maquinaria y equipo de generación de energía de fuentes renovables o de sistemas de cogeneración de electricidad eficiente",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "168",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "169-00-000",
-      "name": "Otra maquinaria y equipo",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "169",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "170-00-000",
-      "name": "Adaptaciones y mejoras",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "170",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "171-00-000",
-      "name": "Depreciación acumulada de activos fijos",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "171",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "172-00-000",
-      "name": "Pérdida por deterioro acumulado de activos fijos",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "172",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "173-00-000",
-      "name": "Gastos diferidos",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "173",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "174-00-000",
-      "name": "Gastos pre operativos",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "174",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "175-00-000",
-      "name": "Regalías, asistencia técnica y otros gastos diferidos",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "175",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "176-00-000",
-      "name": "Activos intangibles",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "176",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "177-00-000",
-      "name": "Gastos de organización",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "177",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "178-00-000",
-      "name": "Investigación y desarrollo de mercado",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "178",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "179-00-000",
-      "name": "Marcas y patentes",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "179",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "180-00-000",
-      "name": "Crédito mercantil",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "180",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "181-00-000",
-      "name": "Gastos de instalación",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "181",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "182-00-000",
-      "name": "Otros activos diferidos",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "182",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "183-00-000",
-      "name": "Amortización acumulada de activos diferidos",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "183",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "184-00-000",
-      "name": "Depósitos en garantía",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "184",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "185-00-000",
-      "name": "Impuestos diferidos",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "185",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "186-00-000",
-      "name": "Cuentas y documentos por cobrar a largo plazo",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "186",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "187-00-000",
-      "name": "Participación de los trabajadores en las utilidades diferidas",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "187",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "188-00-000",
-      "name": "Inversiones permanentes en acciones",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "188",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "189-00-000",
-      "name": "Estimación por deterioro de inversiones permanentes en acciones",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "189",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "190-00-000",
-      "name": "Otros instrumentos financieros",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "190",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "191-00-000",
-      "name": "Otros activos a largo plazo",
-      "type": "Activo Deudor",
-      "level": 2,
-      "satCode": "191",
-      "parentCode": "100-00-000"
-    },
-    {
-      "code": "201-00-000",
-      "name": "Proveedores",
-      "type": "Pasivo Acreedor",
-      "level": 2,
-      "satCode": "201",
-      "parentCode": "200-00-000"
-    },
-    {
-      "code": "202-00-000",
-      "name": "Cuentas por pagar a corto plazo",
-      "type": "Pasivo Acreedor",
-      "level": 2,
-      "satCode": "202",
-      "parentCode": "200-00-000"
-    },
-    {
-      "code": "203-00-000",
-      "name": "Cobros anticipados a corto plazo",
-      "type": "Pasivo Acreedor",
-      "level": 2,
-      "satCode": "203",
-      "parentCode": "200-00-000"
-    },
-    {
-      "code": "204-00-000",
-      "name": "Instrumentos financieros a corto plazo",
-      "type": "Pasivo Acreedor",
-      "level": 2,
-      "satCode": "204",
-      "parentCode": "200-00-000"
-    },
-    {
-      "code": "205-00-000",
-      "name": "Acreedores diversos a corto plazo",
-      "type": "Pasivo Acreedor",
-      "level": 2,
-      "satCode": "205",
-      "parentCode": "200-00-000"
-    },
-    {
-      "code": "206-00-000",
-      "name": "Anticipo de cliente",
-      "type": "Pasivo Acreedor",
-      "level": 2,
-      "satCode": "206",
-      "parentCode": "200-00-000"
-    },
-    {
-      "code": "207-00-000",
-      "name": "Impuestos trasladados",
-      "type": "Pasivo Acreedor",
-      "level": 2,
-      "satCode": "207",
-      "parentCode": "200-00-000"
-    },
-    {
-      "code": "208-00-000",
-      "name": "Impuestos trasladados cobrados",
-      "type": "Pasivo Acreedor",
-      "level": 2,
-      "satCode": "208",
-      "parentCode": "200-00-000"
-    },
-    {
-      "code": "209-00-000",
-      "name": "Impuestos trasladados no cobrados",
-      "type": "Pasivo Acreedor",
-      "level": 2,
-      "satCode": "209",
-      "parentCode": "200-00-000"
-    },
-    {
-      "code": "210-00-000",
-      "name": "Provisión de sueldos y salarios por pagar",
-      "type": "Pasivo Acreedor",
-      "level": 2,
-      "satCode": "210",
-      "parentCode": "200-00-000"
-    },
-    {
-      "code": "211-00-000",
-      "name": "Provisión de contribuciones de seguridad social por pagar",
-      "type": "Pasivo Acreedor",
-      "level": 2,
-      "satCode": "211",
-      "parentCode": "200-00-000"
-    },
-    {
-      "code": "212-00-000",
-      "name": "Provisión de impuesto estatal sobre nómina por pagar",
-      "type": "Pasivo Acreedor",
-      "level": 2,
-      "satCode": "212",
-      "parentCode": "200-00-000"
-    },
-    {
-      "code": "213-00-000",
-      "name": "Impuestos y derechos por pagar",
-      "type": "Pasivo Acreedor",
-      "level": 2,
-      "satCode": "213",
-      "parentCode": "200-00-000"
-    },
-    {
-      "code": "214-00-000",
-      "name": "Dividendos por pagar",
-      "type": "Pasivo Acreedor",
-      "level": 2,
-      "satCode": "214",
-      "parentCode": "200-00-000"
-    },
-    {
-      "code": "215-00-000",
-      "name": "PTU por pagar",
-      "type": "Pasivo Acreedor",
-      "level": 2,
-      "satCode": "215",
-      "parentCode": "200-00-000"
-    },
-    {
-      "code": "216-00-000",
-      "name": "Impuestos retenidos",
-      "type": "Pasivo Acreedor",
-      "level": 2,
-      "satCode": "216",
-      "parentCode": "200-00-000"
-    },
-    {
-      "code": "217-00-000",
-      "name": "Pagos realizados por cuenta de terceros",
-      "type": "Pasivo Acreedor",
-      "level": 2,
-      "satCode": "217",
-      "parentCode": "200-00-000"
-    },
-    {
-      "code": "218-00-000",
-      "name": "Otros pasivos a corto plazo",
-      "type": "Pasivo Acreedor",
-      "level": 2,
-      "satCode": "218",
-      "parentCode": "200-00-000"
-    },
-    {
-      "code": "251-00-000",
-      "name": "Acreedores diversos a largo plazo",
-      "type": "Pasivo Acreedor",
-      "level": 2,
-      "satCode": "251",
-      "parentCode": "200-00-000"
-    },
-    {
-      "code": "252-00-000",
-      "name": "Cuentas por pagar a largo plazo",
-      "type": "Pasivo Acreedor",
-      "level": 2,
-      "satCode": "252",
-      "parentCode": "200-00-000"
-    },
-    {
-      "code": "253-00-000",
-      "name": "Cobros anticipados a largo plazo",
-      "type": "Pasivo Acreedor",
-      "level": 2,
-      "satCode": "253",
-      "parentCode": "200-00-000"
-    },
-    {
-      "code": "254-00-000",
-      "name": "Instrumentos financieros a largo plazo",
-      "type": "Pasivo Acreedor",
-      "level": 2,
-      "satCode": "254",
-      "parentCode": "200-00-000"
-    },
-    {
-      "code": "255-00-000",
-      "name": "Pasivos por beneficios a los empleados a largo plazo",
-      "type": "Pasivo Acreedor",
-      "level": 2,
-      "satCode": "255",
-      "parentCode": "200-00-000"
-    },
-    {
-      "code": "256-00-000",
-      "name": "Otros pasivos a largo plazo",
-      "type": "Pasivo Acreedor",
-      "level": 2,
-      "satCode": "256",
-      "parentCode": "200-00-000"
-    },
-    {
-      "code": "257-00-000",
-      "name": "Participación de los trabajadores en las utilidades diferida",
-      "type": "Pasivo Acreedor",
-      "level": 2,
-      "satCode": "257",
-      "parentCode": "200-00-000"
-    },
-    {
-      "code": "258-00-000",
-      "name": "Obligaciones contraídas de fideicomisos",
-      "type": "Pasivo Acreedor",
-      "level": 2,
-      "satCode": "258",
-      "parentCode": "200-00-000"
-    },
-    {
-      "code": "259-00-000",
-      "name": "Impuestos diferidos",
-      "type": "Pasivo Acreedor",
-      "level": 2,
-      "satCode": "259",
-      "parentCode": "200-00-000"
-    },
-    {
-      "code": "260-00-000",
-      "name": "Pasivos diferidos",
-      "type": "Pasivo Acreedor",
-      "level": 2,
-      "satCode": "260",
-      "parentCode": "200-00-000"
-    },
-    {
-      "code": "301-00-000",
-      "name": "Capital social",
-      "type": "Capital Acreedor",
-      "level": 2,
-      "satCode": "301",
-      "parentCode": "300-00-000"
-    },
-    {
-      "code": "302-00-000",
-      "name": "Patrimonio",
-      "type": "Capital Acreedor",
-      "level": 2,
-      "satCode": "302",
-      "parentCode": "300-00-000"
-    },
-    {
-      "code": "303-00-000",
-      "name": "Reserva legal",
-      "type": "Capital Acreedor",
-      "level": 2,
-      "satCode": "303",
-      "parentCode": "300-00-000"
-    },
-    {
-      "code": "304-00-000",
-      "name": "Resultado de ejercicios anteriores",
-      "type": "Capital Acreedor",
-      "level": 2,
-      "satCode": "304",
-      "parentCode": "300-00-000"
-    },
-    {
-      "code": "305-00-000",
-      "name": "Resultado del ejercicio",
-      "type": "Capital Acreedor",
-      "level": 2,
-      "satCode": "305",
-      "parentCode": "300-00-000"
-    },
-    {
-      "code": "306-00-000",
-      "name": "Otras cuentas de capital",
-      "type": "Capital Acreedor",
-      "level": 2,
-      "satCode": "306",
-      "parentCode": "300-00-000"
-    },
-    {
-      "code": "401-00-000",
-      "name": "Ingresos",
-      "type": "Ingresos",
-      "level": 2,
-      "satCode": "401",
-      "parentCode": "400-00-000"
-    },
-    {
-      "code": "402-00-000",
-      "name": "Devoluciones, descuentos o bonificaciones sobre ingresos",
-      "type": "Ingresos",
-      "level": 2,
-      "satCode": "402",
-      "parentCode": "400-00-000"
-    },
-    {
-      "code": "403-00-000",
-      "name": "Otros ingresos",
-      "type": "Ingresos",
-      "level": 2,
-      "satCode": "403",
-      "parentCode": "400-00-000"
-    },
-    {
-      "code": "501-00-000",
-      "name": "Costo de venta y/o servicio",
-      "type": "Costos",
-      "level": 2,
-      "satCode": "501",
-      "parentCode": "500-00-000"
-    },
-    {
-      "code": "502-00-000",
-      "name": "Compras",
-      "type": "Costos",
-      "level": 2,
-      "satCode": "502",
-      "parentCode": "500-00-000"
-    },
-    {
-      "code": "503-00-000",
-      "name": "Devoluciones, descuentos o bonificaciones sobre compras",
-      "type": "Costos",
-      "level": 2,
-      "satCode": "503",
-      "parentCode": "500-00-000"
-    },
-    {
-      "code": "504-00-000",
-      "name": "Otras cuentas de costos",
-      "type": "Costos",
-      "level": 2,
-      "satCode": "504",
-      "parentCode": "500-00-000"
-    },
-    {
-      "code": "505-00-000",
-      "name": "Costo de activo fijo",
-      "type": "Costos",
-      "level": 2,
-      "satCode": "505",
-      "parentCode": "500-00-000"
-    },
-    {
-      "code": "601-00-000",
-      "name": "Gastos generales",
-      "type": "Gastos",
-      "level": 2,
-      "satCode": "601",
-      "parentCode": "600-00-000"
-    },
-    {
-      "code": "602-00-000",
-      "name": "Gastos de venta",
-      "type": "Gastos",
-      "level": 2,
-      "satCode": "602",
-      "parentCode": "600-00-000"
-    },
-    {
-      "code": "603-00-000",
-      "name": "Gastos de administración",
-      "type": "Gastos",
-      "level": 2,
-      "satCode": "603",
-      "parentCode": "600-00-000"
-    },
-    {
-      "code": "604-00-000",
-      "name": "Gastos de fabricación",
-      "type": "Gastos",
-      "level": 2,
-      "satCode": "604",
-      "parentCode": "600-00-000"
-    },
-    {
-      "code": "605-00-000",
-      "name": "Mano de obra directa",
-      "type": "Gastos",
-      "level": 2,
-      "satCode": "605",
-      "parentCode": "600-00-000"
-    },
-    {
-      "code": "606-00-000",
-      "name": "Facilidades administrativas fiscales",
-      "type": "Gastos",
-      "level": 2,
-      "satCode": "606",
-      "parentCode": "600-00-000"
-    },
-    {
-      "code": "607-00-000",
-      "name": "Participación de los trabajadores en las utilidades",
-      "type": "Gastos",
-      "level": 2,
-      "satCode": "607",
-      "parentCode": "600-00-000"
-    },
-    {
-      "code": "608-00-000",
-      "name": "Participación en resultados de subsidiarias",
-      "type": "Gastos",
-      "level": 2,
-      "satCode": "608",
-      "parentCode": "600-00-000"
-    },
-    {
-      "code": "609-00-000",
-      "name": "Participación en resultados de asociadas",
-      "type": "Gastos",
-      "level": 2,
-      "satCode": "609",
-      "parentCode": "600-00-000"
-    },
-    {
-      "code": "610-00-000",
-      "name": "Participación de los trabajadores en las utilidades diferida",
-      "type": "Gastos",
-      "level": 2,
-      "satCode": "610",
-      "parentCode": "600-00-000"
-    },
-    {
-      "code": "611-00-000",
-      "name": "Impuesto Sobre la renta",
-      "type": "Gastos",
-      "level": 2,
-      "satCode": "611",
-      "parentCode": "600-00-000"
-    },
-    {
-      "code": "612-00-000",
-      "name": "Gastos no deducibles para CUFIN",
-      "type": "Gastos",
-      "level": 2,
-      "satCode": "612",
-      "parentCode": "600-00-000"
-    },
-    {
-      "code": "613-00-000",
-      "name": "Depreciación contable",
-      "type": "Gastos",
-      "level": 2,
-      "satCode": "613",
-      "parentCode": "600-00-000"
-    },
-    {
-      "code": "614-00-000",
-      "name": "Amortización contable",
-      "type": "Gastos",
-      "level": 2,
-      "satCode": "614",
-      "parentCode": "600-00-000"
-    },
-    {
-      "code": "701-00-000",
-      "name": "Gastos financieros",
-      "type": "Resultado Integral",
-      "level": 2,
-      "satCode": "701",
-      "parentCode": "700-00-000"
-    },
-    {
-      "code": "702-00-000",
-      "name": "Productos financieros",
-      "type": "Resultado Integral",
-      "level": 2,
-      "satCode": "702",
-      "parentCode": "700-00-000"
-    },
-    {
-      "code": "703-00-000",
-      "name": "Otros gastos",
-      "type": "Resultado Integral",
-      "level": 2,
-      "satCode": "703",
-      "parentCode": "700-00-000"
-    },
-    {
-      "code": "704-00-000",
-      "name": "Otros productos",
-      "type": "Resultado Integral",
-      "level": 2,
-      "satCode": "704",
-      "parentCode": "700-00-000"
-    },
-    {
-      "code": "801-00-000",
-      "name": "UFIN del ejercicio",
-      "type": "Cuentas de Orden",
-      "level": 2,
-      "satCode": "801",
-      "parentCode": "800-00-000"
-    },
-    {
-      "code": "802-00-000",
-      "name": "CUFIN del ejercicio",
-      "type": "Cuentas de Orden",
-      "level": 2,
-      "satCode": "802",
-      "parentCode": "800-00-000"
-    },
-    {
-      "code": "803-00-000",
-      "name": "CUFIN de ejercicios anteriores",
-      "type": "Cuentas de Orden",
-      "level": 2,
-      "satCode": "803",
-      "parentCode": "800-00-000"
-    },
-    {
-      "code": "804-00-000",
-      "name": "CUFINRE del ejercicio",
-      "type": "Cuentas de Orden",
-      "level": 2,
-      "satCode": "804",
-      "parentCode": "800-00-000"
-    },
-    {
-      "code": "805-00-000",
-      "name": "CUFINRE de ejercicios anteriores",
-      "type": "Cuentas de Orden",
-      "level": 2,
-      "satCode": "805",
-      "parentCode": "800-00-000"
-    },
-    {
-      "code": "806-00-000",
-      "name": "CUCA del ejercicio",
-      "type": "Cuentas de Orden",
-      "level": 2,
-      "satCode": "806",
-      "parentCode": "800-00-000"
-    },
-    {
-      "code": "807-00-000",
-      "name": "CUCA de ejercicios anteriores",
-      "type": "Cuentas de Orden",
-      "level": 2,
-      "satCode": "807",
-      "parentCode": "800-00-000"
-    },
-    {
-      "code": "808-00-000",
-      "name": "Ajuste anual por inflación acumulable",
-      "type": "Cuentas de Orden",
-      "level": 2,
-      "satCode": "808",
-      "parentCode": "800-00-000"
-    },
-    {
-      "code": "809-00-000",
-      "name": "Ajuste anual por inflación deducible",
-      "type": "Cuentas de Orden",
-      "level": 2,
-      "satCode": "809",
-      "parentCode": "800-00-000"
-    },
-    {
-      "code": "810-00-000",
-      "name": "Deducción de inversión",
-      "type": "Cuentas de Orden",
-      "level": 2,
-      "satCode": "810",
-      "parentCode": "800-00-000"
-    },
-    {
-      "code": "811-00-000",
-      "name": "Utilidad o pérdida fiscal en venta y/o baja de activo fijo",
-      "type": "Cuentas de Orden",
-      "level": 2,
-      "satCode": "811",
-      "parentCode": "800-00-000"
-    },
-    {
-      "code": "812-00-000",
-      "name": "Utilidad o pérdida fiscal en venta acciones o partes sociales",
-      "type": "Cuentas de Orden",
-      "level": 2,
-      "satCode": "812",
-      "parentCode": "800-00-000"
-    },
-    {
-      "code": "813-00-000",
-      "name": "Pérdidas fiscales pendientes de amortizar actualizadas de ejercicios anteriores",
-      "type": "Cuentas de Orden",
-      "level": 2,
-      "satCode": "813",
-      "parentCode": "800-00-000"
-    },
-    {
-      "code": "814-00-000",
-      "name": "Mercancías recibidas en consignación",
-      "type": "Cuentas de Orden",
-      "level": 2,
-      "satCode": "814",
-      "parentCode": "800-00-000"
-    },
-    {
-      "code": "815-00-000",
-      "name": "Crédito fiscal de IVA e IEPS por la importación de mercancías para empresas certificadas",
-      "type": "Cuentas de Orden",
-      "level": 2,
-      "satCode": "815",
-      "parentCode": "800-00-000"
-    },
-    {
-      "code": "816-00-000",
-      "name": "Crédito fiscal de IVA e IEPS por la importación de activos fijos para empresas certificadas",
-      "type": "Cuentas de Orden",
-      "level": 2,
-      "satCode": "816",
-      "parentCode": "800-00-000"
-    },
-    {
-      "code": "899-00-000",
-      "name": "Otras cuentas de orden",
-      "type": "Cuentas de Orden",
-      "level": 2,
-      "satCode": "899",
-      "parentCode": "800-00-000"
-    },
-    {
-      "code": "100-01-000",
-      "name": "Activo a corto plazo",
-      "type": "Activo Deudor",
-      "level": 3,
-      "satCode": "100.01",
-      "parentCode": "100-00-000"
-    },
-    {
       "code": "101-01-000",
       "name": "Caja y efectivo",
       "type": "Activo Deudor",
       "level": 3,
       "satCode": "101.01",
       "parentCode": "101-00-000"
+    },
+    {
+      "code": "102-00-000",
+      "name": "Bancos",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "102",
+      "parentCode": "100-00-000"
     },
     {
       "code": "102-01-000",
@@ -1788,6 +636,14 @@
       "level": 3,
       "satCode": "102.02",
       "parentCode": "102-00-000"
+    },
+    {
+      "code": "103-00-000",
+      "name": "Inversiones",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "103",
+      "parentCode": "100-00-000"
     },
     {
       "code": "103-01-000",
@@ -1814,12 +670,28 @@
       "parentCode": "103-00-000"
     },
     {
+      "code": "104-00-000",
+      "name": "Otros instrumentos financieros",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "104",
+      "parentCode": "100-00-000"
+    },
+    {
       "code": "104-01-000",
       "name": "Otros instrumentos financieros",
       "type": "Activo Deudor",
       "level": 3,
       "satCode": "104.01",
       "parentCode": "104-00-000"
+    },
+    {
+      "code": "105-00-000",
+      "name": "Clientes",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "105",
+      "parentCode": "100-00-000"
     },
     {
       "code": "105-01-000",
@@ -1854,11 +726,19 @@
       "parentCode": "105-00-000"
     },
     {
+      "code": "106-00-000",
+      "name": "Cuentas y documentos por cobrar a corto plazo",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "106",
+      "parentCode": "100-00-000"
+    },
+    {
       "code": "106-01-000",
-      "name": "Otras cuentas y documentos por cobrar a corto plazo parte relacionada",
+      "name": "Cuentas y documentos por cobrar a corto plazo nacional",
       "type": "Activo Deudor",
       "level": 3,
-      "satCode": "106.1",
+      "satCode": "106.01",
       "parentCode": "106-00-000"
     },
     {
@@ -1926,6 +806,14 @@
       "parentCode": "106-00-000"
     },
     {
+      "code": "107-00-000",
+      "name": "Deudores diversos",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "107",
+      "parentCode": "100-00-000"
+    },
+    {
       "code": "107-01-000",
       "name": "Funcionarios y empleados",
       "type": "Activo Deudor",
@@ -1966,6 +854,14 @@
       "parentCode": "107-00-000"
     },
     {
+      "code": "108-00-000",
+      "name": "Estimación de cuentas incobrables",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "108",
+      "parentCode": "100-00-000"
+    },
+    {
       "code": "108-01-000",
       "name": "Estimación de cuentas incobrables nacional",
       "type": "Activo Deudor",
@@ -1998,19 +894,27 @@
       "parentCode": "108-00-000"
     },
     {
+      "code": "109-00-000",
+      "name": "Pagos anticipados",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "109",
+      "parentCode": "100-00-000"
+    },
+    {
       "code": "109-01-000",
-      "name": "Intereses pagados por anticipado extranjero",
+      "name": "Seguros y fianzas pagados por anticipado nacional",
       "type": "Activo Deudor",
       "level": 3,
-      "satCode": "109.1",
+      "satCode": "109.01",
       "parentCode": "109-00-000"
     },
     {
       "code": "109-02-000",
-      "name": "Arrendamiento financiero pagados por anticipado extranjero parte relacionada",
+      "name": "Seguros y fianzas pagados por anticipado extranjero",
       "type": "Activo Deudor",
       "level": 3,
-      "satCode": "109.2",
+      "satCode": "109.02",
       "parentCode": "109-00-000"
     },
     {
@@ -2166,12 +1070,28 @@
       "parentCode": "109-00-000"
     },
     {
+      "code": "110-00-000",
+      "name": "Subsidio al empleo por aplicar",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "110",
+      "parentCode": "100-00-000"
+    },
+    {
       "code": "110-01-000",
       "name": "Subsidio al empleo por aplicar",
       "type": "Activo Deudor",
       "level": 3,
       "satCode": "110.01",
       "parentCode": "110-00-000"
+    },
+    {
+      "code": "111-00-000",
+      "name": "Crédito al diesel por acreditar",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "111",
+      "parentCode": "100-00-000"
     },
     {
       "code": "111-01-000",
@@ -2182,12 +1102,28 @@
       "parentCode": "111-00-000"
     },
     {
+      "code": "112-00-000",
+      "name": "Otros estímulos",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "112",
+      "parentCode": "100-00-000"
+    },
+    {
       "code": "112-01-000",
       "name": "Otros estímulos",
       "type": "Activo Deudor",
       "level": 3,
       "satCode": "112.01",
       "parentCode": "112-00-000"
+    },
+    {
+      "code": "113-00-000",
+      "name": "Impuestos a favor",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "113",
+      "parentCode": "100-00-000"
     },
     {
       "code": "113-01-000",
@@ -2254,12 +1190,28 @@
       "parentCode": "113-00-000"
     },
     {
+      "code": "114-00-000",
+      "name": "Pagos provisionales",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "114",
+      "parentCode": "100-00-000"
+    },
+    {
       "code": "114-01-000",
       "name": "Pagos provisionales de ISR",
       "type": "Activo Deudor",
       "level": 3,
       "satCode": "114.01",
       "parentCode": "114-00-000"
+    },
+    {
+      "code": "115-00-000",
+      "name": "Inventario",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "115",
+      "parentCode": "100-00-000"
     },
     {
       "code": "115-01-000",
@@ -2318,6 +1270,14 @@
       "parentCode": "115-00-000"
     },
     {
+      "code": "116-00-000",
+      "name": "Estimación de inventarios obsoletos y de lento movimiento",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "116",
+      "parentCode": "100-00-000"
+    },
+    {
       "code": "116-01-000",
       "name": "Estimación de inventarios obsoletos y de lento movimiento",
       "type": "Activo Deudor",
@@ -2326,12 +1286,28 @@
       "parentCode": "116-00-000"
     },
     {
+      "code": "117-00-000",
+      "name": "Obras en proceso de inmuebles",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "117",
+      "parentCode": "100-00-000"
+    },
+    {
       "code": "117-01-000",
       "name": "Obras en proceso de inmuebles",
       "type": "Activo Deudor",
       "level": 3,
       "satCode": "117.01",
       "parentCode": "117-00-000"
+    },
+    {
+      "code": "118-00-000",
+      "name": "Impuestos acreditables pagados",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "118",
+      "parentCode": "100-00-000"
     },
     {
       "code": "118-01-000",
@@ -2366,6 +1342,14 @@
       "parentCode": "118-00-000"
     },
     {
+      "code": "119-00-000",
+      "name": "Impuestos acreditables por pagar",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "119",
+      "parentCode": "100-00-000"
+    },
+    {
       "code": "119-01-000",
       "name": "IVA pendiente de pago",
       "type": "Activo Deudor",
@@ -2396,6 +1380,14 @@
       "level": 3,
       "satCode": "119.04",
       "parentCode": "119-00-000"
+    },
+    {
+      "code": "120-00-000",
+      "name": "Anticipo a proveedores",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "120",
+      "parentCode": "100-00-000"
     },
     {
       "code": "120-01-000",
@@ -2430,6 +1422,14 @@
       "parentCode": "120-00-000"
     },
     {
+      "code": "121-00-000",
+      "name": "Otros activos a corto plazo",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "121",
+      "parentCode": "100-00-000"
+    },
+    {
       "code": "121-01-000",
       "name": "Otros activos a corto plazo",
       "type": "Activo Deudor",
@@ -2446,12 +1446,28 @@
       "parentCode": "100-00-000"
     },
     {
+      "code": "151-00-000",
+      "name": "Terrenos",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "151",
+      "parentCode": "100-00-000"
+    },
+    {
       "code": "151-01-000",
       "name": "Terrenos",
       "type": "Activo Deudor",
       "level": 3,
       "satCode": "151.01",
       "parentCode": "151-00-000"
+    },
+    {
+      "code": "152-00-000",
+      "name": "Edificios",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "152",
+      "parentCode": "100-00-000"
     },
     {
       "code": "152-01-000",
@@ -2462,12 +1478,28 @@
       "parentCode": "152-00-000"
     },
     {
+      "code": "153-00-000",
+      "name": "Maquinaria y equipo",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "153",
+      "parentCode": "100-00-000"
+    },
+    {
       "code": "153-01-000",
       "name": "Maquinaria y equipo",
       "type": "Activo Deudor",
       "level": 3,
       "satCode": "153.01",
       "parentCode": "153-00-000"
+    },
+    {
+      "code": "154-00-000",
+      "name": "Automóviles, autobuses, camiones de carga, tractocamiones, montacargas y remolques",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "154",
+      "parentCode": "100-00-000"
     },
     {
       "code": "154-01-000",
@@ -2478,12 +1510,28 @@
       "parentCode": "154-00-000"
     },
     {
+      "code": "155-00-000",
+      "name": "Mobiliario y equipo de oficina",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "155",
+      "parentCode": "100-00-000"
+    },
+    {
       "code": "155-01-000",
       "name": "Mobiliario y equipo de oficina",
       "type": "Activo Deudor",
       "level": 3,
       "satCode": "155.01",
       "parentCode": "155-00-000"
+    },
+    {
+      "code": "156-00-000",
+      "name": "Equipo de cómputo",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "156",
+      "parentCode": "100-00-000"
     },
     {
       "code": "156-01-000",
@@ -2494,12 +1542,28 @@
       "parentCode": "156-00-000"
     },
     {
+      "code": "157-00-000",
+      "name": "Equipo de comunicación",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "157",
+      "parentCode": "100-00-000"
+    },
+    {
       "code": "157-01-000",
       "name": "Equipo de comunicación",
       "type": "Activo Deudor",
       "level": 3,
       "satCode": "157.01",
       "parentCode": "157-00-000"
+    },
+    {
+      "code": "158-00-000",
+      "name": "Activos biológicos, vegetales y semovientes",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "158",
+      "parentCode": "100-00-000"
     },
     {
       "code": "158-01-000",
@@ -2510,12 +1574,28 @@
       "parentCode": "158-00-000"
     },
     {
+      "code": "159-00-000",
+      "name": "Obras en proceso de activos fijos",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "159",
+      "parentCode": "100-00-000"
+    },
+    {
       "code": "159-01-000",
       "name": "Obras en proceso de activos fijos",
       "type": "Activo Deudor",
       "level": 3,
       "satCode": "159.01",
       "parentCode": "159-00-000"
+    },
+    {
+      "code": "160-00-000",
+      "name": "Otros activos fijos",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "160",
+      "parentCode": "100-00-000"
     },
     {
       "code": "160-01-000",
@@ -2526,12 +1606,28 @@
       "parentCode": "160-00-000"
     },
     {
+      "code": "161-00-000",
+      "name": "Ferrocarriles",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "161",
+      "parentCode": "100-00-000"
+    },
+    {
       "code": "161-01-000",
       "name": "Ferrocarriles",
       "type": "Activo Deudor",
       "level": 3,
       "satCode": "161.01",
       "parentCode": "161-00-000"
+    },
+    {
+      "code": "162-00-000",
+      "name": "Embarcaciones",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "162",
+      "parentCode": "100-00-000"
     },
     {
       "code": "162-01-000",
@@ -2542,12 +1638,28 @@
       "parentCode": "162-00-000"
     },
     {
+      "code": "163-00-000",
+      "name": "Aviones",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "163",
+      "parentCode": "100-00-000"
+    },
+    {
       "code": "163-01-000",
       "name": "Aviones",
       "type": "Activo Deudor",
       "level": 3,
       "satCode": "163.01",
       "parentCode": "163-00-000"
+    },
+    {
+      "code": "164-00-000",
+      "name": "Troqueles, moldes, matrices y herramental",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "164",
+      "parentCode": "100-00-000"
     },
     {
       "code": "164-01-000",
@@ -2558,12 +1670,28 @@
       "parentCode": "164-00-000"
     },
     {
+      "code": "165-00-000",
+      "name": "Equipo de comunicaciones telefónicas",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "165",
+      "parentCode": "100-00-000"
+    },
+    {
       "code": "165-01-000",
       "name": "Equipo de comunicaciones telefónicas",
       "type": "Activo Deudor",
       "level": 3,
       "satCode": "165.01",
       "parentCode": "165-00-000"
+    },
+    {
+      "code": "166-00-000",
+      "name": "Equipo de comunicación satelital",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "166",
+      "parentCode": "100-00-000"
     },
     {
       "code": "166-01-000",
@@ -2574,12 +1702,28 @@
       "parentCode": "166-00-000"
     },
     {
+      "code": "167-00-000",
+      "name": "Equipo de adaptaciones para personas con capacidades diferentes",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "167",
+      "parentCode": "100-00-000"
+    },
+    {
       "code": "167-01-000",
       "name": "Equipo de adaptaciones para personas con capacidades diferentes",
       "type": "Activo Deudor",
       "level": 3,
       "satCode": "167.01",
       "parentCode": "167-00-000"
+    },
+    {
+      "code": "168-00-000",
+      "name": "Maquinaria y equipo de generación de energía de fuentes renovables o de sistemas de cogeneración de electricidad eficiente",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "168",
+      "parentCode": "100-00-000"
     },
     {
       "code": "168-01-000",
@@ -2590,12 +1734,28 @@
       "parentCode": "168-00-000"
     },
     {
+      "code": "169-00-000",
+      "name": "Otra maquinaria y equipo",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "169",
+      "parentCode": "100-00-000"
+    },
+    {
       "code": "169-01-000",
       "name": "Otra maquinaria y equipo",
       "type": "Activo Deudor",
       "level": 3,
       "satCode": "169.01",
       "parentCode": "169-00-000"
+    },
+    {
+      "code": "170-00-000",
+      "name": "Adaptaciones y mejoras",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "170",
+      "parentCode": "100-00-000"
     },
     {
       "code": "170-01-000",
@@ -2606,11 +1766,19 @@
       "parentCode": "170-00-000"
     },
     {
+      "code": "171-00-000",
+      "name": "Depreciación acumulada de activos fijos",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "171",
+      "parentCode": "100-00-000"
+    },
+    {
       "code": "171-01-000",
-      "name": "Depreciación acumulada de embarcaciones",
+      "name": "Depreciación acumulada de edificios",
       "type": "Activo Deudor",
       "level": 3,
-      "satCode": "171.1",
+      "satCode": "171.01",
       "parentCode": "171-00-000"
     },
     {
@@ -2742,11 +1910,19 @@
       "parentCode": "171-00-000"
     },
     {
+      "code": "172-00-000",
+      "name": "Pérdida por deterioro acumulado de activos fijos",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "172",
+      "parentCode": "100-00-000"
+    },
+    {
       "code": "172-01-000",
-      "name": "Pérdida por deterioro acumulado de embarcaciones",
+      "name": "Pérdida por deterioro acumulado de edificios",
       "type": "Activo Deudor",
       "level": 3,
-      "satCode": "172.1",
+      "satCode": "172.01",
       "parentCode": "172-00-000"
     },
     {
@@ -2878,12 +2054,28 @@
       "parentCode": "172-00-000"
     },
     {
+      "code": "173-00-000",
+      "name": "Gastos diferidos",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "173",
+      "parentCode": "100-00-000"
+    },
+    {
       "code": "173-01-000",
       "name": "Gastos diferidos",
       "type": "Activo Deudor",
       "level": 3,
       "satCode": "173.01",
       "parentCode": "173-00-000"
+    },
+    {
+      "code": "174-00-000",
+      "name": "Gastos pre operativos",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "174",
+      "parentCode": "100-00-000"
     },
     {
       "code": "174-01-000",
@@ -2894,12 +2086,28 @@
       "parentCode": "174-00-000"
     },
     {
+      "code": "175-00-000",
+      "name": "Regalías, asistencia técnica y otros gastos diferidos",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "175",
+      "parentCode": "100-00-000"
+    },
+    {
       "code": "175-01-000",
       "name": "Regalías, asistencia técnica y otros gastos diferidos",
       "type": "Activo Deudor",
       "level": 3,
       "satCode": "175.01",
       "parentCode": "175-00-000"
+    },
+    {
+      "code": "176-00-000",
+      "name": "Activos intangibles",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "176",
+      "parentCode": "100-00-000"
     },
     {
       "code": "176-01-000",
@@ -2910,12 +2118,28 @@
       "parentCode": "176-00-000"
     },
     {
+      "code": "177-00-000",
+      "name": "Gastos de organización",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "177",
+      "parentCode": "100-00-000"
+    },
+    {
       "code": "177-01-000",
       "name": "Gastos de organización",
       "type": "Activo Deudor",
       "level": 3,
       "satCode": "177.01",
       "parentCode": "177-00-000"
+    },
+    {
+      "code": "178-00-000",
+      "name": "Investigación y desarrollo de mercado",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "178",
+      "parentCode": "100-00-000"
     },
     {
       "code": "178-01-000",
@@ -2926,12 +2150,28 @@
       "parentCode": "178-00-000"
     },
     {
+      "code": "179-00-000",
+      "name": "Marcas y patentes",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "179",
+      "parentCode": "100-00-000"
+    },
+    {
       "code": "179-01-000",
       "name": "Marcas y patentes",
       "type": "Activo Deudor",
       "level": 3,
       "satCode": "179.01",
       "parentCode": "179-00-000"
+    },
+    {
+      "code": "180-00-000",
+      "name": "Crédito mercantil",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "180",
+      "parentCode": "100-00-000"
     },
     {
       "code": "180-01-000",
@@ -2942,12 +2182,28 @@
       "parentCode": "180-00-000"
     },
     {
+      "code": "181-00-000",
+      "name": "Gastos de instalación",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "181",
+      "parentCode": "100-00-000"
+    },
+    {
       "code": "181-01-000",
       "name": "Gastos de instalación",
       "type": "Activo Deudor",
       "level": 3,
       "satCode": "181.01",
       "parentCode": "181-00-000"
+    },
+    {
+      "code": "182-00-000",
+      "name": "Otros activos diferidos",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "182",
+      "parentCode": "100-00-000"
     },
     {
       "code": "182-01-000",
@@ -2958,11 +2214,19 @@
       "parentCode": "182-00-000"
     },
     {
+      "code": "183-00-000",
+      "name": "Amortización acumulada de activos diferidos",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "183",
+      "parentCode": "100-00-000"
+    },
+    {
       "code": "183-01-000",
-      "name": "Amortización acumulada de otros activos diferidos",
+      "name": "Amortización acumulada de gastos diferidos",
       "type": "Activo Deudor",
       "level": 3,
-      "satCode": "183.1",
+      "satCode": "183.01",
       "parentCode": "183-00-000"
     },
     {
@@ -3030,6 +2294,14 @@
       "parentCode": "183-00-000"
     },
     {
+      "code": "184-00-000",
+      "name": "Depósitos en garantía",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "184",
+      "parentCode": "100-00-000"
+    },
+    {
       "code": "184-01-000",
       "name": "Depósitos de fianzas",
       "type": "Activo Deudor",
@@ -3054,6 +2326,14 @@
       "parentCode": "184-00-000"
     },
     {
+      "code": "185-00-000",
+      "name": "Impuestos diferidos",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "185",
+      "parentCode": "100-00-000"
+    },
+    {
       "code": "185-01-000",
       "name": "Impuestos diferidos ISR",
       "type": "Activo Deudor",
@@ -3062,11 +2342,19 @@
       "parentCode": "185-00-000"
     },
     {
+      "code": "186-00-000",
+      "name": "Cuentas y documentos por cobrar a largo plazo",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "186",
+      "parentCode": "100-00-000"
+    },
+    {
       "code": "186-01-000",
-      "name": "Otras cuentas y documentos por cobrar a largo plazo parte relacionada",
+      "name": "Cuentas y documentos por cobrar a largo plazo nacional",
       "type": "Activo Deudor",
       "level": 3,
-      "satCode": "186.1",
+      "satCode": "186.01",
       "parentCode": "186-00-000"
     },
     {
@@ -3134,12 +2422,28 @@
       "parentCode": "186-00-000"
     },
     {
+      "code": "187-00-000",
+      "name": "Participación de los trabajadores en las utilidades diferidas",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "187",
+      "parentCode": "100-00-000"
+    },
+    {
       "code": "187-01-000",
       "name": "Participación de los trabajadores en las utilidades diferidas",
       "type": "Activo Deudor",
       "level": 3,
       "satCode": "187.01",
       "parentCode": "187-00-000"
+    },
+    {
+      "code": "188-00-000",
+      "name": "Inversiones permanentes en acciones",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "188",
+      "parentCode": "100-00-000"
     },
     {
       "code": "188-01-000",
@@ -3166,12 +2470,28 @@
       "parentCode": "188-00-000"
     },
     {
+      "code": "189-00-000",
+      "name": "Estimación por deterioro de inversiones permanentes en acciones",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "189",
+      "parentCode": "100-00-000"
+    },
+    {
       "code": "189-01-000",
       "name": "Estimación por deterioro de inversiones permanentes en acciones",
       "type": "Activo Deudor",
       "level": 3,
       "satCode": "189.01",
       "parentCode": "189-00-000"
+    },
+    {
+      "code": "190-00-000",
+      "name": "Otros instrumentos financieros",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "190",
+      "parentCode": "100-00-000"
     },
     {
       "code": "190-01-000",
@@ -3182,12 +2502,28 @@
       "parentCode": "190-00-000"
     },
     {
+      "code": "191-00-000",
+      "name": "Otros activos a largo plazo",
+      "type": "Activo Deudor",
+      "level": 2,
+      "satCode": "191",
+      "parentCode": "100-00-000"
+    },
+    {
       "code": "191-01-000",
       "name": "Otros activos a largo plazo",
       "type": "Activo Deudor",
       "level": 3,
       "satCode": "191.01",
       "parentCode": "191-00-000"
+    },
+    {
+      "code": "200-00-000",
+      "name": "Pasivo",
+      "type": "Pasivo Acreedor",
+      "level": 1,
+      "satCode": "200",
+      "parentCode": ""
     },
     {
       "code": "200-01-000",
@@ -3198,10 +2534,42 @@
       "parentCode": "200-00-000"
     },
     {
+      "code": "201-00-000",
+      "name": "Proveedores",
+      "type": "Pasivo Acreedor",
+      "level": 2,
+      "satCode": "201",
+      "parentCode": "200-00-000"
+    },
+    {
       "code": "201-01-000",
       "name": "Proveedores nacionales",
       "type": "Pasivo Acreedor",
       "level": 3,
+      "satCode": "201.01",
+      "parentCode": "201-00-000"
+    },
+    {
+      "code": "201-01-001",
+      "name": "MA. GUADALUPE LOPEZ ANGUIANO / LOAM5712097D5",
+      "type": "Pasivo Acreedor",
+      "level": 4,
+      "satCode": "201.01",
+      "parentCode": "201-00-000"
+    },
+    {
+      "code": "201-01-002",
+      "name": "Telefonos de Mexico SAB de CV /TME840315KT6",
+      "type": "Pasivo Acreedor",
+      "level": 4,
+      "satCode": "201.01",
+      "parentCode": "201-00-000"
+    },
+    {
+      "code": "201-01-003",
+      "name": "Servicios Ciudad Jardin / RFC SCJ061220195",
+      "type": "Pasivo Acreedor",
+      "level": 4,
       "satCode": "201.01",
       "parentCode": "201-00-000"
     },
@@ -3230,11 +2598,19 @@
       "parentCode": "201-00-000"
     },
     {
+      "code": "202-00-000",
+      "name": "Cuentas por pagar a corto plazo",
+      "type": "Pasivo Acreedor",
+      "level": 2,
+      "satCode": "202",
+      "parentCode": "200-00-000"
+    },
+    {
       "code": "202-01-000",
-      "name": "Intereses por pagar a corto plazo extranjero parte relacionada",
+      "name": "Documentos por pagar bancario y financiero nacional",
       "type": "Pasivo Acreedor",
       "level": 3,
-      "satCode": "202.1",
+      "satCode": "202.01",
       "parentCode": "202-00-000"
     },
     {
@@ -3318,11 +2694,19 @@
       "parentCode": "202-00-000"
     },
     {
+      "code": "203-00-000",
+      "name": "Cobros anticipados a corto plazo",
+      "type": "Pasivo Acreedor",
+      "level": 2,
+      "satCode": "203",
+      "parentCode": "200-00-000"
+    },
+    {
       "code": "203-01-000",
-      "name": "Factoraje financiero cobrados por anticipado a corto plazo extranjero",
+      "name": "Rentas cobradas por anticipado a corto plazo nacional",
       "type": "Pasivo Acreedor",
       "level": 3,
-      "satCode": "203.1",
+      "satCode": "203.01",
       "parentCode": "203-00-000"
     },
     {
@@ -3454,12 +2838,28 @@
       "parentCode": "203-00-000"
     },
     {
+      "code": "204-00-000",
+      "name": "Instrumentos financieros a corto plazo",
+      "type": "Pasivo Acreedor",
+      "level": 2,
+      "satCode": "204",
+      "parentCode": "200-00-000"
+    },
+    {
       "code": "204-01-000",
       "name": "Instrumentos financieros a corto plazo",
       "type": "Pasivo Acreedor",
       "level": 3,
       "satCode": "204.01",
       "parentCode": "204-00-000"
+    },
+    {
+      "code": "205-00-000",
+      "name": "Acreedores diversos a corto plazo",
+      "type": "Pasivo Acreedor",
+      "level": 2,
+      "satCode": "205",
+      "parentCode": "200-00-000"
     },
     {
       "code": "205-01-000",
@@ -3510,6 +2910,14 @@
       "parentCode": "205-00-000"
     },
     {
+      "code": "206-00-000",
+      "name": "Anticipo de cliente",
+      "type": "Pasivo Acreedor",
+      "level": 2,
+      "satCode": "206",
+      "parentCode": "200-00-000"
+    },
+    {
       "code": "206-01-000",
       "name": "Anticipo de cliente nacional",
       "type": "Pasivo Acreedor",
@@ -3550,6 +2958,14 @@
       "parentCode": "206-00-000"
     },
     {
+      "code": "207-00-000",
+      "name": "Impuestos trasladados",
+      "type": "Pasivo Acreedor",
+      "level": 2,
+      "satCode": "207",
+      "parentCode": "200-00-000"
+    },
+    {
       "code": "207-01-000",
       "name": "IVA trasladado",
       "type": "Pasivo Acreedor",
@@ -3564,6 +2980,14 @@
       "level": 3,
       "satCode": "207.02",
       "parentCode": "207-00-000"
+    },
+    {
+      "code": "208-00-000",
+      "name": "Impuestos trasladados cobrados",
+      "type": "Pasivo Acreedor",
+      "level": 2,
+      "satCode": "208",
+      "parentCode": "200-00-000"
     },
     {
       "code": "208-01-000",
@@ -3582,6 +3006,14 @@
       "parentCode": "208-00-000"
     },
     {
+      "code": "209-00-000",
+      "name": "Impuestos trasladados no cobrados",
+      "type": "Pasivo Acreedor",
+      "level": 2,
+      "satCode": "209",
+      "parentCode": "200-00-000"
+    },
+    {
       "code": "209-01-000",
       "name": "IVA trasladado no cobrado",
       "type": "Pasivo Acreedor",
@@ -3596,6 +3028,14 @@
       "level": 3,
       "satCode": "209.02",
       "parentCode": "209-00-000"
+    },
+    {
+      "code": "210-00-000",
+      "name": "Provisión de sueldos y salarios por pagar",
+      "type": "Pasivo Acreedor",
+      "level": 2,
+      "satCode": "210",
+      "parentCode": "200-00-000"
     },
     {
       "code": "210-01-000",
@@ -3654,6 +3094,14 @@
       "parentCode": "210-00-000"
     },
     {
+      "code": "211-00-000",
+      "name": "Provisión de contribuciones de seguridad social por pagar",
+      "type": "Pasivo Acreedor",
+      "level": 2,
+      "satCode": "211",
+      "parentCode": "200-00-000"
+    },
+    {
       "code": "211-01-000",
       "name": "Provisión de IMSS patronal por pagar",
       "type": "Pasivo Acreedor",
@@ -3678,12 +3126,28 @@
       "parentCode": "211-00-000"
     },
     {
+      "code": "212-00-000",
+      "name": "Provisión de impuesto estatal sobre nómina por pagar",
+      "type": "Pasivo Acreedor",
+      "level": 2,
+      "satCode": "212",
+      "parentCode": "200-00-000"
+    },
+    {
       "code": "212-01-000",
       "name": "Provisión de impuesto estatal sobre nómina por pagar",
       "type": "Pasivo Acreedor",
       "level": 3,
       "satCode": "212.01",
       "parentCode": "212-00-000"
+    },
+    {
+      "code": "213-00-000",
+      "name": "Impuestos y derechos por pagar",
+      "type": "Pasivo Acreedor",
+      "level": 2,
+      "satCode": "213",
+      "parentCode": "200-00-000"
     },
     {
       "code": "213-01-000",
@@ -3742,12 +3206,28 @@
       "parentCode": "213-00-000"
     },
     {
+      "code": "214-00-000",
+      "name": "Dividendos por pagar",
+      "type": "Pasivo Acreedor",
+      "level": 2,
+      "satCode": "214",
+      "parentCode": "200-00-000"
+    },
+    {
       "code": "214-01-000",
       "name": "Dividendos por pagar",
       "type": "Pasivo Acreedor",
       "level": 3,
       "satCode": "214.01",
       "parentCode": "214-00-000"
+    },
+    {
+      "code": "215-00-000",
+      "name": "PTU por pagar",
+      "type": "Pasivo Acreedor",
+      "level": 2,
+      "satCode": "215",
+      "parentCode": "200-00-000"
     },
     {
       "code": "215-01-000",
@@ -3774,11 +3254,19 @@
       "parentCode": "215-00-000"
     },
     {
+      "code": "216-00-000",
+      "name": "Impuestos retenidos",
+      "type": "Pasivo Acreedor",
+      "level": 2,
+      "satCode": "216",
+      "parentCode": "200-00-000"
+    },
+    {
       "code": "216-01-000",
-      "name": "Impuestos retenidos de IVA",
+      "name": "Impuestos retenidos de ISR por sueldos y salarios",
       "type": "Pasivo Acreedor",
       "level": 3,
-      "satCode": "216.1",
+      "satCode": "216.01",
       "parentCode": "216-00-000"
     },
     {
@@ -3862,12 +3350,28 @@
       "parentCode": "216-00-000"
     },
     {
+      "code": "217-00-000",
+      "name": "Pagos realizados por cuenta de terceros",
+      "type": "Pasivo Acreedor",
+      "level": 2,
+      "satCode": "217",
+      "parentCode": "200-00-000"
+    },
+    {
       "code": "217-01-000",
       "name": "Pagos realizados por cuenta de terceros",
       "type": "Pasivo Acreedor",
       "level": 3,
       "satCode": "217.01",
       "parentCode": "217-00-000"
+    },
+    {
+      "code": "218-00-000",
+      "name": "Otros pasivos a corto plazo",
+      "type": "Pasivo Acreedor",
+      "level": 2,
+      "satCode": "218",
+      "parentCode": "200-00-000"
     },
     {
       "code": "218-01-000",
@@ -3883,6 +3387,14 @@
       "type": "Pasivo Acreedor",
       "level": 3,
       "satCode": "200.02",
+      "parentCode": "200-00-000"
+    },
+    {
+      "code": "251-00-000",
+      "name": "Acreedores diversos a largo plazo",
+      "type": "Pasivo Acreedor",
+      "level": 2,
+      "satCode": "251",
       "parentCode": "200-00-000"
     },
     {
@@ -3934,11 +3446,19 @@
       "parentCode": "251-00-000"
     },
     {
+      "code": "252-00-000",
+      "name": "Cuentas por pagar a largo plazo",
+      "type": "Pasivo Acreedor",
+      "level": 2,
+      "satCode": "252",
+      "parentCode": "200-00-000"
+    },
+    {
       "code": "252-01-000",
-      "name": "Hipotecas por pagar a largo plazo extranjero parte relacionada",
+      "name": "Documentos bancarios y financieros por pagar a largo plazo nacional",
       "type": "Pasivo Acreedor",
       "level": 3,
-      "satCode": "252.1",
+      "satCode": "252.01",
       "parentCode": "252-00-000"
     },
     {
@@ -4062,11 +3582,19 @@
       "parentCode": "252-00-000"
     },
     {
+      "code": "253-00-000",
+      "name": "Cobros anticipados a largo plazo",
+      "type": "Pasivo Acreedor",
+      "level": 2,
+      "satCode": "253",
+      "parentCode": "200-00-000"
+    },
+    {
       "code": "253-01-000",
-      "name": "Factoraje financiero cobrados por anticipado a largo plazo extranjero",
+      "name": "Rentas cobradas por anticipado a largo plazo nacional",
       "type": "Pasivo Acreedor",
       "level": 3,
-      "satCode": "253.1",
+      "satCode": "253.01",
       "parentCode": "253-00-000"
     },
     {
@@ -4198,12 +3726,28 @@
       "parentCode": "253-00-000"
     },
     {
+      "code": "254-00-000",
+      "name": "Instrumentos financieros a largo plazo",
+      "type": "Pasivo Acreedor",
+      "level": 2,
+      "satCode": "254",
+      "parentCode": "200-00-000"
+    },
+    {
       "code": "254-01-000",
       "name": "Instrumentos financieros a largo plazo",
       "type": "Pasivo Acreedor",
       "level": 3,
       "satCode": "254.01",
       "parentCode": "254-00-000"
+    },
+    {
+      "code": "255-00-000",
+      "name": "Pasivos por beneficios a los empleados a largo plazo",
+      "type": "Pasivo Acreedor",
+      "level": 2,
+      "satCode": "255",
+      "parentCode": "200-00-000"
     },
     {
       "code": "255-01-000",
@@ -4214,12 +3758,28 @@
       "parentCode": "255-00-000"
     },
     {
+      "code": "256-00-000",
+      "name": "Otros pasivos a largo plazo",
+      "type": "Pasivo Acreedor",
+      "level": 2,
+      "satCode": "256",
+      "parentCode": "200-00-000"
+    },
+    {
       "code": "256-01-000",
       "name": "Otros pasivos a largo plazo",
       "type": "Pasivo Acreedor",
       "level": 3,
       "satCode": "256.01",
       "parentCode": "256-00-000"
+    },
+    {
+      "code": "257-00-000",
+      "name": "Participación de los trabajadores en las utilidades diferida",
+      "type": "Pasivo Acreedor",
+      "level": 2,
+      "satCode": "257",
+      "parentCode": "200-00-000"
     },
     {
       "code": "257-01-000",
@@ -4230,12 +3790,28 @@
       "parentCode": "257-00-000"
     },
     {
+      "code": "258-00-000",
+      "name": "Obligaciones contraídas de fideicomisos",
+      "type": "Pasivo Acreedor",
+      "level": 2,
+      "satCode": "258",
+      "parentCode": "200-00-000"
+    },
+    {
       "code": "258-01-000",
       "name": "Obligaciones contraídas de fideicomisos",
       "type": "Pasivo Acreedor",
       "level": 3,
       "satCode": "258.01",
       "parentCode": "258-00-000"
+    },
+    {
+      "code": "259-00-000",
+      "name": "Impuestos diferidos",
+      "type": "Pasivo Acreedor",
+      "level": 2,
+      "satCode": "259",
+      "parentCode": "200-00-000"
     },
     {
       "code": "259-01-000",
@@ -4262,12 +3838,36 @@
       "parentCode": "259-00-000"
     },
     {
+      "code": "260-00-000",
+      "name": "Pasivos diferidos",
+      "type": "Pasivo Acreedor",
+      "level": 2,
+      "satCode": "260",
+      "parentCode": "200-00-000"
+    },
+    {
       "code": "260-01-000",
       "name": "Pasivos diferidos",
       "type": "Pasivo Acreedor",
       "level": 3,
       "satCode": "260.01",
       "parentCode": "260-00-000"
+    },
+    {
+      "code": "300-00-000",
+      "name": "Capital contable",
+      "type": "Capital Acreedor",
+      "level": 1,
+      "satCode": "300",
+      "parentCode": ""
+    },
+    {
+      "code": "301-00-000",
+      "name": "Capital social",
+      "type": "Capital Acreedor",
+      "level": 2,
+      "satCode": "301",
+      "parentCode": "300-00-000"
     },
     {
       "code": "301-01-000",
@@ -4310,6 +3910,14 @@
       "parentCode": "301-00-000"
     },
     {
+      "code": "302-00-000",
+      "name": "Patrimonio",
+      "type": "Capital Acreedor",
+      "level": 2,
+      "satCode": "302",
+      "parentCode": "300-00-000"
+    },
+    {
       "code": "302-01-000",
       "name": "Patrimonio",
       "type": "Capital Acreedor",
@@ -4334,12 +3942,28 @@
       "parentCode": "302-00-000"
     },
     {
+      "code": "303-00-000",
+      "name": "Reserva legal",
+      "type": "Capital Acreedor",
+      "level": 2,
+      "satCode": "303",
+      "parentCode": "300-00-000"
+    },
+    {
       "code": "303-01-000",
       "name": "Reserva legal",
       "type": "Capital Acreedor",
       "level": 3,
       "satCode": "303.01",
       "parentCode": "303-00-000"
+    },
+    {
+      "code": "304-00-000",
+      "name": "Resultado de ejercicios anteriores",
+      "type": "Capital Acreedor",
+      "level": 2,
+      "satCode": "304",
+      "parentCode": "300-00-000"
     },
     {
       "code": "304-01-000",
@@ -4374,6 +3998,14 @@
       "parentCode": "304-00-000"
     },
     {
+      "code": "305-00-000",
+      "name": "Resultado del ejercicio",
+      "type": "Capital Acreedor",
+      "level": 2,
+      "satCode": "305",
+      "parentCode": "300-00-000"
+    },
+    {
       "code": "305-01-000",
       "name": "Utilidad del ejercicio",
       "type": "Capital Acreedor",
@@ -4398,6 +4030,14 @@
       "parentCode": "305-00-000"
     },
     {
+      "code": "306-00-000",
+      "name": "Otras cuentas de capital",
+      "type": "Capital Acreedor",
+      "level": 2,
+      "satCode": "306",
+      "parentCode": "300-00-000"
+    },
+    {
       "code": "306-01-000",
       "name": "Otras cuentas de capital",
       "type": "Capital Acreedor",
@@ -4406,27 +4046,43 @@
       "parentCode": "306-00-000"
     },
     {
+      "code": "400-00-000",
+      "name": "Ingresos",
+      "type": "Ingresos",
+      "level": 1,
+      "satCode": "400",
+      "parentCode": ""
+    },
+    {
+      "code": "401-00-000",
+      "name": "Ingresos",
+      "type": "Ingresos",
+      "level": 2,
+      "satCode": "401",
+      "parentCode": "400-00-000"
+    },
+    {
       "code": "401-01-000",
-      "name": "Ventas y/o servicios gravados a la tasa general nacionales partes relacionadas",
+      "name": "Ventas y/o servicios gravados a la tasa general",
       "type": "Ingresos",
       "level": 3,
-      "satCode": "401.1",
+      "satCode": "401.01",
       "parentCode": "401-00-000"
     },
     {
       "code": "401-02-000",
-      "name": "Ingresos por servicios profesionales nacionales partes relacionadas",
+      "name": "Ventas y/o servicios gravados a la tasa general de contado",
       "type": "Ingresos",
       "level": 3,
-      "satCode": "401.2",
+      "satCode": "401.02",
       "parentCode": "401-00-000"
     },
     {
       "code": "401-03-000",
-      "name": "Ingresos por asistencia técnica",
+      "name": "Ventas y/o servicios gravados a la tasa general a crédito",
       "type": "Ingresos",
       "level": 3,
-      "satCode": "401.3",
+      "satCode": "401.03",
       "parentCode": "401-00-000"
     },
     {
@@ -4686,6 +4342,14 @@
       "parentCode": "401-00-000"
     },
     {
+      "code": "402-00-000",
+      "name": "Devoluciones, descuentos o bonificaciones sobre ingresos",
+      "type": "Ingresos",
+      "level": 2,
+      "satCode": "402",
+      "parentCode": "400-00-000"
+    },
+    {
       "code": "402-01-000",
       "name": "Devoluciones, descuentos o bonificaciones sobre ventas y/o servicios a la tasa general",
       "type": "Ingresos",
@@ -4716,6 +4380,14 @@
       "level": 3,
       "satCode": "402.04",
       "parentCode": "402-00-000"
+    },
+    {
+      "code": "403-00-000",
+      "name": "Otros ingresos",
+      "type": "Ingresos",
+      "level": 2,
+      "satCode": "403",
+      "parentCode": "400-00-000"
     },
     {
       "code": "403-01-000",
@@ -4756,6 +4428,22 @@
       "level": 3,
       "satCode": "403.05",
       "parentCode": "403-00-000"
+    },
+    {
+      "code": "500-00-000",
+      "name": "Costos",
+      "type": "Costos",
+      "level": 1,
+      "satCode": "500",
+      "parentCode": ""
+    },
+    {
+      "code": "501-00-000",
+      "name": "Costo de venta y/o servicio",
+      "type": "Costos",
+      "level": 2,
+      "satCode": "501",
+      "parentCode": "500-00-000"
     },
     {
       "code": "501-01-000",
@@ -4822,6 +4510,14 @@
       "parentCode": "501-00-000"
     },
     {
+      "code": "502-00-000",
+      "name": "Compras",
+      "type": "Costos",
+      "level": 2,
+      "satCode": "502",
+      "parentCode": "500-00-000"
+    },
+    {
       "code": "502-01-000",
       "name": "Compras nacionales",
       "type": "Costos",
@@ -4854,6 +4550,14 @@
       "parentCode": "502-00-000"
     },
     {
+      "code": "503-00-000",
+      "name": "Devoluciones, descuentos o bonificaciones sobre compras",
+      "type": "Costos",
+      "level": 2,
+      "satCode": "503",
+      "parentCode": "500-00-000"
+    },
+    {
       "code": "503-01-000",
       "name": "Devoluciones, descuentos o bonificaciones sobre compras",
       "type": "Costos",
@@ -4862,19 +4566,27 @@
       "parentCode": "503-00-000"
     },
     {
+      "code": "504-00-000",
+      "name": "Otras cuentas de costos",
+      "type": "Costos",
+      "level": 2,
+      "satCode": "504",
+      "parentCode": "500-00-000"
+    },
+    {
       "code": "504-01-000",
-      "name": "Depreciación de mobiliario y equipo de oficina",
+      "name": "Gastos indirectos de fabricación",
       "type": "Costos",
       "level": 3,
-      "satCode": "504.1",
+      "satCode": "504.01",
       "parentCode": "504-00-000"
     },
     {
       "code": "504-02-000",
-      "name": "Depreciación de equipo de comunicación satelital",
+      "name": "Gastos indirectos de fabricación de partes relacionadas nacionales",
       "type": "Costos",
       "level": 3,
-      "satCode": "504.2",
+      "satCode": "504.02",
       "parentCode": "504-00-000"
     },
     {
@@ -5046,6 +4758,14 @@
       "parentCode": "504-00-000"
     },
     {
+      "code": "505-00-000",
+      "name": "Costo de activo fijo",
+      "type": "Costos",
+      "level": 2,
+      "satCode": "505",
+      "parentCode": "500-00-000"
+    },
+    {
       "code": "505-01-000",
       "name": "Costo por venta de activo fijo",
       "type": "Costos",
@@ -5062,67 +4782,83 @@
       "parentCode": "505-00-000"
     },
     {
+      "code": "600-00-000",
+      "name": "Gastos",
+      "type": "Gastos",
+      "level": 1,
+      "satCode": "600",
+      "parentCode": ""
+    },
+    {
+      "code": "601-00-000",
+      "name": "Gastos generales",
+      "type": "Gastos",
+      "level": 2,
+      "satCode": "601",
+      "parentCode": "600-00-000"
+    },
+    {
       "code": "601-01-000",
-      "name": "Gratificaciones",
+      "name": "Sueldos y salarios",
       "type": "Gastos",
       "level": 3,
-      "satCode": "601.1",
+      "satCode": "601.01",
       "parentCode": "601-00-000"
     },
     {
       "code": "601-02-000",
-      "name": "Cuotas sindicales",
+      "name": "Compensaciones",
       "type": "Gastos",
       "level": 3,
-      "satCode": "601.2",
+      "satCode": "601.02",
       "parentCode": "601-00-000"
     },
     {
       "code": "601-03-000",
-      "name": "Otras aportaciones",
+      "name": "Tiempos extras",
       "type": "Gastos",
       "level": 3,
-      "satCode": "601.3",
+      "satCode": "601.03",
       "parentCode": "601-00-000"
     },
     {
       "code": "601-04-000",
-      "name": "Honorarios a personas morales residentes del extranjero",
+      "name": "Premios de asistencia",
       "type": "Gastos",
       "level": 3,
-      "satCode": "601.4",
+      "satCode": "601.04",
       "parentCode": "601-00-000"
     },
     {
       "code": "601-05-000",
-      "name": "Teléfono, internet",
+      "name": "Premios de puntualidad",
       "type": "Gastos",
       "level": 3,
-      "satCode": "601.5",
+      "satCode": "601.05",
       "parentCode": "601-00-000"
     },
     {
       "code": "601-06-000",
-      "name": "Cuotas y suscripciones",
+      "name": "Vacaciones",
       "type": "Gastos",
       "level": 3,
-      "satCode": "601.6",
+      "satCode": "601.06",
       "parentCode": "601-00-000"
     },
     {
       "code": "601-07-000",
-      "name": "Regalías sujetas al 30%",
+      "name": "Prima vacacional",
       "type": "Gastos",
       "level": 3,
-      "satCode": "601.7",
+      "satCode": "601.07",
       "parentCode": "601-00-000"
     },
     {
       "code": "601-08-000",
-      "name": "Gastos generales de construcción",
+      "name": "Prima dominical",
       "type": "Gastos",
       "level": 3,
-      "satCode": "601.8",
+      "satCode": "601.08",
       "parentCode": "601-00-000"
     },
     {
@@ -5670,67 +5406,75 @@
       "parentCode": "601-00-000"
     },
     {
+      "code": "602-00-000",
+      "name": "Gastos de venta",
+      "type": "Gastos",
+      "level": 2,
+      "satCode": "602",
+      "parentCode": "600-00-000"
+    },
+    {
       "code": "602-01-000",
-      "name": "Gratificaciones",
+      "name": "Sueldos y salarios",
       "type": "Gastos",
       "level": 3,
-      "satCode": "602.1",
+      "satCode": "602.01",
       "parentCode": "602-00-000"
     },
     {
       "code": "602-02-000",
-      "name": "Cuotas sindicales",
+      "name": "Compensaciones",
       "type": "Gastos",
       "level": 3,
-      "satCode": "602.2",
+      "satCode": "602.02",
       "parentCode": "602-00-000"
     },
     {
       "code": "602-03-000",
-      "name": "Otras aportaciones",
+      "name": "Tiempos extras",
       "type": "Gastos",
       "level": 3,
-      "satCode": "602.3",
+      "satCode": "602.03",
       "parentCode": "602-00-000"
     },
     {
       "code": "602-04-000",
-      "name": "Honorarios a personas morales residentes del extranjero",
+      "name": "Premios de asistencia",
       "type": "Gastos",
       "level": 3,
-      "satCode": "602.4",
+      "satCode": "602.04",
       "parentCode": "602-00-000"
     },
     {
       "code": "602-05-000",
-      "name": "Teléfono, internet",
+      "name": "Premios de puntualidad",
       "type": "Gastos",
       "level": 3,
-      "satCode": "602.5",
+      "satCode": "602.05",
       "parentCode": "602-00-000"
     },
     {
       "code": "602-06-000",
-      "name": "Cuotas y suscripciones",
+      "name": "Vacaciones",
       "type": "Gastos",
       "level": 3,
-      "satCode": "602.6",
+      "satCode": "602.06",
       "parentCode": "602-00-000"
     },
     {
       "code": "602-07-000",
-      "name": "Regalías sujetas al 30%",
+      "name": "Prima vacacional",
       "type": "Gastos",
       "level": 3,
-      "satCode": "602.7",
+      "satCode": "602.07",
       "parentCode": "602-00-000"
     },
     {
       "code": "602-08-000",
-      "name": "Gastos de venta de construcción",
+      "name": "Prima dominical",
       "type": "Gastos",
       "level": 3,
-      "satCode": "602.8",
+      "satCode": "602.08",
       "parentCode": "602-00-000"
     },
     {
@@ -6278,67 +6022,75 @@
       "parentCode": "602-00-000"
     },
     {
+      "code": "603-00-000",
+      "name": "Gastos de administración",
+      "type": "Gastos",
+      "level": 2,
+      "satCode": "603",
+      "parentCode": "600-00-000"
+    },
+    {
       "code": "603-01-000",
-      "name": "Gratificaciones",
+      "name": "Sueldos y salarios",
       "type": "Gastos",
       "level": 3,
-      "satCode": "603.1",
+      "satCode": "603.01",
       "parentCode": "603-00-000"
     },
     {
       "code": "603-02-000",
-      "name": "Cuotas sindicales",
+      "name": "Compensaciones",
       "type": "Gastos",
       "level": 3,
-      "satCode": "603.2",
+      "satCode": "603.02",
       "parentCode": "603-00-000"
     },
     {
       "code": "603-03-000",
-      "name": "Otras aportaciones",
+      "name": "Tiempos extras",
       "type": "Gastos",
       "level": 3,
-      "satCode": "603.3",
+      "satCode": "603.03",
       "parentCode": "603-00-000"
     },
     {
       "code": "603-04-000",
-      "name": "Honorarios a personas morales residentes del extranjero",
+      "name": "Premios de asistencia",
       "type": "Gastos",
       "level": 3,
-      "satCode": "603.4",
+      "satCode": "603.04",
       "parentCode": "603-00-000"
     },
     {
       "code": "603-05-000",
-      "name": "Teléfono, internet",
+      "name": "Premios de puntualidad",
       "type": "Gastos",
       "level": 3,
-      "satCode": "603.5",
+      "satCode": "603.05",
       "parentCode": "603-00-000"
     },
     {
       "code": "603-06-000",
-      "name": "Cuotas y suscripciones",
+      "name": "Vacaciones",
       "type": "Gastos",
       "level": 3,
-      "satCode": "603.6",
+      "satCode": "603.06",
       "parentCode": "603-00-000"
     },
     {
       "code": "603-07-000",
-      "name": "Regalías sujetas al 30%",
+      "name": "Prima vacacional",
       "type": "Gastos",
       "level": 3,
-      "satCode": "603.7",
+      "satCode": "603.07",
       "parentCode": "603-00-000"
     },
     {
       "code": "603-08-000",
-      "name": "Recolección de bienes del sector agropecuario y/o ganadero",
+      "name": "Prima dominical",
       "type": "Gastos",
       "level": 3,
-      "satCode": "603.8",
+      "satCode": "603.08",
       "parentCode": "603-00-000"
     },
     {
@@ -6870,67 +6622,75 @@
       "parentCode": "603-00-000"
     },
     {
+      "code": "604-00-000",
+      "name": "Gastos de fabricación",
+      "type": "Gastos",
+      "level": 2,
+      "satCode": "604",
+      "parentCode": "600-00-000"
+    },
+    {
       "code": "604-01-000",
-      "name": "Gratificaciones",
+      "name": "Sueldos y salarios",
       "type": "Gastos",
       "level": 3,
-      "satCode": "604.1",
+      "satCode": "604.01",
       "parentCode": "604-00-000"
     },
     {
       "code": "604-02-000",
-      "name": "Cuotas sindicales",
+      "name": "Compensaciones",
       "type": "Gastos",
       "level": 3,
-      "satCode": "604.2",
+      "satCode": "604.02",
       "parentCode": "604-00-000"
     },
     {
       "code": "604-03-000",
-      "name": "Otras aportaciones",
+      "name": "Tiempos extras",
       "type": "Gastos",
       "level": 3,
-      "satCode": "604.3",
+      "satCode": "604.03",
       "parentCode": "604-00-000"
     },
     {
       "code": "604-04-000",
-      "name": "Honorarios a personas morales residentes del extranjero",
+      "name": "Premios de asistencia",
       "type": "Gastos",
       "level": 3,
-      "satCode": "604.4",
+      "satCode": "604.04",
       "parentCode": "604-00-000"
     },
     {
       "code": "604-05-000",
-      "name": "Teléfono, internet",
+      "name": "Premios de puntualidad",
       "type": "Gastos",
       "level": 3,
-      "satCode": "604.5",
+      "satCode": "604.05",
       "parentCode": "604-00-000"
     },
     {
       "code": "604-06-000",
-      "name": "Cuotas y suscripciones",
+      "name": "Vacaciones",
       "type": "Gastos",
       "level": 3,
-      "satCode": "604.6",
+      "satCode": "604.06",
       "parentCode": "604-00-000"
     },
     {
       "code": "604-07-000",
-      "name": "Regalías sujetas al 30%",
+      "name": "Prima vacacional",
       "type": "Gastos",
       "level": 3,
-      "satCode": "604.7",
+      "satCode": "604.07",
       "parentCode": "604-00-000"
     },
     {
       "code": "604-08-000",
-      "name": "Recolección de bienes del sector agropecuario y/o ganadero",
+      "name": "Prima dominical",
       "type": "Gastos",
       "level": 3,
-      "satCode": "604.8",
+      "satCode": "604.08",
       "parentCode": "604-00-000"
     },
     {
@@ -7462,27 +7222,35 @@
       "parentCode": "604-00-000"
     },
     {
+      "code": "605-00-000",
+      "name": "Mano de obra directa",
+      "type": "Gastos",
+      "level": 2,
+      "satCode": "605",
+      "parentCode": "600-00-000"
+    },
+    {
       "code": "605-01-000",
-      "name": "Días festivos",
+      "name": "Mano de obra",
       "type": "Gastos",
       "level": 3,
-      "satCode": "605.1",
+      "satCode": "605.01",
       "parentCode": "605-00-000"
     },
     {
       "code": "605-02-000",
-      "name": "Fondo de ahorro",
+      "name": "Sueldos y Salarios",
       "type": "Gastos",
       "level": 3,
-      "satCode": "605.2",
+      "satCode": "605.02",
       "parentCode": "605-00-000"
     },
     {
       "code": "605-03-000",
-      "name": "Aportaciones al SAR",
+      "name": "Compensaciones",
       "type": "Gastos",
       "level": 3,
-      "satCode": "605.3",
+      "satCode": "605.03",
       "parentCode": "605-00-000"
     },
     {
@@ -7686,12 +7454,28 @@
       "parentCode": "605-00-000"
     },
     {
+      "code": "606-00-000",
+      "name": "Facilidades administrativas fiscales",
+      "type": "Gastos",
+      "level": 2,
+      "satCode": "606",
+      "parentCode": "600-00-000"
+    },
+    {
       "code": "606-01-000",
       "name": "Facilidades administrativas fiscales",
       "type": "Gastos",
       "level": 3,
       "satCode": "606.01",
       "parentCode": "606-00-000"
+    },
+    {
+      "code": "607-00-000",
+      "name": "Participación de los trabajadores en las utilidades",
+      "type": "Gastos",
+      "level": 2,
+      "satCode": "607",
+      "parentCode": "600-00-000"
     },
     {
       "code": "607-01-000",
@@ -7702,12 +7486,28 @@
       "parentCode": "607-00-000"
     },
     {
+      "code": "608-00-000",
+      "name": "Participación en resultados de subsidiarias",
+      "type": "Gastos",
+      "level": 2,
+      "satCode": "608",
+      "parentCode": "600-00-000"
+    },
+    {
       "code": "608-01-000",
       "name": "Participación en resultados de subsidiarias",
       "type": "Gastos",
       "level": 3,
       "satCode": "608.01",
       "parentCode": "608-00-000"
+    },
+    {
+      "code": "609-00-000",
+      "name": "Participación en resultados de asociadas",
+      "type": "Gastos",
+      "level": 2,
+      "satCode": "609",
+      "parentCode": "600-00-000"
     },
     {
       "code": "609-01-000",
@@ -7718,12 +7518,28 @@
       "parentCode": "609-00-000"
     },
     {
+      "code": "610-00-000",
+      "name": "Participación de los trabajadores en las utilidades diferida",
+      "type": "Gastos",
+      "level": 2,
+      "satCode": "610",
+      "parentCode": "600-00-000"
+    },
+    {
       "code": "610-01-000",
       "name": "Participación de los trabajadores en las utilidades diferida",
       "type": "Gastos",
       "level": 3,
       "satCode": "610.01",
       "parentCode": "610-00-000"
+    },
+    {
+      "code": "611-00-000",
+      "name": "Impuesto Sobre la renta",
+      "type": "Gastos",
+      "level": 2,
+      "satCode": "611",
+      "parentCode": "600-00-000"
     },
     {
       "code": "611-01-000",
@@ -7742,6 +7558,14 @@
       "parentCode": "611-00-000"
     },
     {
+      "code": "612-00-000",
+      "name": "Gastos no deducibles para CUFIN",
+      "type": "Gastos",
+      "level": 2,
+      "satCode": "612",
+      "parentCode": "600-00-000"
+    },
+    {
       "code": "612-01-000",
       "name": "Gastos no deducibles para CUFIN",
       "type": "Gastos",
@@ -7750,11 +7574,19 @@
       "parentCode": "612-00-000"
     },
     {
+      "code": "613-00-000",
+      "name": "Depreciación contable",
+      "type": "Gastos",
+      "level": 2,
+      "satCode": "613",
+      "parentCode": "600-00-000"
+    },
+    {
       "code": "613-01-000",
-      "name": "Depreciación de embarcaciones",
+      "name": "Depreciación de edificios",
       "type": "Gastos",
       "level": 3,
-      "satCode": "613.1",
+      "satCode": "613.01",
       "parentCode": "613-00-000"
     },
     {
@@ -7886,11 +7718,19 @@
       "parentCode": "613-00-000"
     },
     {
+      "code": "614-00-000",
+      "name": "Amortización contable",
+      "type": "Gastos",
+      "level": 2,
+      "satCode": "614",
+      "parentCode": "600-00-000"
+    },
+    {
       "code": "614-01-000",
-      "name": "Amortización de otros activos diferidos",
+      "name": "Amortización de gastos diferidos",
       "type": "Gastos",
       "level": 3,
-      "satCode": "614.1",
+      "satCode": "614.01",
       "parentCode": "614-00-000"
     },
     {
@@ -7958,11 +7798,27 @@
       "parentCode": "614-00-000"
     },
     {
+      "code": "700-00-000",
+      "name": "Resultado integral de financiamiento",
+      "type": "Resultado Integral",
+      "level": 1,
+      "satCode": "700",
+      "parentCode": ""
+    },
+    {
+      "code": "701-00-000",
+      "name": "Gastos financieros",
+      "type": "Resultado Integral",
+      "level": 2,
+      "satCode": "701",
+      "parentCode": "700-00-000"
+    },
+    {
       "code": "701-01-000",
-      "name": "Comisiones bancarias",
+      "name": "Pérdida cambiaria",
       "type": "Resultado Integral",
       "level": 3,
-      "satCode": "701.1",
+      "satCode": "701.01",
       "parentCode": "701-00-000"
     },
     {
@@ -8038,11 +7894,19 @@
       "parentCode": "701-00-000"
     },
     {
+      "code": "702-00-000",
+      "name": "Productos financieros",
+      "type": "Resultado Integral",
+      "level": 2,
+      "satCode": "702",
+      "parentCode": "700-00-000"
+    },
+    {
       "code": "702-01-000",
-      "name": "Otros productos financieros",
+      "name": "Utilidad cambiaria",
       "type": "Resultado Integral",
       "level": 3,
-      "satCode": "702.1",
+      "satCode": "702.01",
       "parentCode": "702-00-000"
     },
     {
@@ -8110,19 +7974,27 @@
       "parentCode": "702-00-000"
     },
     {
+      "code": "703-00-000",
+      "name": "Otros gastos",
+      "type": "Resultado Integral",
+      "level": 2,
+      "satCode": "703",
+      "parentCode": "700-00-000"
+    },
+    {
       "code": "703-01-000",
-      "name": "Pérdida en venta y/o baja de ferrocarriles",
+      "name": "Pérdida en venta y/o baja de terrenos",
       "type": "Resultado Integral",
       "level": 3,
-      "satCode": "703.1",
+      "satCode": "703.01",
       "parentCode": "703-00-000"
     },
     {
       "code": "703-02-000",
-      "name": "Pérdida por enajenación de partes sociales",
+      "name": "Pérdida en venta y/o baja de edificios",
       "type": "Resultado Integral",
       "level": 3,
-      "satCode": "703.2",
+      "satCode": "703.02",
       "parentCode": "703-00-000"
     },
     {
@@ -8262,19 +8134,27 @@
       "parentCode": "703-00-000"
     },
     {
+      "code": "704-00-000",
+      "name": "Otros productos",
+      "type": "Resultado Integral",
+      "level": 2,
+      "satCode": "704",
+      "parentCode": "700-00-000"
+    },
+    {
       "code": "704-01-000",
-      "name": "Ganancia en venta y/o baja de ferrocarriles",
+      "name": "Ganancia en venta y/o baja de terrenos",
       "type": "Resultado Integral",
       "level": 3,
-      "satCode": "704.1",
+      "satCode": "704.01",
       "parentCode": "704-00-000"
     },
     {
       "code": "704-02-000",
-      "name": "Ganancia por enajenación de partes sociales",
+      "name": "Ganancia en venta y/o baja de edificios",
       "type": "Resultado Integral",
       "level": 3,
-      "satCode": "704.2",
+      "satCode": "704.02",
       "parentCode": "704-00-000"
     },
     {
@@ -8430,6 +8310,22 @@
       "parentCode": "704-00-000"
     },
     {
+      "code": "800-00-000",
+      "name": "Cuentas de orden",
+      "type": "Cuentas de Orden",
+      "level": 1,
+      "satCode": "800",
+      "parentCode": ""
+    },
+    {
+      "code": "801-00-000",
+      "name": "UFIN del ejercicio",
+      "type": "Cuentas de Orden",
+      "level": 2,
+      "satCode": "801",
+      "parentCode": "800-00-000"
+    },
+    {
       "code": "801-01-000",
       "name": "UFIN",
       "type": "Cuentas de Orden",
@@ -8444,6 +8340,14 @@
       "level": 3,
       "satCode": "801.02",
       "parentCode": "801-00-000"
+    },
+    {
+      "code": "802-00-000",
+      "name": "CUFIN del ejercicio",
+      "type": "Cuentas de Orden",
+      "level": 2,
+      "satCode": "802",
+      "parentCode": "800-00-000"
     },
     {
       "code": "802-01-000",
@@ -8462,6 +8366,14 @@
       "parentCode": "802-00-000"
     },
     {
+      "code": "803-00-000",
+      "name": "CUFIN de ejercicios anteriores",
+      "type": "Cuentas de Orden",
+      "level": 2,
+      "satCode": "803",
+      "parentCode": "800-00-000"
+    },
+    {
       "code": "803-01-000",
       "name": "CUFIN de ejercicios anteriores",
       "type": "Cuentas de Orden",
@@ -8476,6 +8388,14 @@
       "level": 3,
       "satCode": "803.02",
       "parentCode": "803-00-000"
+    },
+    {
+      "code": "804-00-000",
+      "name": "CUFINRE del ejercicio",
+      "type": "Cuentas de Orden",
+      "level": 2,
+      "satCode": "804",
+      "parentCode": "800-00-000"
     },
     {
       "code": "804-01-000",
@@ -8494,6 +8414,14 @@
       "parentCode": "804-00-000"
     },
     {
+      "code": "805-00-000",
+      "name": "CUFINRE de ejercicios anteriores",
+      "type": "Cuentas de Orden",
+      "level": 2,
+      "satCode": "805",
+      "parentCode": "800-00-000"
+    },
+    {
       "code": "805-01-000",
       "name": "CUFINRE de ejercicios anteriores",
       "type": "Cuentas de Orden",
@@ -8508,6 +8436,14 @@
       "level": 3,
       "satCode": "805.02",
       "parentCode": "805-00-000"
+    },
+    {
+      "code": "806-00-000",
+      "name": "CUCA del ejercicio",
+      "type": "Cuentas de Orden",
+      "level": 2,
+      "satCode": "806",
+      "parentCode": "800-00-000"
     },
     {
       "code": "806-01-000",
@@ -8526,6 +8462,14 @@
       "parentCode": "806-00-000"
     },
     {
+      "code": "807-00-000",
+      "name": "CUCA de ejercicios anteriores",
+      "type": "Cuentas de Orden",
+      "level": 2,
+      "satCode": "807",
+      "parentCode": "800-00-000"
+    },
+    {
       "code": "807-01-000",
       "name": "CUCA de ejercicios anteriores",
       "type": "Cuentas de Orden",
@@ -8540,6 +8484,14 @@
       "level": 3,
       "satCode": "807.02",
       "parentCode": "807-00-000"
+    },
+    {
+      "code": "808-00-000",
+      "name": "Ajuste anual por inflación acumulable",
+      "type": "Cuentas de Orden",
+      "level": 2,
+      "satCode": "808",
+      "parentCode": "800-00-000"
     },
     {
       "code": "808-01-000",
@@ -8558,6 +8510,14 @@
       "parentCode": "808-00-000"
     },
     {
+      "code": "809-00-000",
+      "name": "Ajuste anual por inflación deducible",
+      "type": "Cuentas de Orden",
+      "level": 2,
+      "satCode": "809",
+      "parentCode": "800-00-000"
+    },
+    {
       "code": "809-01-000",
       "name": "Ajuste anual por inflación deducible",
       "type": "Cuentas de Orden",
@@ -8572,6 +8532,14 @@
       "level": 3,
       "satCode": "809.02",
       "parentCode": "809-00-000"
+    },
+    {
+      "code": "810-00-000",
+      "name": "Deducción de inversión",
+      "type": "Cuentas de Orden",
+      "level": 2,
+      "satCode": "810",
+      "parentCode": "800-00-000"
     },
     {
       "code": "810-01-000",
@@ -8590,6 +8558,14 @@
       "parentCode": "810-00-000"
     },
     {
+      "code": "811-00-000",
+      "name": "Utilidad o pérdida fiscal en venta y/o baja de activo fijo",
+      "type": "Cuentas de Orden",
+      "level": 2,
+      "satCode": "811",
+      "parentCode": "800-00-000"
+    },
+    {
       "code": "811-01-000",
       "name": "Utilidad o pérdida fiscal en venta y/o baja de activo fijo",
       "type": "Cuentas de Orden",
@@ -8604,6 +8580,14 @@
       "level": 3,
       "satCode": "811.02",
       "parentCode": "811-00-000"
+    },
+    {
+      "code": "812-00-000",
+      "name": "Utilidad o pérdida fiscal en venta acciones o partes sociales",
+      "type": "Cuentas de Orden",
+      "level": 2,
+      "satCode": "812",
+      "parentCode": "800-00-000"
     },
     {
       "code": "812-01-000",
@@ -8622,6 +8606,14 @@
       "parentCode": "812-00-000"
     },
     {
+      "code": "813-00-000",
+      "name": "Pérdidas fiscales pendientes de amortizar actualizadas de ejercicios anteriores",
+      "type": "Cuentas de Orden",
+      "level": 2,
+      "satCode": "813",
+      "parentCode": "800-00-000"
+    },
+    {
       "code": "813-01-000",
       "name": "Pérdidas fiscales pendientes de amortizar actualizadas de ejercicios anteriores",
       "type": "Cuentas de Orden",
@@ -8636,6 +8628,14 @@
       "level": 3,
       "satCode": "813.02",
       "parentCode": "813-00-000"
+    },
+    {
+      "code": "814-00-000",
+      "name": "Mercancías recibidas en consignación",
+      "type": "Cuentas de Orden",
+      "level": 2,
+      "satCode": "814",
+      "parentCode": "800-00-000"
     },
     {
       "code": "814-01-000",
@@ -8654,6 +8654,14 @@
       "parentCode": "814-00-000"
     },
     {
+      "code": "815-00-000",
+      "name": "Crédito fiscal de IVA e IEPS por la importación de mercancías para empresas certificadas",
+      "type": "Cuentas de Orden",
+      "level": 2,
+      "satCode": "815",
+      "parentCode": "800-00-000"
+    },
+    {
       "code": "815-01-000",
       "name": "Crédito fiscal de IVA e IEPS por la importación de mercancías",
       "type": "Cuentas de Orden",
@@ -8668,6 +8676,14 @@
       "level": 3,
       "satCode": "815.02",
       "parentCode": "815-00-000"
+    },
+    {
+      "code": "816-00-000",
+      "name": "Crédito fiscal de IVA e IEPS por la importación de activos fijos para empresas certificadas",
+      "type": "Cuentas de Orden",
+      "level": 2,
+      "satCode": "816",
+      "parentCode": "800-00-000"
     },
     {
       "code": "816-01-000",
@@ -8686,6 +8702,14 @@
       "parentCode": "816-00-000"
     },
     {
+      "code": "899-00-000",
+      "name": "Otras cuentas de orden",
+      "type": "Cuentas de Orden",
+      "level": 2,
+      "satCode": "899",
+      "parentCode": "800-00-000"
+    },
+    {
       "code": "899-01-000",
       "name": "Otras cuentas de orden",
       "type": "Cuentas de Orden",
@@ -8700,30 +8724,6 @@
       "level": 3,
       "satCode": "899.02",
       "parentCode": "899-00-000"
-    },
-    {
-      "code": "102-01-001",
-      "name": "Banamex",
-      "type": "Activo Deudor",
-      "level": 4,
-      "satCode": "102.01",
-      "parentCode": "102-01-000"
-    },
-    {
-      "code": "201-01-001",
-      "name": "MA. GUADALUPE LOPEZ ANGUIANO / LOAM5712097D5",
-      "type": "Pasivo Acreedor",
-      "level": 4,
-      "satCode": "201.01",
-      "parentCode": "201-01-000"
-    },
-    {
-      "code": "201-01-002",
-      "name": "Telefonos de Mexico SAB de CV /TME840315KT6",
-      "type": "Pasivo Acreedor",
-      "level": 4,
-      "satCode": "201.01",
-      "parentCode": "201-01-000"
     }
   ],
   "sistema_contable_polizas": [
