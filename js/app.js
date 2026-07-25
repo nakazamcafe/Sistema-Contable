@@ -146,24 +146,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const activeComp = getActiveCompany();
   system = AccountingSystem.loadFromStorage(activeComp.id);
 
-  // Suscribirse a cambios en tiempo real en la Nube (Google Firebase)
-  if (typeof listenCloudUsers === "function") {
-    listenCloudUsers(() => {
-      if (currentView === "users") renderUsers();
-    });
-    listenCloudCompanies(() => {
-      renderCompanyDropdownItems();
-    });
-    listenCloudAccounts(activeComp.id, (cloudAccounts) => {
-      system.accounts = cloudAccounts;
-      if (currentView === "catalog") renderCatalog();
-    });
-    listenCloudPolizas(activeComp.id, (cloudPolizas) => {
-      system.polizas = cloudPolizas;
-      if (currentView === "polizas") renderPolizas();
-      if (currentView === "dashboard") renderDashboard();
-    });
-  }
+  // Las suscripciones en tiempo real a Firebase se inician ahora de forma segura dentro de initAuth() una vez autenticado
   
   // Establecer el color scheme del sistema
   const currentTheme = localStorage.getItem("theme") || "dark";
@@ -2183,6 +2166,11 @@ function initAuth() {
   const isFirebaseEnabled = typeof firebase !== "undefined" && db !== null;
 
   if (isFirebaseEnabled) {
+    let unsubUsers = null;
+    let unsubCompanies = null;
+    let unsubAccounts = null;
+    let unsubPolizas = null;
+
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         // Usuario autenticado en Firebase Auth
@@ -2204,15 +2192,52 @@ function initAuth() {
           if (dbStatusText) dbStatusText.innerText = "Sincronización Nube Activa";
           if (dbStatusIcon) dbStatusIcon.className = "fa-solid fa-cloud text-emerald";
           if (dbStatusContainer) dbStatusContainer.className = "db-status text-emerald";
+
+          // Activar escuchas en tiempo real de Firebase de forma segura sólo tras estar autenticado
+          const activeCompany = getActiveCompany();
+          
+          if (!unsubUsers) {
+            unsubUsers = listenCloudUsers((cloudUsers) => {
+              if (currentView === "users") renderUsers();
+            });
+          }
+          if (!unsubCompanies) {
+            unsubCompanies = listenCloudCompanies(() => {
+              renderCompanyDropdownItems();
+            });
+          }
+          if (!unsubAccounts) {
+            unsubAccounts = listenCloudAccounts(activeCompany.id, (cloudAccounts) => {
+              system.accounts = cloudAccounts;
+              if (currentView === "catalog") renderCatalog();
+            });
+          }
+          if (!unsubPolizas) {
+            unsubPolizas = listenCloudPolizas(activeCompany.id, (cloudPolizas) => {
+              system.polizas = cloudPolizas;
+              if (currentView === "polizas") renderPolizas();
+              if (currentView === "dashboard") renderDashboard();
+            });
+          }
         } else {
-          // El usuario no existe localmente o está deshabilitado
+          // Limpiar escuchas si el usuario se inactiva o no existe localmente
+          if (unsubAccounts) { unsubAccounts(); unsubAccounts = null; }
+          if (unsubPolizas) { unsubPolizas(); unsubPolizas = null; }
+          if (unsubCompanies) { unsubCompanies(); unsubCompanies = null; }
+          if (unsubUsers) { unsubUsers(); unsubUsers = null; }
+
           firebase.auth().signOut().then(() => {
             setCurrentUser(null);
             overlay.classList.add("active");
           });
         }
       } else {
-        // No hay sesión activa en Firebase Auth, forzar login
+        // Limpiar escuchas si se cierra sesión
+        if (unsubAccounts) { unsubAccounts(); unsubAccounts = null; }
+        if (unsubPolizas) { unsubPolizas(); unsubPolizas = null; }
+        if (unsubCompanies) { unsubCompanies(); unsubCompanies = null; }
+        if (unsubUsers) { unsubUsers(); unsubUsers = null; }
+
         setCurrentUser(null);
         overlay.classList.add("active");
       }

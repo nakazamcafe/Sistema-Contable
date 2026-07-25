@@ -124,7 +124,7 @@ function arePolizasEqual(arr1, arr2) {
 // 1. Escuchar cambios de usuarios en tiempo real
 function listenCloudUsers(callback) {
   if (!db) return;
-  db.collection("users").onSnapshot((snapshot) => {
+  return db.collection("users").onSnapshot((snapshot) => {
     const cloudUsers = [];
     snapshot.forEach((doc) => {
       cloudUsers.push(doc.data());
@@ -168,7 +168,7 @@ function saveCloudUser(userObj) {
 // 3. Escuchar empresas en tiempo real
 function listenCloudCompanies(callback) {
   if (!db) return;
-  db.collection("companies").onSnapshot((snapshot) => {
+  return db.collection("companies").onSnapshot((snapshot) => {
     const cloudCompanies = [];
     snapshot.forEach((doc) => {
       cloudCompanies.push(doc.data());
@@ -200,7 +200,7 @@ function saveCloudCompany(companyObj) {
 // 5. Escuchar catálogo de cuentas en tiempo real
 function listenCloudAccounts(companyId, callback) {
   if (!db || !companyId) return;
-  db.collection(`accounts_${companyId}`).onSnapshot((snapshot) => {
+  return db.collection(`accounts_${companyId}`).onSnapshot((snapshot) => {
     const accounts = [];
     snapshot.forEach((doc) => {
       accounts.push(doc.data());
@@ -258,7 +258,7 @@ function saveCloudAccounts(companyId, accountsArray) {
 // 7. Escuchar pólizas en tiempo real
 function listenCloudPolizas(companyId, callback) {
   if (!db || !companyId) return;
-  db.collection(`polizas_${companyId}`).onSnapshot((snapshot) => {
+  return db.collection(`polizas_${companyId}`).onSnapshot((snapshot) => {
     const polizas = [];
     snapshot.forEach((doc) => {
       polizas.push(doc.data());
