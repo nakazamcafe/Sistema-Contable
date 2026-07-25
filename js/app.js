@@ -149,6 +149,15 @@ async function checkAutoSyncSeedDatabase() {
         let count = 0;
         Object.keys(data).forEach(key => {
           if (key.startsWith("sistema_contable_")) {
+            // Proteger datos de empresas personalizadas (que no sean la de muestra EDM260715AAA)
+            if (key.includes("_accounts_") || key.includes("_polizas_")) {
+              const parts = key.split("_");
+              const compId = parts[parts.length - 1];
+              if (compId !== "EDM260715AAA") {
+                // Si es personalizada, no sobrescribir jamás con la semilla del servidor
+                return;
+              }
+            }
             const val = data[key];
             const strVal = typeof val === "string" ? val : JSON.stringify(val);
             localStorage.setItem(key, strVal);
@@ -1369,10 +1378,77 @@ function importCatalog(jsonRows) {
     const code = String(row["Código"] || row["Codigo"] || row["codigo"] || row["Code"] || row["code"] || "").trim();
     const name = String(row["Nombre"] || row["nombre"] || row["Name"] || row["name"] || row["Cuenta"] || row["cuenta"] || row["Nombre de la Cuenta"] || row["Nombre de la cuenta"] || row["Descripción"] || row["descripcion"] || "").trim();
     const type = String(row["Tipo"] || row["tipo"] || row["Type"] || row["type"] || row["Naturaleza"] || row["naturaleza"] || "").trim();
-    const level = parseInt(row["Nivel"] || row["nivel"] || row["Level"] || row["level"]) || 1;
-    const satCode = String(row["Código Agrupador SAT"] || row["Codigo Agrupador SAT"] || row["Agrupador SAT"] || row["agrupador sat"] || row["SAT"] || row["sat"] || "").trim();
-    const parentCode = String(row["Cuenta Padre"] || row["Cuenta padre"] || row["cuenta padre"] || row["Padre"] || row["padre"] || "").trim();
-    return { code, name, type, level, satCode, parentCode };
+    const level = parseInt(row["Nivel"] || row["nivel"] || row["Level"] || row["level"]);
+    const satCodeFromExcel = String(row["Código Agrupador SAT"] || row["Codigo Agrupador SAT"] || row["Agrupador SAT"] || row["agrupador sat"] || row["SAT"] || row["sat"] || "").trim();
+    const parentCodeFromExcel = String(row["Cuenta Padre"] || row["Cuenta padre"] || row["cuenta padre"] || row["Padre"] || row["padre"] || "").trim();
+
+    // Auto-derivar nivel, parentCode, satCode y tipo si faltan en el Excel
+    let derivedLevel = level;
+    let derivedParentCode = parentCodeFromExcel;
+    let derivedSatCode = satCodeFromExcel;
+    let derivedType = type;
+
+    if (code) {
+      const parts = code.split("-");
+      if (parts.length === 3) {
+        const seg1 = parts[0];
+        const seg2 = parts[1];
+        const seg3 = parts[2];
+
+        // 1. Calcular Nivel
+        if (!derivedLevel) {
+          if (seg2 === "00" && seg3 === "000") {
+            derivedLevel = 1;
+          } else if (seg2 === "00") {
+            derivedLevel = 2;
+          } else if (seg3 === "000") {
+            derivedLevel = 3;
+          } else {
+            derivedLevel = 4;
+          }
+        }
+
+        // 2. Calcular Cuenta Padre
+        if (!derivedParentCode) {
+          if (derivedLevel === 2) {
+            const rootNum = Math.floor(parseInt(seg1) / 100) * 100;
+            derivedParentCode = `${rootNum}-00-000`;
+          } else if (derivedLevel === 3) {
+            derivedParentCode = `${seg1}-00-000`;
+          } else if (derivedLevel === 4) {
+            derivedParentCode = `${seg1}-${seg2}-000`;
+          }
+        }
+
+        // 3. Calcular Código SAT
+        if (!derivedSatCode) {
+          if (derivedLevel === 1 || derivedLevel === 2) {
+            derivedSatCode = seg1;
+          } else if (derivedLevel === 3 || derivedLevel === 4) {
+            derivedSatCode = `${seg1}.${seg2}`;
+          }
+        }
+
+        // 4. Calcular Tipo (Naturaleza)
+        if (!derivedType) {
+          const firstChar = seg1.charAt(0);
+          if (firstChar === "1") derivedType = "Activo Deudor";
+          else if (firstChar === "2") derivedType = "Pasivo Acreedor";
+          else if (firstChar === "3") derivedType = "Capital Acreedor";
+          else if (firstChar === "4") derivedType = "Ingresos Acreedor";
+          else if (["5", "6", "7", "8"].includes(firstChar)) derivedType = "Egresos Deudor";
+        }
+      }
+    }
+
+    return { 
+      code, 
+      name, 
+      type: derivedType || "Activo Deudor", 
+      level: derivedLevel || 1, 
+      satCode: derivedSatCode || "", 
+      parentCode: derivedParentCode || "" 
+    };
   });
 
   // Ordenar por nivel contable para garantizar que los padres se creen antes que las subcuentas
@@ -1395,8 +1471,8 @@ function importCatalog(jsonRows) {
     }
 
     const exists = system.getAccount(code);
-    const finalType = type || (exists ? exists.type : "Activo Deudor");
-    const finalLevel = level || (exists ? exists.level : 1);
+    const finalType = type;
+    const finalLevel = level;
 
     try {
       if (exists) {
