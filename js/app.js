@@ -1278,33 +1278,27 @@ function handleExcelFile(file, importType, callback) {
     let sheetName = workbook.SheetNames[0];
 
     if (importType === "polizas") {
-      let found = workbook.SheetNames.find(n => 
-        n.toLowerCase() === "pólizas" || 
-        n.toLowerCase() === "polizas" ||
-        n.toLowerCase() === "transacciones"
-      );
+      let found = workbook.SheetNames.find(n => {
+        const norm = n.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        return norm === "polizas" || norm === "transacciones";
+      });
       if (!found) {
-        found = workbook.SheetNames.find(n => 
-          n.toLowerCase().includes("póliza") || 
-          n.toLowerCase().includes("poliza") || 
-          n.toLowerCase().includes("transacciones") ||
-          n.toLowerCase().includes("sheet1")
-        );
+        found = workbook.SheetNames.find(n => {
+          const norm = n.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+          return norm.includes("poliza") || norm.includes("transacciones") || norm.includes("sheet1");
+        });
       }
       if (found) sheetName = found;
     } else if (importType === "catalog") {
-      let found = workbook.SheetNames.find(n => 
-        n.toLowerCase() === "catálogo" || 
-        n.toLowerCase() === "catalogo" || 
-        n.toLowerCase() === "cuentas"
-      );
+      let found = workbook.SheetNames.find(n => {
+        const norm = n.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        return norm === "catalogo" || norm === "cuentas";
+      });
       if (!found) {
-        found = workbook.SheetNames.find(n => 
-          n.toLowerCase().includes("catál") || 
-          n.toLowerCase().includes("catal") || 
-          n.toLowerCase().includes("cuentas") ||
-          n.toLowerCase().includes("sheet1")
-        );
+        found = workbook.SheetNames.find(n => {
+          const norm = n.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+          return norm.includes("catal") || norm.includes("cuentas") || norm.includes("sheet1");
+        });
       }
       if (found) sheetName = found;
     }
