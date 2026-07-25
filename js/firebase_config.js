@@ -372,39 +372,62 @@ function clearCloudDatabase(companyId) {
   return Promise.all([
     // Borrar cuentas
     db.collection(`accounts_${companyId}`).get().then(snapshot => {
-      const chunks = [];
       const docs = [];
       snapshot.forEach(doc => docs.push(doc.ref));
+      console.log(`🔎 Encontradas ${docs.length} cuentas para eliminar en la nube.`);
       
+      if (docs.length === 0) return Promise.resolve();
+
+      const chunks = [];
       const CHUNK_SIZE = 400;
       for (let i = 0; i < docs.length; i += CHUNK_SIZE) {
         chunks.push(docs.slice(i, i + CHUNK_SIZE));
       }
       
-      const promises = chunks.map(chunk => {
+      const promises = chunks.map((chunk, idx) => {
         const batch = db.batch();
         chunk.forEach(ref => batch.delete(ref));
-        return batch.commit();
+        return batch.commit().then(() => {
+          console.log(`☁️ Lote de eliminación de cuentas ${idx + 1}/${chunks.length} completado.`);
+        });
       });
-      return Promise.all(promises);
+      return Promise.all(promises).then(() => {
+        alert(`☁️ Se eliminaron con éxito ${docs.length} cuentas de la nube en Firebase.`);
+      });
+    }).catch(err => {
+      console.error("Error al borrar cuentas de la nube:", err);
+      alert(`⚠️ Error al borrar cuentas de la nube: ${err.message}`);
+      throw err;
     }),
+
     // Borrar pólizas
     db.collection(`polizas_${companyId}`).get().then(snapshot => {
-      const chunks = [];
       const docs = [];
       snapshot.forEach(doc => docs.push(doc.ref));
-      
+      console.log(`🔎 Encontradas ${docs.length} pólizas para eliminar en la nube.`);
+
+      if (docs.length === 0) return Promise.resolve();
+
+      const chunks = [];
       const CHUNK_SIZE = 400;
       for (let i = 0; i < docs.length; i += CHUNK_SIZE) {
         chunks.push(docs.slice(i, i + CHUNK_SIZE));
       }
       
-      const promises = chunks.map(chunk => {
+      const promises = chunks.map((chunk, idx) => {
         const batch = db.batch();
         chunk.forEach(ref => batch.delete(ref));
-        return batch.commit();
+        return batch.commit().then(() => {
+          console.log(`☁️ Lote de eliminación de pólizas ${idx + 1}/${chunks.length} completado.`);
+        });
       });
-      return Promise.all(promises);
+      return Promise.all(promises).then(() => {
+        alert(`☁️ Se eliminaron con éxito ${docs.length} pólizas de la nube en Firebase.`);
+      });
+    }).catch(err => {
+      console.error("Error al borrar pólizas de la nube:", err);
+      alert(`⚠️ Error al borrar pólizas de la nube: ${err.message}`);
+      throw err;
     })
   ]).then(() => {
     console.log(`☁️ Datos de la empresa ${companyId} eliminados de Firebase.`);
