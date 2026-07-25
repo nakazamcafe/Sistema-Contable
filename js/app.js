@@ -1367,7 +1367,25 @@ function addLog(type, message) {
 }
 window.addAppLog = addLog;
 
-function importCatalog(jsonRows) {
+async function importCatalog(jsonRows) {
+  addLog("info", `Iniciando importación. Limpiando catálogo anterior...`);
+  
+  // 1. Limpiar catálogo local
+  system.accounts = [];
+  system.saveToStorage();
+
+  // 2. Limpiar catálogo en la nube si está activo
+  const activeComp = getActiveCompany();
+  if (typeof clearCloudAccounts === "function") {
+    try {
+      await clearCloudAccounts(activeComp.id);
+      addLog("success", `Catálogo anterior eliminado de la nube con éxito.`);
+    } catch (err) {
+      console.error("Error al limpiar catálogo en la nube:", err);
+      addLog("error", `Error al limpiar catálogo en la nube: ${err.message}`);
+    }
+  }
+
   addLog("info", `Procesando ${jsonRows.length} renglones del archivo Excel de Catálogo...`);
   
   let successCount = 0;
@@ -1496,6 +1514,7 @@ function importCatalog(jsonRows) {
 
   populateParentAccountsSelect();
   renderCatalog();
+  updateDbStatus(); // ¡Actualizar la barra de estado inferior inmediatamente!
   alert(`¡Catálogo cargado con éxito!\n\nSe importaron ${successCount} cuentas en tu navegador. Actualmente hay ${system.accounts.length} cuentas registradas para esta empresa.`);
   addLog("success", `Carga finalizada. Cuentas creadas/actualizadas con éxito: ${successCount}. Errores: ${errorCount}.`);
 }

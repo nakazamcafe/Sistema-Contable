@@ -436,3 +436,31 @@ function clearCloudDatabase(companyId) {
     console.log(`☁️ Datos de la empresa ${companyId} eliminados de Firebase.`);
   });
 }
+
+// 12. Limpiar solo las cuentas de una empresa en la nube
+function clearCloudAccounts(companyId) {
+  if (!db || !companyId) return Promise.resolve();
+
+  return db.collection(`accounts_${companyId}`).get().then(snapshot => {
+    const docs = [];
+    snapshot.forEach(doc => docs.push(doc.ref));
+    console.log(`🔎 Encontradas ${docs.length} cuentas para limpiar antes de la importación.`);
+    
+    if (docs.length === 0) return Promise.resolve();
+
+    const chunks = [];
+    const CHUNK_SIZE = 400;
+    for (let i = 0; i < docs.length; i += CHUNK_SIZE) {
+      chunks.push(docs.slice(i, i + CHUNK_SIZE));
+    }
+    
+    const promises = chunks.map((chunk, idx) => {
+      const batch = db.batch();
+      chunk.forEach(ref => batch.delete(ref));
+      return batch.commit().then(() => {
+        console.log(`☁️ Lote de limpieza de cuentas ${idx + 1}/${chunks.length} completado.`);
+      });
+    });
+    return Promise.all(promises);
+  });
+}
