@@ -9,11 +9,6 @@ let charts = {};
 
 const DEFAULT_COMPANIES = [
   {
-    id: "EDM260715AAA",
-    name: "Empresa Demo Mexicana, S.A.",
-    rfc: "EDM260715AAA"
-  },
-  {
     id: "NCA2603137Q1",
     name: "Nakazam Cafe SA de CV",
     rfc: "NCA2603137Q1"
@@ -149,11 +144,11 @@ async function checkAutoSyncSeedDatabase() {
         let count = 0;
         Object.keys(data).forEach(key => {
           if (key.startsWith("sistema_contable_")) {
-            // Proteger datos de empresas personalizadas (que no sean la de muestra EDM260715AAA)
+            // Proteger datos de empresas personalizadas (que no sean la de muestra NCA2603137Q1)
             if (key.includes("_accounts_") || key.includes("_polizas_")) {
               const parts = key.split("_");
               const compId = parts[parts.length - 1];
-              if (compId !== "EDM260715AAA") {
+              if (compId !== "NCA2603137Q1") {
                 // Sincronizar solo si está vacío para evitar sobrescribir el trabajo del usuario
                 const existing = localStorage.getItem(key);
                 if (existing && existing !== "[]" && existing !== "{}") {

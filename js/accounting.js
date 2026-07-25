@@ -4,7 +4,7 @@
  */
 
 class AccountingSystem {
-  constructor(accounts = [], polizas = [], companyId = "EDM260715AAA") {
+  constructor(accounts = [], polizas = [], companyId = "NCA2603137Q1") {
     this.accounts = JSON.parse(JSON.stringify(accounts));
     this.polizas = JSON.parse(JSON.stringify(polizas));
     this.companyId = companyId;
@@ -721,14 +721,14 @@ class AccountingSystem {
 
   static loadFromStorage(companyId = null) {
     if (!companyId) {
-      companyId = localStorage.getItem("sistema_contable_active_company_id") || "EDM260715AAA";
+      companyId = localStorage.getItem("sistema_contable_active_company_id") || "NCA2603137Q1";
     }
     
     let accounts = JSON.parse(localStorage.getItem(`sistema_contable_accounts_${companyId}`));
     let polizas = JSON.parse(localStorage.getItem(`sistema_contable_polizas_${companyId}`));
 
     // Si es la empresa por defecto y no hay datos, cargar los datos muestra
-    if (companyId === "EDM260715AAA" && (!accounts || accounts.length === 0)) {
+    if (companyId === "NCA2603137Q1" && (!accounts || accounts.length === 0)) {
       accounts = DEFAULT_ACCOUNTS;
       polizas = DEFAULT_POLIZAS;
       localStorage.setItem(`sistema_contable_accounts_${companyId}`, JSON.stringify(accounts));
@@ -743,7 +743,7 @@ class AccountingSystem {
     return new AccountingSystem(accounts, polizas, companyId);
   }
 
-  static resetDatabase(companyId = "EDM260715AAA") {
+  static resetDatabase(companyId = "NCA2603137Q1") {
     localStorage.removeItem(`sistema_contable_accounts_${companyId}`);
     localStorage.removeItem(`sistema_contable_polizas_${companyId}`);
     return this.loadFromStorage(companyId);
