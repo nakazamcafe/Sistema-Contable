@@ -735,10 +735,10 @@
     },
     {
       "code": "106-01-000",
-      "name": "Cuentas y documentos por cobrar a corto plazo nacional",
+      "name": "Otras cuentas y documentos por cobrar a corto plazo parte relacionada",
       "type": "Activo Deudor",
       "level": 3,
-      "satCode": "106.01",
+      "satCode": "106.1",
       "parentCode": "106-00-000"
     },
     {
@@ -903,18 +903,18 @@
     },
     {
       "code": "109-01-000",
-      "name": "Seguros y fianzas pagados por anticipado nacional",
+      "name": "Intereses pagados por anticipado extranjero",
       "type": "Activo Deudor",
       "level": 3,
-      "satCode": "109.01",
+      "satCode": "109.1",
       "parentCode": "109-00-000"
     },
     {
       "code": "109-02-000",
-      "name": "Seguros y fianzas pagados por anticipado extranjero",
+      "name": "Arrendamiento financiero pagados por anticipado extranjero parte relacionada",
       "type": "Activo Deudor",
       "level": 3,
-      "satCode": "109.02",
+      "satCode": "109.2",
       "parentCode": "109-00-000"
     },
     {
@@ -1775,10 +1775,10 @@
     },
     {
       "code": "171-01-000",
-      "name": "Depreciación acumulada de edificios",
+      "name": "Depreciación acumulada de embarcaciones",
       "type": "Activo Deudor",
       "level": 3,
-      "satCode": "171.01",
+      "satCode": "171.1",
       "parentCode": "171-00-000"
     },
     {
@@ -1919,10 +1919,10 @@
     },
     {
       "code": "172-01-000",
-      "name": "Pérdida por deterioro acumulado de edificios",
+      "name": "Pérdida por deterioro acumulado de embarcaciones",
       "type": "Activo Deudor",
       "level": 3,
-      "satCode": "172.01",
+      "satCode": "172.1",
       "parentCode": "172-00-000"
     },
     {
@@ -2223,10 +2223,10 @@
     },
     {
       "code": "183-01-000",
-      "name": "Amortización acumulada de gastos diferidos",
+      "name": "Amortización acumulada de otros activos diferidos",
       "type": "Activo Deudor",
       "level": 3,
-      "satCode": "183.01",
+      "satCode": "183.1",
       "parentCode": "183-00-000"
     },
     {
@@ -2351,10 +2351,10 @@
     },
     {
       "code": "186-01-000",
-      "name": "Cuentas y documentos por cobrar a largo plazo nacional",
+      "name": "Otras cuentas y documentos por cobrar a largo plazo parte relacionada",
       "type": "Activo Deudor",
       "level": 3,
-      "satCode": "186.01",
+      "satCode": "186.1",
       "parentCode": "186-00-000"
     },
     {
@@ -2607,10 +2607,10 @@
     },
     {
       "code": "202-01-000",
-      "name": "Documentos por pagar bancario y financiero nacional",
+      "name": "Intereses por pagar a corto plazo extranjero parte relacionada",
       "type": "Pasivo Acreedor",
       "level": 3,
-      "satCode": "202.01",
+      "satCode": "202.1",
       "parentCode": "202-00-000"
     },
     {
@@ -2703,10 +2703,10 @@
     },
     {
       "code": "203-01-000",
-      "name": "Rentas cobradas por anticipado a corto plazo nacional",
+      "name": "Factoraje financiero cobrados por anticipado a corto plazo extranjero",
       "type": "Pasivo Acreedor",
       "level": 3,
-      "satCode": "203.01",
+      "satCode": "203.1",
       "parentCode": "203-00-000"
     },
     {
@@ -3263,10 +3263,10 @@
     },
     {
       "code": "216-01-000",
-      "name": "Impuestos retenidos de ISR por sueldos y salarios",
+      "name": "Impuestos retenidos de IVA",
       "type": "Pasivo Acreedor",
       "level": 3,
-      "satCode": "216.01",
+      "satCode": "216.1",
       "parentCode": "216-00-000"
     },
     {
@@ -3455,10 +3455,10 @@
     },
     {
       "code": "252-01-000",
-      "name": "Documentos bancarios y financieros por pagar a largo plazo nacional",
+      "name": "Hipotecas por pagar a largo plazo extranjero parte relacionada",
       "type": "Pasivo Acreedor",
       "level": 3,
-      "satCode": "252.01",
+      "satCode": "252.1",
       "parentCode": "252-00-000"
     },
     {
@@ -3591,10 +3591,10 @@
     },
     {
       "code": "253-01-000",
-      "name": "Rentas cobradas por anticipado a largo plazo nacional",
+      "name": "Factoraje financiero cobrados por anticipado a largo plazo extranjero",
       "type": "Pasivo Acreedor",
       "level": 3,
-      "satCode": "253.01",
+      "satCode": "253.1",
       "parentCode": "253-00-000"
     },
     {
@@ -4063,26 +4063,26 @@
     },
     {
       "code": "401-01-000",
-      "name": "Ventas y/o servicios gravados a la tasa general",
+      "name": "Ventas y/o servicios gravados a la tasa general nacionales partes relacionadas",
       "type": "Ingresos",
       "level": 3,
-      "satCode": "401.01",
+      "satCode": "401.1",
       "parentCode": "401-00-000"
     },
     {
       "code": "401-02-000",
-      "name": "Ventas y/o servicios gravados a la tasa general de contado",
+      "name": "Ingresos por servicios profesionales nacionales partes relacionadas",
       "type": "Ingresos",
       "level": 3,
-      "satCode": "401.02",
+      "satCode": "401.2",
       "parentCode": "401-00-000"
     },
     {
       "code": "401-03-000",
-      "name": "Ventas y/o servicios gravados a la tasa general a crédito",
+      "name": "Ingresos por asistencia técnica",
       "type": "Ingresos",
       "level": 3,
-      "satCode": "401.03",
+      "satCode": "401.3",
       "parentCode": "401-00-000"
     },
     {
@@ -4575,18 +4575,18 @@
     },
     {
       "code": "504-01-000",
-      "name": "Gastos indirectos de fabricación",
+      "name": "Depreciación de mobiliario y equipo de oficina",
       "type": "Costos",
       "level": 3,
-      "satCode": "504.01",
+      "satCode": "504.1",
       "parentCode": "504-00-000"
     },
     {
       "code": "504-02-000",
-      "name": "Gastos indirectos de fabricación de partes relacionadas nacionales",
+      "name": "Depreciación de equipo de comunicación satelital",
       "type": "Costos",
       "level": 3,
-      "satCode": "504.02",
+      "satCode": "504.2",
       "parentCode": "504-00-000"
     },
     {
@@ -4799,66 +4799,66 @@
     },
     {
       "code": "601-01-000",
-      "name": "Sueldos y salarios",
+      "name": "Gratificaciones",
       "type": "Gastos",
       "level": 3,
-      "satCode": "601.01",
+      "satCode": "601.1",
       "parentCode": "601-00-000"
     },
     {
       "code": "601-02-000",
-      "name": "Compensaciones",
+      "name": "Cuotas sindicales",
       "type": "Gastos",
       "level": 3,
-      "satCode": "601.02",
+      "satCode": "601.2",
       "parentCode": "601-00-000"
     },
     {
       "code": "601-03-000",
-      "name": "Tiempos extras",
+      "name": "Otras aportaciones",
       "type": "Gastos",
       "level": 3,
-      "satCode": "601.03",
+      "satCode": "601.3",
       "parentCode": "601-00-000"
     },
     {
       "code": "601-04-000",
-      "name": "Premios de asistencia",
+      "name": "Honorarios a personas morales residentes del extranjero",
       "type": "Gastos",
       "level": 3,
-      "satCode": "601.04",
+      "satCode": "601.4",
       "parentCode": "601-00-000"
     },
     {
       "code": "601-05-000",
-      "name": "Premios de puntualidad",
+      "name": "Teléfono, internet",
       "type": "Gastos",
       "level": 3,
-      "satCode": "601.05",
+      "satCode": "601.5",
       "parentCode": "601-00-000"
     },
     {
       "code": "601-06-000",
-      "name": "Vacaciones",
+      "name": "Cuotas y suscripciones",
       "type": "Gastos",
       "level": 3,
-      "satCode": "601.06",
+      "satCode": "601.6",
       "parentCode": "601-00-000"
     },
     {
       "code": "601-07-000",
-      "name": "Prima vacacional",
+      "name": "Regalías sujetas al 30%",
       "type": "Gastos",
       "level": 3,
-      "satCode": "601.07",
+      "satCode": "601.7",
       "parentCode": "601-00-000"
     },
     {
       "code": "601-08-000",
-      "name": "Prima dominical",
+      "name": "Gastos generales de construcción",
       "type": "Gastos",
       "level": 3,
-      "satCode": "601.08",
+      "satCode": "601.8",
       "parentCode": "601-00-000"
     },
     {
@@ -5415,66 +5415,66 @@
     },
     {
       "code": "602-01-000",
-      "name": "Sueldos y salarios",
+      "name": "Gratificaciones",
       "type": "Gastos",
       "level": 3,
-      "satCode": "602.01",
+      "satCode": "602.1",
       "parentCode": "602-00-000"
     },
     {
       "code": "602-02-000",
-      "name": "Compensaciones",
+      "name": "Cuotas sindicales",
       "type": "Gastos",
       "level": 3,
-      "satCode": "602.02",
+      "satCode": "602.2",
       "parentCode": "602-00-000"
     },
     {
       "code": "602-03-000",
-      "name": "Tiempos extras",
+      "name": "Otras aportaciones",
       "type": "Gastos",
       "level": 3,
-      "satCode": "602.03",
+      "satCode": "602.3",
       "parentCode": "602-00-000"
     },
     {
       "code": "602-04-000",
-      "name": "Premios de asistencia",
+      "name": "Honorarios a personas morales residentes del extranjero",
       "type": "Gastos",
       "level": 3,
-      "satCode": "602.04",
+      "satCode": "602.4",
       "parentCode": "602-00-000"
     },
     {
       "code": "602-05-000",
-      "name": "Premios de puntualidad",
+      "name": "Teléfono, internet",
       "type": "Gastos",
       "level": 3,
-      "satCode": "602.05",
+      "satCode": "602.5",
       "parentCode": "602-00-000"
     },
     {
       "code": "602-06-000",
-      "name": "Vacaciones",
+      "name": "Cuotas y suscripciones",
       "type": "Gastos",
       "level": 3,
-      "satCode": "602.06",
+      "satCode": "602.6",
       "parentCode": "602-00-000"
     },
     {
       "code": "602-07-000",
-      "name": "Prima vacacional",
+      "name": "Regalías sujetas al 30%",
       "type": "Gastos",
       "level": 3,
-      "satCode": "602.07",
+      "satCode": "602.7",
       "parentCode": "602-00-000"
     },
     {
       "code": "602-08-000",
-      "name": "Prima dominical",
+      "name": "Gastos de venta de construcción",
       "type": "Gastos",
       "level": 3,
-      "satCode": "602.08",
+      "satCode": "602.8",
       "parentCode": "602-00-000"
     },
     {
@@ -6031,66 +6031,66 @@
     },
     {
       "code": "603-01-000",
-      "name": "Sueldos y salarios",
+      "name": "Gratificaciones",
       "type": "Gastos",
       "level": 3,
-      "satCode": "603.01",
+      "satCode": "603.1",
       "parentCode": "603-00-000"
     },
     {
       "code": "603-02-000",
-      "name": "Compensaciones",
+      "name": "Cuotas sindicales",
       "type": "Gastos",
       "level": 3,
-      "satCode": "603.02",
+      "satCode": "603.2",
       "parentCode": "603-00-000"
     },
     {
       "code": "603-03-000",
-      "name": "Tiempos extras",
+      "name": "Otras aportaciones",
       "type": "Gastos",
       "level": 3,
-      "satCode": "603.03",
+      "satCode": "603.3",
       "parentCode": "603-00-000"
     },
     {
       "code": "603-04-000",
-      "name": "Premios de asistencia",
+      "name": "Honorarios a personas morales residentes del extranjero",
       "type": "Gastos",
       "level": 3,
-      "satCode": "603.04",
+      "satCode": "603.4",
       "parentCode": "603-00-000"
     },
     {
       "code": "603-05-000",
-      "name": "Premios de puntualidad",
+      "name": "Teléfono, internet",
       "type": "Gastos",
       "level": 3,
-      "satCode": "603.05",
+      "satCode": "603.5",
       "parentCode": "603-00-000"
     },
     {
       "code": "603-06-000",
-      "name": "Vacaciones",
+      "name": "Cuotas y suscripciones",
       "type": "Gastos",
       "level": 3,
-      "satCode": "603.06",
+      "satCode": "603.6",
       "parentCode": "603-00-000"
     },
     {
       "code": "603-07-000",
-      "name": "Prima vacacional",
+      "name": "Regalías sujetas al 30%",
       "type": "Gastos",
       "level": 3,
-      "satCode": "603.07",
+      "satCode": "603.7",
       "parentCode": "603-00-000"
     },
     {
       "code": "603-08-000",
-      "name": "Prima dominical",
+      "name": "Recolección de bienes del sector agropecuario y/o ganadero",
       "type": "Gastos",
       "level": 3,
-      "satCode": "603.08",
+      "satCode": "603.8",
       "parentCode": "603-00-000"
     },
     {
@@ -6631,66 +6631,66 @@
     },
     {
       "code": "604-01-000",
-      "name": "Sueldos y salarios",
+      "name": "Gratificaciones",
       "type": "Gastos",
       "level": 3,
-      "satCode": "604.01",
+      "satCode": "604.1",
       "parentCode": "604-00-000"
     },
     {
       "code": "604-02-000",
-      "name": "Compensaciones",
+      "name": "Cuotas sindicales",
       "type": "Gastos",
       "level": 3,
-      "satCode": "604.02",
+      "satCode": "604.2",
       "parentCode": "604-00-000"
     },
     {
       "code": "604-03-000",
-      "name": "Tiempos extras",
+      "name": "Otras aportaciones",
       "type": "Gastos",
       "level": 3,
-      "satCode": "604.03",
+      "satCode": "604.3",
       "parentCode": "604-00-000"
     },
     {
       "code": "604-04-000",
-      "name": "Premios de asistencia",
+      "name": "Honorarios a personas morales residentes del extranjero",
       "type": "Gastos",
       "level": 3,
-      "satCode": "604.04",
+      "satCode": "604.4",
       "parentCode": "604-00-000"
     },
     {
       "code": "604-05-000",
-      "name": "Premios de puntualidad",
+      "name": "Teléfono, internet",
       "type": "Gastos",
       "level": 3,
-      "satCode": "604.05",
+      "satCode": "604.5",
       "parentCode": "604-00-000"
     },
     {
       "code": "604-06-000",
-      "name": "Vacaciones",
+      "name": "Cuotas y suscripciones",
       "type": "Gastos",
       "level": 3,
-      "satCode": "604.06",
+      "satCode": "604.6",
       "parentCode": "604-00-000"
     },
     {
       "code": "604-07-000",
-      "name": "Prima vacacional",
+      "name": "Regalías sujetas al 30%",
       "type": "Gastos",
       "level": 3,
-      "satCode": "604.07",
+      "satCode": "604.7",
       "parentCode": "604-00-000"
     },
     {
       "code": "604-08-000",
-      "name": "Prima dominical",
+      "name": "Recolección de bienes del sector agropecuario y/o ganadero",
       "type": "Gastos",
       "level": 3,
-      "satCode": "604.08",
+      "satCode": "604.8",
       "parentCode": "604-00-000"
     },
     {
@@ -7231,26 +7231,26 @@
     },
     {
       "code": "605-01-000",
-      "name": "Mano de obra",
+      "name": "Días festivos",
       "type": "Gastos",
       "level": 3,
-      "satCode": "605.01",
+      "satCode": "605.1",
       "parentCode": "605-00-000"
     },
     {
       "code": "605-02-000",
-      "name": "Sueldos y Salarios",
+      "name": "Fondo de ahorro",
       "type": "Gastos",
       "level": 3,
-      "satCode": "605.02",
+      "satCode": "605.2",
       "parentCode": "605-00-000"
     },
     {
       "code": "605-03-000",
-      "name": "Compensaciones",
+      "name": "Aportaciones al SAR",
       "type": "Gastos",
       "level": 3,
-      "satCode": "605.03",
+      "satCode": "605.3",
       "parentCode": "605-00-000"
     },
     {
@@ -7583,10 +7583,10 @@
     },
     {
       "code": "613-01-000",
-      "name": "Depreciación de edificios",
+      "name": "Depreciación de embarcaciones",
       "type": "Gastos",
       "level": 3,
-      "satCode": "613.01",
+      "satCode": "613.1",
       "parentCode": "613-00-000"
     },
     {
@@ -7727,10 +7727,10 @@
     },
     {
       "code": "614-01-000",
-      "name": "Amortización de gastos diferidos",
+      "name": "Amortización de otros activos diferidos",
       "type": "Gastos",
       "level": 3,
-      "satCode": "614.01",
+      "satCode": "614.1",
       "parentCode": "614-00-000"
     },
     {
@@ -7815,10 +7815,10 @@
     },
     {
       "code": "701-01-000",
-      "name": "Pérdida cambiaria",
+      "name": "Comisiones bancarias",
       "type": "Resultado Integral",
       "level": 3,
-      "satCode": "701.01",
+      "satCode": "701.1",
       "parentCode": "701-00-000"
     },
     {
@@ -7903,10 +7903,10 @@
     },
     {
       "code": "702-01-000",
-      "name": "Utilidad cambiaria",
+      "name": "Otros productos financieros",
       "type": "Resultado Integral",
       "level": 3,
-      "satCode": "702.01",
+      "satCode": "702.1",
       "parentCode": "702-00-000"
     },
     {
@@ -7983,18 +7983,18 @@
     },
     {
       "code": "703-01-000",
-      "name": "Pérdida en venta y/o baja de terrenos",
+      "name": "Pérdida en venta y/o baja de ferrocarriles",
       "type": "Resultado Integral",
       "level": 3,
-      "satCode": "703.01",
+      "satCode": "703.1",
       "parentCode": "703-00-000"
     },
     {
       "code": "703-02-000",
-      "name": "Pérdida en venta y/o baja de edificios",
+      "name": "Pérdida por enajenación de partes sociales",
       "type": "Resultado Integral",
       "level": 3,
-      "satCode": "703.02",
+      "satCode": "703.2",
       "parentCode": "703-00-000"
     },
     {
@@ -8143,18 +8143,18 @@
     },
     {
       "code": "704-01-000",
-      "name": "Ganancia en venta y/o baja de terrenos",
+      "name": "Ganancia en venta y/o baja de ferrocarriles",
       "type": "Resultado Integral",
       "level": 3,
-      "satCode": "704.01",
+      "satCode": "704.1",
       "parentCode": "704-00-000"
     },
     {
       "code": "704-02-000",
-      "name": "Ganancia en venta y/o baja de edificios",
+      "name": "Ganancia por enajenación de partes sociales",
       "type": "Resultado Integral",
       "level": 3,
-      "satCode": "704.02",
+      "satCode": "704.2",
       "parentCode": "704-00-000"
     },
     {
