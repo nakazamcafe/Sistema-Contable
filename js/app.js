@@ -1378,6 +1378,10 @@ function importCatalog(jsonRows) {
   // Ordenar por nivel contable para garantizar que los padres se creen antes que las subcuentas
   const sortedRows = normalizedRows.sort((a, b) => a.level - b.level);
 
+  // Muestra diagnóstica de lo que se leyó del Excel
+  const sampleImported = sortedRows.slice(0, 5).map(r => `• ${r.code}: "${r.name}"`).join("<br>");
+  addLog("info", `Muestra de cuentas leídas del Excel:<br>${sampleImported}`);
+
   // Evitar escrituras concurrentes e ineficientes a la nube en cada iteración
   system.isImporting = true;
 
@@ -1409,6 +1413,10 @@ function importCatalog(jsonRows) {
 
   system.isImporting = false;
   system.saveToStorage(); // Guarda localmente y sube en lote a Firebase de una sola vez
+
+  // Muestra diagnóstica de lo que se guardó en memoria
+  const sampleSaved = system.getSortedAccounts().slice(0, 5).map(a => `• ${a.code}: "${a.name}"`).join("<br>");
+  addLog("success", `Muestra de cuentas guardadas en memoria:<br>${sampleSaved}`);
 
   populateParentAccountsSelect();
   renderCatalog();
