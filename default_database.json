@@ -14,7 +14,8 @@
       "role": "admin",
       "companies": [
         "NCA2603137Q1"
-      ]
+      ],
+      "active": true
     }
   ],
   "sistema_contable_current_user": "admin",
