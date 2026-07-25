@@ -201,6 +201,10 @@ function saveCloudCompany(companyObj) {
 function listenCloudAccounts(companyId, callback) {
   if (!db || !companyId) return;
   return db.collection(`accounts_${companyId}`).onSnapshot((snapshot) => {
+    if (snapshot.metadata.hasPendingWrites) {
+      console.log(`⏳ Catálogo (${companyId}): Ignorando snapshot local con escrituras pendientes.`);
+      return;
+    }
     const accounts = [];
     snapshot.forEach((doc) => {
       accounts.push(doc.data());
@@ -272,6 +276,10 @@ function saveCloudAccounts(companyId, accountsArray) {
 function listenCloudPolizas(companyId, callback) {
   if (!db || !companyId) return;
   return db.collection(`polizas_${companyId}`).onSnapshot((snapshot) => {
+    if (snapshot.metadata.hasPendingWrites) {
+      console.log(`⏳ Pólizas (${companyId}): Ignorando snapshot local con escrituras pendientes.`);
+      return;
+    }
     const polizas = [];
     snapshot.forEach((doc) => {
       polizas.push(doc.data());
