@@ -207,12 +207,33 @@ document.addEventListener("DOMContentLoaded", async () => {
   switchView("dashboard");
 
   // Botón para resetear base de datos
-  document.getElementById("btn-reset-db").addEventListener("click", () => {
+  document.getElementById("btn-reset-db").addEventListener("click", async () => {
     const active = getActiveCompany();
     if (confirm(`¿Estás seguro de que deseas reestablecer los datos de ${active.name} a los valores muestra por defecto? Se perderán todas tus cuentas y pólizas personalizadas.`)) {
-      system = AccountingSystem.resetDatabase(active.id);
-      alert("Base de datos reestablecida correctamente.");
-      location.reload();
+      
+      const btn = document.getElementById("btn-reset-db");
+      const originalText = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Limpiando...';
+
+      try {
+        // 1. Limpiar base de datos en la nube si está activa
+        if (typeof clearCloudDatabase === "function") {
+          await clearCloudDatabase(active.id);
+        }
+        
+        // 2. Limpiar base de datos local
+        system = AccountingSystem.resetDatabase(active.id);
+        
+        alert("Base de datos reestablecida correctamente.");
+        location.reload();
+      } catch (err) {
+        console.error("Error al reestablecer base de datos:", err);
+        alert(`⚠️ Error al reestablecer la base de datos:\n${err.message}`);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = originalText;
+      }
     }
   });
 });

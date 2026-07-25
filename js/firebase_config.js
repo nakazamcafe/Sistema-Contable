@@ -364,3 +364,49 @@ function saveCloudPolizasBulk(companyId, polizasArray) {
       });
   });
 }
+
+// 11. Limpiar base de datos completa de una empresa en la nube
+function clearCloudDatabase(companyId) {
+  if (!db || !companyId) return Promise.resolve();
+
+  return Promise.all([
+    // Borrar cuentas
+    db.collection(`accounts_${companyId}`).get().then(snapshot => {
+      const chunks = [];
+      const docs = [];
+      snapshot.forEach(doc => docs.push(doc.ref));
+      
+      const CHUNK_SIZE = 400;
+      for (let i = 0; i < docs.length; i += CHUNK_SIZE) {
+        chunks.push(docs.slice(i, i + CHUNK_SIZE));
+      }
+      
+      const promises = chunks.map(chunk => {
+        const batch = db.batch();
+        chunk.forEach(ref => batch.delete(ref));
+        return batch.commit();
+      });
+      return Promise.all(promises);
+    }),
+    // Borrar pólizas
+    db.collection(`polizas_${companyId}`).get().then(snapshot => {
+      const chunks = [];
+      const docs = [];
+      snapshot.forEach(doc => docs.push(doc.ref));
+      
+      const CHUNK_SIZE = 400;
+      for (let i = 0; i < docs.length; i += CHUNK_SIZE) {
+        chunks.push(docs.slice(i, i + CHUNK_SIZE));
+      }
+      
+      const promises = chunks.map(chunk => {
+        const batch = db.batch();
+        chunk.forEach(ref => batch.delete(ref));
+        return batch.commit();
+      });
+      return Promise.all(promises);
+    })
+  ]).then(() => {
+    console.log(`☁️ Datos de la empresa ${companyId} eliminados de Firebase.`);
+  });
+}
