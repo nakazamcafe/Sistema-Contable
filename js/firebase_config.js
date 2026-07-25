@@ -14,10 +14,13 @@ const firebaseConfig = {
   measurementId: "G-9QGMTTF9QX"
 };
 
+// Cambia esta variable a true si deseas forzar el Modo Local Offline (ej. si superas la cuota gratuita de Firebase)
+const FORCE_LOCAL_MODE = true;
+
 let db = null;
 
-// Inicializar Firebase si el SDK está disponible
-if (typeof firebase !== 'undefined') {
+// Inicializar Firebase si el SDK está disponible y no se ha forzado el modo local
+if (typeof firebase !== 'undefined' && !FORCE_LOCAL_MODE) {
   try {
     if (!firebase.apps.length) {
       firebase.initializeApp(firebaseConfig);

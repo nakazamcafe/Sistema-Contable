@@ -1295,6 +1295,11 @@ function handleExcelFile(file, importType, callback) {
   reader.onload = (e) => {
     const data = new Uint8Array(e.target.result);
     const workbook = XLSX.read(data, { type: 'array' });
+
+    // Reportar las pestañas detectadas en la UI
+    if (typeof window.addAppLog === "function") {
+      window.addAppLog("info", `Archivo Excel leído. Pestañas detectadas: [${workbook.SheetNames.join(", ")}]`);
+    }
     
     let sheetName = workbook.SheetNames[0];
 
@@ -1322,6 +1327,10 @@ function handleExcelFile(file, importType, callback) {
         });
       }
       if (found) sheetName = found;
+    }
+
+    if (typeof window.addAppLog === "function") {
+      window.addAppLog("success", `Leyendo datos de la pestaña seleccionada: "${sheetName}"`);
     }
 
     const sheet = workbook.Sheets[sheetName];
