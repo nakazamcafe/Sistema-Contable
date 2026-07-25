@@ -213,7 +213,7 @@ function listenCloudAccounts(companyId, callback) {
     if (accounts.length > 0 && !areAccountsEqual(last, accounts)) {
       lastSeenAccounts[companyId] = accounts;
       const storageKey = `sistema_contable_accounts_${companyId}`;
-      const sorted = [...accounts].sort((a, b) => a.code.localeCompare(b.code));
+      const sorted = [...accounts].sort((a, b) => String(a.code || "").localeCompare(String(b.code || "")));
       localStorage.setItem(storageKey, JSON.stringify(sorted));
       if (callback) callback(sorted);
     }
@@ -288,7 +288,7 @@ function listenCloudPolizas(companyId, callback) {
     if (polizas.length > 0 && !arePolizasEqual(last, polizas)) {
       lastSeenPolizas[companyId] = polizas;
       const storageKey = `sistema_contable_polizas_${companyId}`;
-      const sorted = [...polizas].sort((a, b) => a.id.localeCompare(b.id));
+      const sorted = [...polizas].sort((a, b) => String(a.id || "").localeCompare(String(b.id || "")));
       localStorage.setItem(storageKey, JSON.stringify(sorted));
       if (callback) callback(sorted);
     }

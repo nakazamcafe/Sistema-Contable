@@ -13,12 +13,18 @@ class AccountingSystem {
   // --- GESTIÓN DE CUENTAS ---
 
   getAccount(code) {
-    return this.accounts.find(a => a.code === code);
+    if (code === undefined || code === null) return null;
+    const strCode = String(code).trim();
+    return this.accounts.find(a => String(a.code || "").trim() === strCode);
   }
 
   // Obtener cuentas ordenadas jerárquicamente
   getSortedAccounts() {
-    return [...this.accounts].sort((a, b) => a.code.localeCompare(b.code));
+    return [...this.accounts].sort((a, b) => {
+      const codeA = String(a.code || "").trim();
+      const codeB = String(b.code || "").trim();
+      return codeA.localeCompare(codeB, undefined, { numeric: true, sensitivity: 'base' });
+    });
   }
 
   addAccount(account) {
@@ -242,10 +248,13 @@ class AccountingSystem {
   getBalanza(startDate, endDate, maxLevel = 4) {
     const allBalances = this.calculateBalances(startDate, endDate);
     
-    // Filtrar por nivel y ordenar por código de cuenta
     const balanzaRows = Object.values(allBalances)
       .filter(bal => bal.level <= maxLevel)
-      .sort((a, b) => a.code.localeCompare(b.code));
+      .sort((a, b) => {
+        const codeA = String(a.code || "").trim();
+        const codeB = String(b.code || "").trim();
+        return codeA.localeCompare(codeB, undefined, { numeric: true, sensitivity: 'base' });
+      });
 
     // Calcular totales
     let totalInitialDebit = 0;
@@ -344,7 +353,7 @@ class AccountingSystem {
         const polDate = new Date(pol.date);
         return polDate >= dateStart && polDate <= dateEnd;
       })
-      .sort((a, b) => new Date(a.date) - new Date(b.date) || a.number.localeCompare(b.number))
+      .sort((a, b) => new Date(a.date) - new Date(b.date) || String(a.number || "").localeCompare(String(b.number || "")))
       .forEach(pol => {
         pol.lines.forEach(line => {
           // Si el movimiento es en una cuenta que pertenece a la jerarquía de la seleccionada
