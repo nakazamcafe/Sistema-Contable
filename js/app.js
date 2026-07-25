@@ -2178,13 +2178,54 @@ function initAuth() {
   const overlay = document.getElementById("login-overlay");
   const loginForm = document.getElementById("form-login");
   const logoutBtn = document.getElementById("btn-logout");
-  const currentUser = getCurrentUser();
 
-  if (!currentUser || !currentUser.active) {
-    overlay.classList.add("active");
+  // Determinar si Firebase está activo y configurado
+  const isFirebaseEnabled = typeof firebase !== "undefined" && db !== null;
+
+  if (isFirebaseEnabled) {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        // Usuario autenticado en Firebase Auth
+        const email = user.email || "";
+        const username = email.split("@")[0].toLowerCase();
+
+        const users = getUsers();
+        const userObj = users.find(u => u.username.toLowerCase() === username);
+
+        if (userObj && userObj.active) {
+          setCurrentUser(userObj.username);
+          overlay.classList.remove("active");
+          updateUserHeader(userObj);
+          
+          // Actualizar indicador de base de datos a nube activa
+          const dbStatusText = document.getElementById("db-status-text");
+          const dbStatusIcon = document.getElementById("db-status-icon");
+          const dbStatusContainer = document.getElementById("db-status-container");
+          if (dbStatusText) dbStatusText.innerText = "Sincronización Nube Activa";
+          if (dbStatusIcon) dbStatusIcon.className = "fa-solid fa-cloud text-emerald";
+          if (dbStatusContainer) dbStatusContainer.className = "db-status text-emerald";
+        } else {
+          // El usuario no existe localmente o está deshabilitado
+          firebase.auth().signOut().then(() => {
+            setCurrentUser(null);
+            overlay.classList.add("active");
+          });
+        }
+      } else {
+        // No hay sesión activa en Firebase Auth, forzar login
+        setCurrentUser(null);
+        overlay.classList.add("active");
+      }
+    });
   } else {
-    overlay.classList.remove("active");
-    updateUserHeader(currentUser);
+    // Modo local clásico
+    const currentUser = getCurrentUser();
+    if (!currentUser || !currentUser.active) {
+      overlay.classList.add("active");
+    } else {
+      overlay.classList.remove("active");
+      updateUserHeader(currentUser);
+    }
   }
 
   loginForm.addEventListener("submit", (e) => {
@@ -2209,16 +2250,61 @@ function initAuth() {
     }
 
     errorMsg.style.display = "none";
-    setCurrentUser(userObj.username);
-    overlay.classList.remove("active");
-    location.reload();
+
+    if (isFirebaseEnabled) {
+      // Usar credenciales constantes derivadas por usuario para evitar fallos de sincronía al cambiar contraseñas
+      const email = `${userVal}@sistemaconta.local`;
+      const authPassword = `secure_${userVal}_auth_token_2026`;
+
+      firebase.auth().signInWithEmailAndPassword(email, authPassword)
+        .then(() => {
+          setCurrentUser(userVal);
+          overlay.classList.remove("active");
+          location.reload();
+        })
+        .catch((error) => {
+          if (error.code === 'auth/user-not-found' || error.code === 'auth/invalid-credential' || error.code === 'auth/wrong-password') {
+            // Si no existe, crearlo automáticamente
+            firebase.auth().createUserWithEmailAndPassword(email, authPassword)
+              .then(() => {
+                setCurrentUser(userVal);
+                overlay.classList.remove("active");
+                location.reload();
+              })
+              .catch((createErr) => {
+                console.error("Error al registrar credenciales en Firebase Auth:", createErr);
+                errorMsg.innerText = `Error al registrar credenciales en la nube:\n${createErr.message}`;
+                errorMsg.style.display = "block";
+              });
+          } else {
+            console.error("Error de autenticación en la nube:", error);
+            errorMsg.innerText = `Error de autenticación en la nube:\n${error.message}`;
+            errorMsg.style.display = "block";
+          }
+        });
+    } else {
+      setCurrentUser(userObj.username);
+      overlay.classList.remove("active");
+      location.reload();
+    }
   });
 
   if (logoutBtn) {
     logoutBtn.addEventListener("click", () => {
       if (confirm("¿Deseas cerrar tu sesión actual?")) {
-        setCurrentUser(null);
-        location.reload();
+        if (isFirebaseEnabled) {
+          firebase.auth().signOut().then(() => {
+            setCurrentUser(null);
+            location.reload();
+          }).catch((err) => {
+            console.error("Error al cerrar sesión:", err);
+            setCurrentUser(null);
+            location.reload();
+          });
+        } else {
+          setCurrentUser(null);
+          location.reload();
+        }
       }
     });
   }
