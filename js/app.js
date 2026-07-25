@@ -108,6 +108,36 @@ function updateActiveCompanyHeader(company) {
   document.getElementById("active-company-rfc").innerText = `RFC: ${company.rfc}`;
 }
 
+function updateDbStatus() {
+  const dbStatusText = document.getElementById("db-status-text");
+  const dbStatusIcon = document.getElementById("db-status-icon");
+  const dbStatusContainer = document.getElementById("db-status-container");
+
+  const isFirebaseEnabled = typeof firebase !== "undefined" && db !== null;
+  const accountsCount = system && system.accounts ? system.accounts.length : 0;
+  const polizasCount = system && system.polizas ? system.polizas.length : 0;
+
+  if (isFirebaseEnabled && firebase.auth().currentUser) {
+    if (dbStatusText) {
+      dbStatusText.innerText = `Sincronización Nube Activa (${accountsCount} cuentas, ${polizasCount} pólizas)`;
+    }
+    if (dbStatusIcon) dbStatusIcon.className = "fa-solid fa-cloud text-emerald";
+    if (dbStatusContainer) {
+      dbStatusContainer.className = "db-status text-emerald";
+      dbStatusContainer.title = "Conectado a Google Firebase Cloud Firestore 24/7";
+    }
+  } else {
+    if (dbStatusText) {
+      dbStatusText.innerText = `Modo Local (${accountsCount} cuentas, ${polizasCount} pólizas)`;
+    }
+    if (dbStatusIcon) dbStatusIcon.className = "fa-solid fa-database text-amber";
+    if (dbStatusContainer) {
+      dbStatusContainer.className = "db-status text-amber";
+      dbStatusContainer.title = "El SDK de Firebase no se cargó o no está conectado. Usando almacenamiento local.";
+    }
+  }
+}
+
 async function checkAutoSyncSeedDatabase() {
   try {
     const res = await fetch("default_database.json", { cache: "no-cache" });
@@ -156,25 +186,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   updateActiveCompanyHeader(activeComp);
 
   // Actualizar estado de la base de datos (Nube vs Local)
-  const dbStatusText = document.getElementById("db-status-text");
-  const dbStatusIcon = document.getElementById("db-status-icon");
-  const dbStatusContainer = document.getElementById("db-status-container");
-
-  if (typeof db !== "undefined" && db !== null) {
-    if (dbStatusText) dbStatusText.innerText = "Sincronización Nube Activa";
-    if (dbStatusIcon) dbStatusIcon.className = "fa-solid fa-cloud text-emerald";
-    if (dbStatusContainer) {
-      dbStatusContainer.className = "db-status text-emerald";
-      dbStatusContainer.title = "Conectado a Google Firebase Cloud Firestore 24/7";
-    }
-  } else {
-    if (dbStatusText) dbStatusText.innerText = "Modo Local (Sin Nube)";
-    if (dbStatusIcon) dbStatusIcon.className = "fa-solid fa-database text-amber";
-    if (dbStatusContainer) {
-      dbStatusContainer.className = "db-status text-amber";
-      dbStatusContainer.title = "El SDK de Firebase no se cargó o no está conectado. Usando almacenamiento local.";
-    }
-  }
+  updateDbStatus();
 
   // Rellenar selectores estáticos
   populateSatCodesSelects();
@@ -2210,12 +2222,14 @@ function initAuth() {
           if (!unsubAccounts) {
             unsubAccounts = listenCloudAccounts(activeCompany.id, (cloudAccounts) => {
               system.accounts = cloudAccounts;
+              updateDbStatus();
               if (currentView === "catalog") renderCatalog();
             });
           }
           if (!unsubPolizas) {
             unsubPolizas = listenCloudPolizas(activeCompany.id, (cloudPolizas) => {
               system.polizas = cloudPolizas;
+              updateDbStatus();
               if (currentView === "polizas") renderPolizas();
               if (currentView === "dashboard") renderDashboard();
             });
