@@ -1515,7 +1515,10 @@ async function importCatalog(jsonRows) {
   populateParentAccountsSelect();
   renderCatalog();
   updateDbStatus(); // ¡Actualizar la barra de estado inferior inmediatamente!
-  alert(`¡Catálogo cargado con éxito!\n\nSe importaron ${successCount} cuentas en tu navegador. Actualmente hay ${system.accounts.length} cuentas registradas para esta empresa.`);
+  
+  const duplicates = jsonRows.length - system.accounts.length;
+  alert(`¡Catálogo cargado con éxito!\n\nSe leyeron ${jsonRows.length} renglones de tu archivo Excel nuevo.\nSe registraron ${system.accounts.length} cuentas únicas en tu catálogo (hubo ${duplicates} renglones con códigos repetidos que fueron actualizados en lugar de duplicarse).\n\nEste es tu nuevo catálogo al 100% (el catálogo estándar fue eliminado por completo).`);
+  
   addLog("success", `Carga finalizada. Cuentas creadas/actualizadas con éxito: ${successCount}. Errores: ${errorCount}.`);
 }
 
