@@ -232,6 +232,10 @@ function saveCloudAccounts(companyId, accountsArray) {
   let completed = 0;
   let hasError = false;
 
+  if (typeof window.addAppLog === "function") {
+    window.addAppLog("info", `Subiendo ${accountsArray.length} cuentas a Firebase en ${chunks.length} lotes...`);
+  }
+
   chunks.forEach((chunk, index) => {
     const batch = db.batch();
     chunk.forEach(acc => {
@@ -243,13 +247,22 @@ function saveCloudAccounts(companyId, accountsArray) {
       .then(() => {
         completed++;
         console.log(`☁️ Lote de catálogo ${index + 1}/${chunks.length} sincronizado.`);
+        if (typeof window.addAppLog === "function") {
+          window.addAppLog("success", `Lote de catálogo ${index + 1}/${chunks.length} subido con éxito.`);
+        }
         if (completed === chunks.length && !hasError) {
           console.log("🔥 Catálogo completo sincronizado con éxito.");
+          if (typeof window.addAppLog === "function") {
+            window.addAppLog("success", "🔥 Todo el catálogo se guardó en Firebase con éxito.");
+          }
         }
       })
       .catch(err => {
         hasError = true;
         console.error(`Error en lote de catálogo ${index + 1}:`, err);
+        if (typeof window.addAppLog === "function") {
+          window.addAppLog("error", `Error al subir lote ${index + 1} del catálogo: ${err.message}`);
+        }
         alert(`⚠️ Error al sincronizar catálogo con Firebase (Lote ${index + 1}):\n${err.message}\n\nVerifica las reglas de seguridad en Firebase Console.`);
       });
   });
@@ -309,6 +322,10 @@ function saveCloudPolizasBulk(companyId, polizasArray) {
   let completed = 0;
   let hasError = false;
 
+  if (typeof window.addAppLog === "function") {
+    window.addAppLog("info", `Subiendo ${polizasArray.length} pólizas a Firebase en ${chunks.length} lotes...`);
+  }
+
   chunks.forEach((chunk, index) => {
     const batch = db.batch();
     chunk.forEach(pol => {
@@ -320,10 +337,21 @@ function saveCloudPolizasBulk(companyId, polizasArray) {
       .then(() => {
         completed++;
         console.log(`☁️ Lote de pólizas ${index + 1}/${chunks.length} sincronizado.`);
+        if (typeof window.addAppLog === "function") {
+          window.addAppLog("success", `Lote de pólizas ${index + 1}/${chunks.length} subido con éxito.`);
+        }
+        if (completed === chunks.length && !hasError) {
+          if (typeof window.addAppLog === "function") {
+            window.addAppLog("success", "🔥 Todas las pólizas se guardaron en Firebase con éxito.");
+          }
+        }
       })
       .catch(err => {
         hasError = true;
         console.error(`Error en lote de pólizas ${index + 1}:`, err);
+        if (typeof window.addAppLog === "function") {
+          window.addAppLog("error", `Error al subir lote ${index + 1} de pólizas: ${err.message}`);
+        }
         alert(`⚠️ Error al sincronizar pólizas (Lote ${index + 1}) con Firebase:\n${err.message}\n\nVerifica las Reglas de Seguridad en tu Firebase Console.`);
       });
   });

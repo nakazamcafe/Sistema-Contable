@@ -1320,6 +1320,7 @@ function addLog(type, message) {
   logContent.appendChild(div);
   logContent.scrollTop = logContent.scrollHeight;
 }
+window.addAppLog = addLog;
 
 function importCatalog(jsonRows) {
   addLog("info", `Procesando ${jsonRows.length} renglones del archivo Excel de Catálogo...`);
