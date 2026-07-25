@@ -154,8 +154,11 @@ async function checkAutoSyncSeedDatabase() {
               const parts = key.split("_");
               const compId = parts[parts.length - 1];
               if (compId !== "EDM260715AAA") {
-                // Si es personalizada, no sobrescribir jamás con la semilla del servidor
-                return;
+                // Sincronizar solo si está vacío para evitar sobrescribir el trabajo del usuario
+                const existing = localStorage.getItem(key);
+                if (existing && existing !== "[]" && existing !== "{}") {
+                  return;
+                }
               }
             }
             const val = data[key];

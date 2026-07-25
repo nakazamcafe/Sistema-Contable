@@ -15,7 +15,7 @@ const firebaseConfig = {
 };
 
 // Cambia esta variable a true si deseas forzar el Modo Local Offline (ej. si superas la cuota gratuita de Firebase)
-const FORCE_LOCAL_MODE = null;
+const FORCE_LOCAL_MODE = true;
 
 let db = null;
 
