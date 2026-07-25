@@ -212,6 +212,30 @@ function listenCloudAccounts(companyId, callback) {
     snapshot.forEach((doc) => {
       accounts.push(doc.data());
     });
+
+    // Auto-corrección si la nube tiene el catálogo viejo
+    if (accounts.length > 0) {
+      const phoneAcc = accounts.find(a => a.code === "601-05-000");
+      const salesAcc = accounts.find(a => a.code === "401-01-000");
+      const hasOldPhoneName = phoneAcc && phoneAcc.name === "Premios de puntualidad";
+      const hasOldSalesName = salesAcc && salesAcc.name === "Ventas y/o servicios gravados a la tasa general nacionales partes relacionadas";
+      
+      if (hasOldPhoneName || hasOldSalesName) {
+        console.warn("⚠️ Catálogo antiguo detectado en Firebase. Actualizando base de datos en la nube con la versión 2 limpia...");
+        if (typeof window.addAppLog === "function") {
+          window.addAppLog("info", "Sincronizando catálogo personalizado V2 con la nube...");
+        }
+        if (typeof DEFAULT_ACCOUNTS !== "undefined" && typeof saveCloudAccounts === "function") {
+          clearCloudAccounts(companyId).then(() => {
+            saveCloudAccounts(companyId, DEFAULT_ACCOUNTS);
+          }).catch(err => {
+            console.error("Error al auto-sincronizar catálogo con la nube:", err);
+          });
+        }
+        return;
+      }
+    }
+
     const last = lastSeenAccounts[companyId];
     if (accounts.length > 0 && !areAccountsEqual(last, accounts)) {
       lastSeenAccounts[companyId] = accounts;
