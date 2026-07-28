@@ -378,16 +378,9 @@ function populateParentAccountsSelect() {
   });
 
   // Rellenar selectores de cuentas en otros filtros si aplica
-  const reportAccSelect = document.getElementById("report-auxiliar-account");
-  if (reportAccSelect) {
-    reportAccSelect.innerHTML = "";
-    sortedAccounts.forEach(acc => {
-      const opt = document.createElement("option");
-      opt.value = acc.code;
-      opt.innerText = `${acc.code} - ${acc.name}`;
-      reportAccSelect.appendChild(opt);
-    });
-  }
+  const balanzaLvlSelect = document.getElementById("report-balanza-level");
+  const maxLvl = balanzaLvlSelect ? parseInt(balanzaLvlSelect.value || 4) : 4;
+  populateReportAccountsSelect(maxLvl);
 
   // Actualizar también la lista autocompletable para los asientos
   populateAccountsDatalist();
@@ -1011,7 +1004,7 @@ function initPolizaModal() {
 
     importDirectInput.addEventListener("change", (e) => {
       if (e.target.files.length > 0) {
-        handleExcelFile(e.target.files[0], (data) => {
+        handleExcelFile(e.target.files[0], "polizas", (data) => {
           importPolizas(data);
           e.target.value = "";
         });
@@ -1609,6 +1602,28 @@ function renderImportLogs() {
   // Solo actualiza la pantalla de carga, el log persiste hasta que se limpia
 }
 
+function populateReportAccountsSelect(maxLevel = 4) {
+  const reportAccSelect = document.getElementById("report-auxiliar-account");
+  if (!reportAccSelect) return;
+  
+  const currentSelected = reportAccSelect.value;
+  reportAccSelect.innerHTML = "";
+  
+  const sortedAccounts = system.getSortedAccounts();
+  sortedAccounts.forEach(acc => {
+    if (acc.level <= maxLevel) {
+      const opt = document.createElement("option");
+      opt.value = acc.code;
+      opt.innerText = `${acc.code} - ${acc.name} (Nivel ${acc.level})`;
+      reportAccSelect.appendChild(opt);
+    }
+  });
+
+  if (currentSelected && [...reportAccSelect.options].some(opt => opt.value === currentSelected)) {
+    reportAccSelect.value = currentSelected;
+  }
+}
+
 // --- VISTA 5: REPORTES FINANCIEROS Y EXPORTADORES ---
 
 function initReportsSection() {
@@ -1620,16 +1635,30 @@ function initReportsSection() {
   // Mostrar u ocultar filtros contextuales
   rSelect.addEventListener("change", () => {
     const val = rSelect.value;
-    filterBalanza.style.display = val === "balanza" ? "flex" : "none";
+    filterBalanza.style.display = (val === "balanza" || val === "auxiliar") ? "flex" : "none";
     filterAuxiliar.style.display = val === "auxiliar" ? "flex" : "none";
     filterHideEmpty.style.display = "flex"; // Siempre visible para todos los reportes
+    
+    if (val === "auxiliar") {
+      const maxLevel = parseInt(document.getElementById("report-balanza-level").value || 4);
+      populateReportAccountsSelect(maxLevel);
+    }
     renderReports();
   });
 
   // Re-renderizar al cambiar filtros
   document.getElementById("report-start-date").addEventListener("change", renderReports);
   document.getElementById("report-end-date").addEventListener("change", renderReports);
-  document.getElementById("report-balanza-level").addEventListener("change", renderReports);
+  
+  document.getElementById("report-balanza-level").addEventListener("change", () => {
+    const val = rSelect.value;
+    if (val === "auxiliar") {
+      const maxLevel = parseInt(document.getElementById("report-balanza-level").value || 4);
+      populateReportAccountsSelect(maxLevel);
+    }
+    renderReports();
+  });
+  
   document.getElementById("report-auxiliar-account").addEventListener("change", renderReports);
   document.getElementById("report-hide-empty").addEventListener("change", renderReports);
 
@@ -1756,7 +1785,7 @@ function renderReports() {
     }
     
     try {
-      const aux = system.getAuxiliar(accountCode, startDate, endDate);
+      const aux = system.getAuxiliar(accountCode, startDate, endDate, maxLevel);
       
       let rowsHtml = "";
       aux.movements.forEach(m => {

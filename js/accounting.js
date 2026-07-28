@@ -303,9 +303,28 @@ class AccountingSystem {
   // --- REPORTES AUXILIARES ---
 
   /**
+   * Obtiene la cuenta ancestro a un nivel específico para agrupar movimientos.
+   */
+  getAncestorAtLevel(code, targetLevel) {
+    const account = this.getAccount(code);
+    if (!account) return null;
+
+    if (account.level <= targetLevel) return account;
+
+    let current = account;
+    while (current && current.level > targetLevel) {
+      if (!current.parentCode) break;
+      const parent = this.getAccount(current.parentCode);
+      if (!parent) break;
+      current = parent;
+    }
+    return current;
+  }
+
+  /**
    * Genera el reporte auxiliar de una cuenta específica en un periodo.
    */
-  getAuxiliar(accountCode, startDate, endDate) {
+  getAuxiliar(accountCode, startDate, endDate, maxLevel = 4) {
     const account = this.getAccount(accountCode);
     if (!account) throw new Error(`La cuenta ${accountCode} no existe.`);
 
@@ -317,11 +336,6 @@ class AccountingSystem {
     let initialCredit = 0;
     
     // Obtener todas las subcuentas u hojas que pertenecen a esta cuenta (o ella misma)
-    const subAccountCodes = this.accounts
-      .filter(a => a.code === accountCode || a.code.startsWith(accountCode + "-") || a.parentCode === accountCode)
-      .map(a => a.code);
-
-    // Si la estructura no es estrictamente por prefijos sino por parentesco recursivo:
     const getLeafCodes = (code) => {
       const children = this.accounts.filter(a => a.parentCode === code);
       if (children.length === 0) return [code];
@@ -345,8 +359,7 @@ class AccountingSystem {
     let initialBalance = isDeudora ? (initialDebit - initialCredit) : (initialCredit - initialDebit);
 
     // Obtener movimientos en el periodo
-    const movements = [];
-    let runningBalance = initialBalance;
+    const rawMovements = [];
 
     this.polizas
       .filter(pol => {
@@ -356,32 +369,38 @@ class AccountingSystem {
       .sort((a, b) => new Date(a.date) - new Date(b.date) || String(a.number || "").localeCompare(String(b.number || "")))
       .forEach(pol => {
         pol.lines.forEach(line => {
-          // Si el movimiento es en una cuenta que pertenece a la jerarquía de la seleccionada
           if (leafCodes.includes(line.accountCode)) {
-            if (isDeudora) {
-              runningBalance += (line.debit - line.credit);
-            } else {
-              runningBalance += (line.credit - line.debit);
-            }
-
-            // Obtener el nombre de la cuenta específica del movimiento
-            const lineAcc = this.getAccount(line.accountCode);
-
-            movements.push({
+            // Mapear la cuenta al nivel objetivo
+            const targetAcc = this.getAncestorAtLevel(line.accountCode, maxLevel);
+            
+            rawMovements.push({
               date: pol.date,
               polizaNumber: pol.number,
               polizaType: pol.type,
               concept: line.concept || pol.concept,
-              accountCode: line.accountCode,
-              accountName: lineAcc ? lineAcc.name : "",
-              reference: line.reference,
+              accountCode: targetAcc ? targetAcc.code : line.accountCode,
+              accountName: targetAcc ? targetAcc.name : "Cuenta no encontrada",
+              reference: line.reference || "",
               debit: line.debit,
-              credit: line.credit,
-              balance: runningBalance
+              credit: line.credit
             });
           }
         });
       });
+
+    // Calcular el saldo acumulado cronológico para las partidas mapeadas
+    let runningBalance = initialBalance;
+    const movements = rawMovements.map(m => {
+      if (isDeudora) {
+        runningBalance += (m.debit - m.credit);
+      } else {
+        runningBalance += (m.credit - m.debit);
+      }
+      return {
+        ...m,
+        balance: runningBalance
+      };
+    });
 
     return {
       account,
