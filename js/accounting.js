@@ -410,6 +410,72 @@ class AccountingSystem {
     };
   }
 
+  /**
+   * Genera el reporte auxiliar agrupado por subcuentas contables hasta el nivel seleccionado.
+   */
+  getAuxiliarGrouped(accountCode, startDate, endDate, maxLevel = 4) {
+    const parentAcc = this.getAccount(accountCode);
+    if (!parentAcc) throw new Error(`La cuenta ${accountCode} no existe.`);
+
+    // Obtener cuentas objetivo para el reporte
+    const getTargetAccounts = (code) => {
+      const acc = this.getAccount(code);
+      if (!acc) return [];
+      const children = this.accounts.filter(a => a.parentCode === code);
+      if (acc.level >= maxLevel || children.length === 0) {
+        return [acc];
+      }
+      return children.reduce((list, child) => list.concat(getTargetAccounts(child.code)), []);
+    };
+
+    const targetAccounts = getTargetAccounts(accountCode);
+
+    // Ordenar cuentas por código
+    targetAccounts.sort((a, b) => String(a.code || "").localeCompare(String(b.code || "")));
+
+    const accountsReport = [];
+    let totalInitialBalance = 0;
+    let totalFinalBalance = 0;
+    let totalDebit = 0;
+    let totalCredit = 0;
+
+    targetAccounts.forEach(acc => {
+      const report = this.getAuxiliar(acc.code, startDate, endDate, maxLevel);
+
+      let accDebit = 0;
+      let accCredit = 0;
+      report.movements.forEach(m => {
+        accDebit += m.debit;
+        accCredit += m.credit;
+      });
+
+      accountsReport.push({
+        account: acc,
+        initialBalance: report.initialBalance,
+        movements: report.movements,
+        finalBalance: report.finalBalance,
+        totalDebit: accDebit,
+        totalCredit: accCredit
+      });
+
+      totalInitialBalance += report.initialBalance;
+      totalFinalBalance += report.finalBalance;
+      totalDebit += accDebit;
+      totalCredit += accCredit;
+    });
+
+    return {
+      parentAccount: parentAcc,
+      accounts: accountsReport,
+      totals: {
+        initialBalance: totalInitialBalance,
+        finalBalance: totalFinalBalance,
+        debit: totalDebit,
+        credit: totalCredit
+      }
+    };
+  }
+
   // --- ESTADOS FINANCIEROS ---
 
   /**

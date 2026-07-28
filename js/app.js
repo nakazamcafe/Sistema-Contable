@@ -1785,56 +1785,94 @@ function renderReports() {
     }
     
     try {
-      const aux = system.getAuxiliar(accountCode, startDate, endDate, maxLevel);
+      const reportData = system.getAuxiliarGrouped(accountCode, startDate, endDate, maxLevel);
       
-      let rowsHtml = "";
-      aux.movements.forEach(m => {
-        rowsHtml += `
-          <tr>
-            <td>${m.date}</td>
-            <td class="font-mono">${m.polizaNumber}</td>
-            <td><span class="badge ${m.polizaType === 'Ingresos' ? 'badge-emerald' : m.polizaType === 'Egresos' ? 'badge-rose' : 'badge-indigo'}">${m.polizaType}</span></td>
-            <td>${m.concept}</td>
-            <td class="font-mono">${m.accountCode} - ${m.accountName}</td>
-            <td>${m.reference || "-"}</td>
-            <td class="col-amount">${fmt(m.debit)}</td>
-            <td class="col-amount">${fmt(m.credit)}</td>
-            <td class="col-amount">${fmt(m.balance)}</td>
-          </tr>
-        `;
-      });
-
-      if (aux.movements.length === 0) {
-        rowsHtml = `<tr><td colspan="9" class="text-center text-muted">No se registraron movimientos en este periodo.</td></tr>`;
-      }
-
-      container.innerHTML = `
-        ${headerHtml}
-        <div class="report-summary-box flex-between">
-          <span>Saldo Inicial (${aux.account.type === 'Activo Deudor' ? 'Deudor' : 'Acreedor'}): <strong>${fmt(aux.initialBalance)}</strong></span>
-          <span>Saldo Final: <strong>${fmt(aux.finalBalance)}</strong></span>
-        </div>
-        <div class="responsive-table">
-          <table class="report-table">
-            <thead>
-              <tr>
-                <th>Fecha</th>
-                <th>Poliza</th>
-                <th>Tipo</th>
-                <th>Concepto</th>
-                <th>Cuenta Movimiento</th>
-                <th>Ref</th>
-                <th>Debe</th>
-                <th>Haber</th>
-                <th>Saldo Acumulado</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${rowsHtml}
-            </tbody>
-          </table>
+      let html = headerHtml;
+      
+      // Resumen general combinado
+      html += `
+        <div class="report-summary-box flex-between mb-4" style="font-size: 0.9rem; padding: 10px 15px; margin-bottom: 20px; background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 6px;">
+          <span>Inicial Combinado: <strong>${fmt(reportData.totals.initialBalance)}</strong></span>
+          <span>Cargos: <strong style="color: var(--emerald);">${fmt(reportData.totals.debit)}</strong></span>
+          <span>Abonos: <strong style="color: var(--rose);">${fmt(reportData.totals.credit)}</strong></span>
+          <span>Final Combinado: <strong>${fmt(reportData.totals.finalBalance)}</strong></span>
         </div>
       `;
+      
+      let renderedSectionsCount = 0;
+      
+      reportData.accounts.forEach(accReport => {
+        const hasMovements = accReport.movements.length > 0;
+        const hasBalances = Math.abs(accReport.initialBalance) > 0.01 || Math.abs(accReport.finalBalance) > 0.01;
+        
+        if (hideEmpty && !hasMovements && !hasBalances) {
+          return;
+        }
+        
+        renderedSectionsCount++;
+        
+        let rowsHtml = "";
+        accReport.movements.forEach(m => {
+          rowsHtml += `
+            <tr>
+              <td>${m.date}</td>
+              <td class="font-mono">${m.polizaNumber}</td>
+              <td><span class="badge ${m.polizaType === 'Ingresos' ? 'badge-emerald' : m.polizaType === 'Egresos' ? 'badge-rose' : 'badge-indigo'}">${m.polizaType}</span></td>
+              <td>${m.concept}</td>
+              <td>${m.reference || "-"}</td>
+              <td class="col-amount">${fmt(m.debit)}</td>
+              <td class="col-amount">${fmt(m.credit)}</td>
+              <td class="col-amount">${fmt(m.balance)}</td>
+            </tr>
+          `;
+        });
+        
+        if (accReport.movements.length === 0) {
+          rowsHtml = `<tr><td colspan="8" class="text-center text-muted">No se registraron movimientos en este periodo.</td></tr>`;
+        }
+        
+        html += `
+          <div class="auxiliar-account-section" style="margin-bottom: 30px;">
+            <h4 style="margin: 25px 0 10px 0; padding: 8px 12px; background: var(--bg-card); border-left: 4px solid var(--primary); display: flex; justify-content: space-between; align-items: center; border-radius: 4px;">
+              <strong>${accReport.account.code} - ${accReport.account.name}</strong>
+              <span style="font-size: 0.75rem; color: var(--text-muted);">Nivel ${accReport.account.level}</span>
+            </h4>
+            
+            <div class="report-summary-box flex-between" style="font-size: 0.82rem; padding: 6px 12px; margin-bottom: 12px; background: rgba(255,255,255,0.01); border: 1px solid var(--border-color); border-radius: 4px;">
+              <span>Saldo Inicial: <strong>${fmt(accReport.initialBalance)}</strong></span>
+              <span>Cargos: <strong style="color: var(--emerald);">${fmt(accReport.totalDebit)}</strong></span>
+              <span>Abonos: <strong style="color: var(--rose);">${fmt(accReport.totalCredit)}</strong></span>
+              <span>Saldo Final: <strong>${fmt(accReport.finalBalance)}</strong></span>
+            </div>
+            
+            <div class="responsive-table">
+              <table class="report-table">
+                <thead>
+                  <tr>
+                    <th>Fecha</th>
+                    <th>Póliza</th>
+                    <th>Tipo</th>
+                    <th>Concepto</th>
+                    <th>Ref</th>
+                    <th>Debe</th>
+                    <th>Haber</th>
+                    <th>Saldo Acumulado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${rowsHtml}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        `;
+      });
+      
+      if (renderedSectionsCount === 0) {
+        html += `<div class="text-center p-4 text-muted">No hay cuentas con saldos o movimientos para mostrar.</div>`;
+      }
+      
+      container.innerHTML = html;
     } catch (err) {
       container.innerHTML = `<div class="text-center p-4 text-rose">Error: ${err.message}</div>`;
     }
